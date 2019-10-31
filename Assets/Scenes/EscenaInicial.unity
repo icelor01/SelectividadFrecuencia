@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 0}
-  url: '"http://localhost:5000/x?a=square_signal.m&b=10&c=100"'
+  url: http://localhost:5000/x?a=square_signal.m&b=10&c=100
 --- !u!1 &588504324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 0}
-  url: '"http://localhost:5000/x?a=sinewave.m&b=10"'
+  url: http://localhost:5000/x?a=sinewave.m&b=10
 --- !u!212 &1438513790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 0}
-  url: '"http://localhost:5000/x?a=z.m&b=20"'
+  url: http://localhost:5000/x?a=z.m&b=20
 --- !u!1 &1846034237
 GameObject:
   m_ObjectHideFlags: 0
