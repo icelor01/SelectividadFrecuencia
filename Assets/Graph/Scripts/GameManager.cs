@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour { 
 
     public static GameManager instance; //instancia de GameManeger
-    public Plot_Graph_from_txtfile_Server plotter; 
+   // public Plot_Graph_from_txtfile_Server plotter; 
 
     private void Awake()    {
         print("Awake GameManager");
