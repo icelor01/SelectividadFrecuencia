@@ -8,12 +8,12 @@ using UnityEngine.Networking;
 using CodeMonkey.Utils;
 
 /*
- * GraphLib: Libreria GraphAdventure de gráficas en Unity
- * Dada una tabla, pintarla
+ * Graph: Dibuja una gráfica a partir de sus valores tipo Int 
+ * Los valores son extraídos de un fichero de texto
  * Dada una tabla, pintar una parte o con un nivel de zoom dado
  */
 
-public class GraphLib {
+public class Graph_old : MonoBehaviour {
 
     [SerializeField] private Sprite circleSprite;
     public float yMaximum;
@@ -22,8 +22,9 @@ public class GraphLib {
     public int totalValores;
     public List<GameObject> last;
     public Plot plot;
-   
-    public void Initialize(Plot plot) {
+
+    public void Initialize(Plot plot)
+    {
         this.plot = plot;
         last = new List<GameObject>();
         plot.StartCoroutine(GetText(plot.getUrlFichero()));
@@ -32,7 +33,7 @@ public class GraphLib {
 
     //private void StartCoroutine (IEnumerator enumerator)  {
     //    yield return StartCoroutine(GetText(urlFich));
-        //throw new NotImplementedException();
+    //throw new NotImplementedException();
 
     //}
 
@@ -44,15 +45,18 @@ public class GraphLib {
      *  En Windows PowerShell: usuario> python -m http.server 8000
      *  En navegador: http://localhost:8000
      */
-    public IEnumerator GetText(String url) {
+    public IEnumerator GetText(String url)
+    {
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
-        if (www.isNetworkError || www.isHttpError)  {
+        if (www.isNetworkError || www.isHttpError)
+        {
             Debug.Log(www.error);
         }
-        else   {
+        else
+        {
             listaInts = new List<int>();
             // Show results as text
             String texto = www.downloadHandler.text;
@@ -62,11 +66,13 @@ public class GraphLib {
 
 
             // Rellenamos la lista de enteros covirtiendo cada valor de la lista de strings en un valor tipo int
-            foreach (String s in ListaStrings)   {
+            foreach (String s in ListaStrings)
+            {
                 if (s.Length > 0) listaInts.Add(int.Parse(s.Trim()));
             }
 
-            for (int i = 0; i < listaInts.Count(); i++)  {
+            for (int i = 0; i < listaInts.Count(); i++)
+            {
                 Debug.Log("Elemento lista " + i + ":" + listaInts[i]);
             }
 
@@ -80,14 +86,16 @@ public class GraphLib {
            */
         }
 
-        for (int i = 0; i < listaInts.Count(); i++)   {
+        for (int i = 0; i < listaInts.Count(); i++)
+        {
             Debug.Log("Elemento lista " + i + ":" + listaInts[i]);
         }
 
         ShowGraph();
     }
 
-    private GameObject CreateCircle(Vector2 anchoredPosition) {
+    private GameObject CreateCircle(Vector2 anchoredPosition)
+    {
         GameObject gameObject = new GameObject("circle", typeof(Image));
         gameObject.transform.SetParent(plot.getGraphContainer(), false);
         gameObject.GetComponent<Image>().sprite = circleSprite;
@@ -99,7 +107,8 @@ public class GraphLib {
         return gameObject;
     }
 
-    private void ShowGraph()  {
+    private void ShowGraph()
+    {
         float graphHeight = plot.getGraphContainer().sizeDelta.y;
         float yMaximum = 100f; //Amplitud ó máximo valor de la gráfica
         float graphWidth = plot.getGraphContainer().sizeDelta.x;
@@ -109,15 +118,17 @@ public class GraphLib {
         float xSize = stepWidth;
         //float xSize = 50f; //Paso de 50 unidades. Habría que definir según número de puntos a representar
 
-       
-        foreach (GameObject o in last)  {
-           GameObject.Destroy(o);
+
+        foreach (GameObject o in last)
+        {
+            GameObject.Destroy(o);
         }
         last.Clear();
-       
+
 
         GameObject lastCircleGameObject = null;
-        for (int i = 0; i < listaInts.Count; i++)  {
+        for (int i = 0; i < listaInts.Count; i++)
+        {
             float xPosition = xSize + i * xSize;
             float yPosition = (listaInts[i] / yMaximum) * graphHeight;
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition));
@@ -134,7 +145,8 @@ public class GraphLib {
     }
 
 
-    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)  {
+    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
+    {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
         gameObject.transform.SetParent(plot.getGraphContainer(), false);
         gameObject.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
@@ -149,4 +161,3 @@ public class GraphLib {
         return gameObject;
     }
 }
-

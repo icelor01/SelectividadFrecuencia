@@ -10,10 +10,10 @@ public class ButtonScriptExample : MonoBehaviour {
 
         void Start()  {
             //Calls the TaskOnClick/TaskWithParameters/ButtonClicked method when you click the Button
-            m_YourFirstButton.onClick.AddListener(TaskOnClick);
-            m_YourSecondButton.onClick.AddListener(delegate { TaskWithParameters("Hello"); });
-            m_YourThirdButton.onClick.AddListener(() => ButtonClicked(42));
-            m_YourThirdButton.onClick.AddListener(TaskOnClick);
+            //m_YourFirstButton.onClick.AddListener(TaskOnClick);
+           // m_YourSecondButton.onClick.AddListener(delegate { TaskWithParameters("Hello"); });
+           // m_YourThirdButton.onClick.AddListener(() => ButtonClicked(42));
+            // m_YourThirdButton.onClick.AddListener(TaskOnClick);
         }
 
         void TaskOnClick()  {
