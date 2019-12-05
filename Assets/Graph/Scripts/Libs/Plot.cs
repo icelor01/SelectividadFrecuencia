@@ -8,57 +8,63 @@ using UnityEngine.Networking;
 using CodeMonkey.Utils;
 
 /*
- * Graph: Dibuja una gráfica a partir de sus valores tipo Int 
+ * Plot: Incluye un objeto de tipo Graph,  
+ * y métodos para obtener y actualizar los Tables
  * Los valores son extraídos de un fichero de texto
- * Dada una tabla, pintar una parte o con un nivel de zoom dado
- */
+  */
 
-public class Graph_old : MonoBehaviour {
+
+public class Plot : MonoBehaviour {
+    #region Fields
 
     [SerializeField] private Sprite circleSprite;
+    [SerializeField] public string url;
     public float yMaximum;
     public float yMin;
-    public List<int> listaInts;
     public int totalValores;
-    public List<GameObject> last;
-    public Plot plot;
+    public Table table;
+    public RectTransform container;
+    public List<float> listaFloats = new List<float>();
 
-    public void Initialize(Plot plot)
-    {
-        this.plot = plot;
-        last = new List<GameObject>();
-        plot.StartCoroutine(GetText(plot.getUrlFichero()));
+    #endregion
+
+    #region Properties
+    public RectTransform getGraphContainer()  {
+        return container;
     }
 
+    public string getUrlFichero() {
+        return url;
+    }
+    #endregion
 
-    //private void StartCoroutine (IEnumerator enumerator)  {
-    //    yield return StartCoroutine(GetText(urlFich));
-    //throw new NotImplementedException();
-
-    //}
+    #region Methods
 
 
 
-    /*
-     *  Rutina para que Unity recoja valores a través de un fichero en servidor
-     *  Guardamos valores en fichero "cosa.txt" en servidor en puerto 8000
-     *  En Windows PowerShell: usuario> python -m http.server 8000
-     *  En navegador: http://localhost:8000
-     */
-    public IEnumerator GetText(String url)
-    {
+   public void Initialize(Plot plot) {
+        this.plot = plot;
+        plot.StartCoroutine(plot.GetText(plot.getUrlFichero()));
+        this.ShowGraph(plot.listaFloats);
+   }
+
+   protected virtual void Awake() {
+        container = transform.Find("graphContainer").GetComponent<RectTransform>();
+        glib = new Graph();
+        glib.Initialize(this);
+    }
+    #endregion
+
+    public IEnumerator GetText(String url) {
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
-        if (www.isNetworkError || www.isHttpError)
-        {
+        if (www.isNetworkError || www.isHttpError)  {
             Debug.Log(www.error);
         }
-        else
-        {
-            listaInts = new List<int>();
-            // Show results as text
+        else  {
+                        // Show results as text
             String texto = www.downloadHandler.text;
             Debug.Log("Contenido del archivo: " + texto);
             // Creamos una lista de strings en la que guardamos las divisiones de texto tomando como divisor los espacios del mismo
@@ -66,36 +72,18 @@ public class Graph_old : MonoBehaviour {
 
 
             // Rellenamos la lista de enteros covirtiendo cada valor de la lista de strings en un valor tipo int
-            foreach (String s in ListaStrings)
-            {
-                if (s.Length > 0) listaInts.Add(int.Parse(s.Trim()));
+            foreach (String s in ListaStrings) {
+                if (s.Length > 0) listaFloats.Add(int.Parse(s.Trim()));
             }
 
-            for (int i = 0; i < listaInts.Count(); i++)
-            {
-                Debug.Log("Elemento lista " + i + ":" + listaInts[i]);
+            for (int i = 0; i < listaFloats.Count(); i++) {
+                Debug.Log("Elemento lista " + i + ":" + listaFloats[i]);
             }
 
-            /* 
-            // Or retrieve results as binary data
-            byte[] results = www.downloadHandler.data;
-           Debug.Log("Resultados: " + results);
-           for (int j = 0; j < results.Length; j++) {
-               Debug.Log("Resultado " + j+ ":" + results[j]);
-           }
-           */
-        }
-
-        for (int i = 0; i < listaInts.Count(); i++)
-        {
-            Debug.Log("Elemento lista " + i + ":" + listaInts[i]);
-        }
-
-        ShowGraph();
+          }
     }
 
-    private GameObject CreateCircle(Vector2 anchoredPosition)
-    {
+    private GameObject CreateCircle(Vector2 anchoredPosition) {
         GameObject gameObject = new GameObject("circle", typeof(Image));
         gameObject.transform.SetParent(plot.getGraphContainer(), false);
         gameObject.GetComponent<Image>().sprite = circleSprite;
@@ -107,30 +95,27 @@ public class Graph_old : MonoBehaviour {
         return gameObject;
     }
 
-    private void ShowGraph()
-    {
+    private void ShowGraph(List<float> listaFloats)  {
         float graphHeight = plot.getGraphContainer().sizeDelta.y;
         float yMaximum = 100f; //Amplitud ó máximo valor de la gráfica
         float graphWidth = plot.getGraphContainer().sizeDelta.x;
-        totalValores = listaInts.Count();
+        totalValores = listaFloats.Count();
         //Debug.Log("Número de valores total de la lista:" + totalValores);
         float stepWidth = graphWidth / totalValores;
         float xSize = stepWidth;
         //float xSize = 50f; //Paso de 50 unidades. Habría que definir según número de puntos a representar
 
-
-        foreach (GameObject o in last)
-        {
-            GameObject.Destroy(o);
+       
+        foreach (GameObject o in last)  {
+           GameObject.Destroy(o);
         }
         last.Clear();
-
+       
 
         GameObject lastCircleGameObject = null;
-        for (int i = 0; i < listaInts.Count; i++)
-        {
+        for (int i = 0; i < listaFloats.Count; i++)  {
             float xPosition = xSize + i * xSize;
-            float yPosition = (listaInts[i] / yMaximum) * graphHeight;
+            float yPosition = (listaFloats[i] / yMaximum) * graphHeight;
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition));
             last.Add(circleGameObject);
             if (lastCircleGameObject != null)
@@ -145,8 +130,7 @@ public class Graph_old : MonoBehaviour {
     }
 
 
-    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
-    {
+    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)  {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
         gameObject.transform.SetParent(plot.getGraphContainer(), false);
         gameObject.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
