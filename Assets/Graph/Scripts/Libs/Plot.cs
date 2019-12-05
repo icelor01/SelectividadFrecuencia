@@ -14,78 +14,54 @@ using CodeMonkey.Utils;
   */
 
 
-public class Plot : MonoBehaviour {
+public class Plot : MonoBehaviour
+{
     #region Fields
 
+    [SerializeField] public Table table;
     [SerializeField] private Sprite circleSprite;
-    [SerializeField] public string url;
-    public float yMaximum;
-    public float yMin;
-    public int totalValores;
-    public Table table;
-    public RectTransform container;
-    public List<float> listaFloats = new List<float>();
+    private float yMaximum;
+    private float yMin;
+    private int totalValores;
+    private RectTransform container;
+    private List<float> listaFloats = new List<float>();
+    private List<GameObject> last = new List<GameObject>();
 
     #endregion
 
     #region Properties
-    public RectTransform getGraphContainer()  {
-        return container;
+
+    public Table getTable() {
+        return table;
+    }
+    public void setTable(Table table) {
+        this.table = table;
     }
 
-    public string getUrlFichero() {
-        return url;
+    public RectTransform getGraphContainer()
+    {
+        return container;
     }
     #endregion
 
     #region Methods
 
+    public void Initialize()
+    {
+        StartCoroutine(table.RequestData(this));
+    }
 
-
-   public void Initialize(Plot plot) {
-        this.plot = plot;
-        plot.StartCoroutine(plot.GetText(plot.getUrlFichero()));
-        this.ShowGraph(plot.listaFloats);
-   }
-
-   protected virtual void Awake() {
+    protected virtual void Awake()
+    {
         container = transform.Find("graphContainer").GetComponent<RectTransform>();
-        glib = new Graph();
-        glib.Initialize(this);
+        Initialize();
     }
     #endregion
 
-    public IEnumerator GetText(String url) {
-
-        UnityWebRequest www = UnityWebRequest.Get(url);
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError || www.isHttpError)  {
-            Debug.Log(www.error);
-        }
-        else  {
-                        // Show results as text
-            String texto = www.downloadHandler.text;
-            Debug.Log("Contenido del archivo: " + texto);
-            // Creamos una lista de strings en la que guardamos las divisiones de texto tomando como divisor los espacios del mismo
-            List<string> ListaStrings = texto.Split(' ').ToList();
-
-
-            // Rellenamos la lista de enteros covirtiendo cada valor de la lista de strings en un valor tipo int
-            foreach (String s in ListaStrings) {
-                if (s.Length > 0) listaFloats.Add(int.Parse(s.Trim()));
-            }
-
-            for (int i = 0; i < listaFloats.Count(); i++) {
-                Debug.Log("Elemento lista " + i + ":" + listaFloats[i]);
-            }
-
-          }
-    }
-
-    private GameObject CreateCircle(Vector2 anchoredPosition) {
+    private GameObject CreateCircle(Vector2 anchoredPosition)
+    {
         GameObject gameObject = new GameObject("circle", typeof(Image));
-        gameObject.transform.SetParent(plot.getGraphContainer(), false);
+        gameObject.transform.SetParent(getGraphContainer(), false);
         gameObject.GetComponent<Image>().sprite = circleSprite;
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = anchoredPosition;
@@ -95,25 +71,29 @@ public class Plot : MonoBehaviour {
         return gameObject;
     }
 
-    private void ShowGraph(List<float> listaFloats)  {
-        float graphHeight = plot.getGraphContainer().sizeDelta.y;
+    public void ShowGraph(List<float> listaFloats)
+    {
+        this.listaFloats = listaFloats;
+        float graphHeight = getGraphContainer().sizeDelta.y;
         float yMaximum = 100f; //Amplitud ó máximo valor de la gráfica
-        float graphWidth = plot.getGraphContainer().sizeDelta.x;
+        float graphWidth = getGraphContainer().sizeDelta.x;
         totalValores = listaFloats.Count();
-        //Debug.Log("Número de valores total de la lista:" + totalValores);
+        Debug.Log("Número de valores total de la lista:" + totalValores);
         float stepWidth = graphWidth / totalValores;
         float xSize = stepWidth;
         //float xSize = 50f; //Paso de 50 unidades. Habría que definir según número de puntos a representar
 
-       
-        foreach (GameObject o in last)  {
-           GameObject.Destroy(o);
+
+        foreach (GameObject o in last)
+        {
+            GameObject.Destroy(o);
         }
         last.Clear();
-       
+
 
         GameObject lastCircleGameObject = null;
-        for (int i = 0; i < listaFloats.Count; i++)  {
+        for (int i = 0; i < listaFloats.Count; i++)
+        {
             float xPosition = xSize + i * xSize;
             float yPosition = (listaFloats[i] / yMaximum) * graphHeight;
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition));
@@ -130,9 +110,10 @@ public class Plot : MonoBehaviour {
     }
 
 
-    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)  {
+    private GameObject CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
+    {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
-        gameObject.transform.SetParent(plot.getGraphContainer(), false);
+        gameObject.transform.SetParent(getGraphContainer(), false);
         gameObject.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         Vector2 dir = (dotPositionB - dotPositionA).normalized;
