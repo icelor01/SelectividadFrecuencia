@@ -76,9 +76,9 @@ public class Plot : MonoBehaviour {
         for (int i = 0; i < listaFloats.Count; i++) {
             float xPosition = i * xSize;
             float yPosition= (listaFloats[i]/ yMax ) * graphHeight;
-            //if (yMin < 0)    {
-            //    yPosition = graphHeight / 2 + (listaFloats[i] / yMax) * graphHeight / 2; //Normalizamos el valor de y
-            // }
+            if (yMin < 0)    {
+                yPosition = graphHeight / 2 + (listaFloats[i] / yMax) * graphHeight / 2; //Normalizamos el valor de y
+             }
           
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition)); //create circle
             last.Add(circleGameObject);
