@@ -223,7 +223,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 588504325}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -489,10 +489,10 @@ MonoBehaviour:
   table:
     url: http://localhost:5000/x?a=z.m&b=10
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
-  xMin: 2
+  xMin: 0
   xMax: 6
   yMin: 0
-  yMax: 5
+  yMax: 10
 --- !u!1 &588504324
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,11 +522,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 515470846}
+  - {fileID: 1438513788}
   - {fileID: 1786772501}
   - {fileID: 1304857153}
   - {fileID: 2059296576}
   - {fileID: 95763567}
-  - {fileID: 1438513788}
   - {fileID: 1846034238}
   - {fileID: 1330599206}
   - {fileID: 990248099}
@@ -1113,7 +1113,7 @@ Prefab:
     - target: {fileID: 224165108262552684, guid: bb41d8f77919c4c45a6d6e34fcad9268,
         type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 224165108262552684, guid: bb41d8f77919c4c45a6d6e34fcad9268,
         type: 2}
@@ -1370,7 +1370,7 @@ RectTransform:
   m_LocalScale: {x: 1.000008, y: 1.000008, z: 1.000008}
   m_Children: []
   m_Father: {fileID: 588504325}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1576,7 +1576,7 @@ RectTransform:
   - {fileID: 1923138663}
   - {fileID: 861768291}
   m_Father: {fileID: 588504325}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url: http://localhost:5000/x?a=sinewave.m&b=100&c=1
+    url: http://localhost:5000/x?a=sinewave.m&b=10&c=1
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
   xMin: 1
   xMax: 7
@@ -1758,7 +1758,7 @@ Prefab:
     - target: {fileID: 224165108262552684, guid: bb41d8f77919c4c45a6d6e34fcad9268,
         type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 224165108262552684, guid: bb41d8f77919c4c45a6d6e34fcad9268,
         type: 2}
@@ -2016,7 +2016,7 @@ RectTransform:
   - {fileID: 764792963}
   - {fileID: 905044951}
   m_Father: {fileID: 588504325}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2415,7 +2415,7 @@ RectTransform:
   m_LocalScale: {x: 1.000008, y: 1.000008, z: 1.000008}
   m_Children: []
   m_Father: {fileID: 588504325}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

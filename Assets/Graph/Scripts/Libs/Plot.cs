@@ -75,15 +75,14 @@ public class Plot : MonoBehaviour {
         GameObject lastCircleGameObject = null;
         for (int i = 0; i < listaFloats.Count; i++) {
             float xPosition = i * xSize;
-            float yPosition= listaFloats[i] / (yMax * graphHeight);;
-            if (yMin < 0)    {
-                yPosition = graphHeight / 2 + (listaFloats[i] / yMax) * graphHeight / 2; //Normalizamos el valor de y
-            }
+            float yPosition= (listaFloats[i]/ yMax ) * graphHeight;
+            //if (yMin < 0)    {
+            //    yPosition = graphHeight / 2 + (listaFloats[i] / yMax) * graphHeight / 2; //Normalizamos el valor de y
+            // }
           
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition)); //create circle
             last.Add(circleGameObject);
-            if (lastCircleGameObject != null)
-            {
+            if (lastCircleGameObject != null)  {
                 last.Add(CreateDotConnection(
                     lastCircleGameObject.GetComponent<RectTransform>().anchoredPosition,
                     circleGameObject.GetComponent<RectTransform>().anchoredPosition) ); //create connection between dots
