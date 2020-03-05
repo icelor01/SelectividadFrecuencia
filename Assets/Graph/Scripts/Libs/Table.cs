@@ -51,7 +51,7 @@ using UnityEngine.Networking;
             // Rellenamos la lista de enteros covirtiendo cada valor de la lista de strings en un valor tipo int
             foreach (String s in ListaStrings)
             {
-                if (s.Length > 0) lastResult.Add(int.Parse(s.Trim()));
+                if (s.Length > 0) lastResult.Add(float.Parse(s.Trim()));
             }
 
             for (int i = 0; i < lastResult.Count(); i++) {
