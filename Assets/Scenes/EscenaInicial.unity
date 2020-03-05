@@ -486,9 +486,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6ba77fe11b6f41bd84737d2141487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
-  url: http://localhost:5000/x?a=z.m&b=6
-  listaFloats: []
+  table:
+    url: http://localhost:5000/x?a=z.m&b=10
+  circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  xMin: 2
+  xMax: 6
+  yMin: 0
+  yMax: 5
 --- !u!1 &588504324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,9 +1594,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6ba77fe11b6f41bd84737d2141487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
-  url: http://localhost:5000/x?a=z.m&b=6
-  listaFloats: []
+  table:
+    url: http://localhost:5000/x?a=sinewave.m&b=100&c=1
+  circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  xMin: 1
+  xMax: 7
+  yMin: -1
+  yMax: 1
 --- !u!212 &1438513790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2026,9 +2034,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6ba77fe11b6f41bd84737d2141487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
-  url: http://localhost:5000/x?a=z.m&b=6
-  listaFloats: []
+  table:
+    url: http://localhost:5000/x?a=z.m&b=6
+  circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  xMin: 1
+  xMax: 4
+  yMin: 0
+  yMax: 20
 --- !u!1 &1846034237
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,30 +11,40 @@ using UnityEngine.Networking;
   */
 
 
-[Serializable]
-public class Table {
-    [SerializeField] public string url;    
-    List<float> lastResult = new List<float>();
+[Serializable] public class Table {
 
-    public IEnumerator RequestData(Plot plot) {
-        return GetText(url, plot);
+    #region Fields
+    [SerializeField] public string url;
+    Boolean firstTime = true;
+    List<float> lastResult = new List<float>(); //Valores recogidos del servidor
+    private List<float> listToPlot = new List<float>();
+    // Create a new SortedDictionary of floats.
+    SortedDictionary<int, float> mysorteddictionary = new SortedDictionary <int, float>();
+    #endregion
+
+    #region Methods
+
+    public IEnumerator RequestData(Plot plot, int x0, int x1) {
+        if (firstTime == true)        {
+            Debug.Log("Primera vez. Pido datos al servidor");
+            return GetText(url, plot,x0, x1);
+                    }
+        plotGraphFromInterval (plot, x0, x1);
+       return null;
     }
 
-    public IEnumerator GetText(String url, Plot plot)
-    {
+    public IEnumerator GetText(String url, Plot plot, int x0, int x1) {
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
-        if (www.isNetworkError || www.isHttpError)
-        {
+        if (www.isNetworkError || www.isHttpError) {
             Debug.Log(www.error);
         }
-        else
-        {
+        else  {
             // Show results as text
             String texto = www.downloadHandler.text;
-            Debug.Log("Contenido del archivo: " + texto);
+            //Debug.Log("Contenido del archivo: " + texto);
             // Creamos una lista de strings en la que guardamos las divisiones de texto tomando como divisor los espacios del mismo
             List<string> ListaStrings = texto.Split(' ').ToList();
 
@@ -44,14 +54,42 @@ public class Table {
                 if (s.Length > 0) lastResult.Add(int.Parse(s.Trim()));
             }
 
-            for (int i = 0; i < lastResult.Count(); i++)
-            {
+            for (int i = 0; i < lastResult.Count(); i++) {
                 Debug.Log("Elemento lista " + i + ":" + lastResult[i]);
+                mysorteddictionary.Add(i,lastResult [i]);
             }
-            plot.ShowGraph(lastResult);
+            // plot.ShowGraph(lastResult);
+            firstTime = false;
+          }
+
+        // Código redundante para que se ejecute
+        for (int i = x0; i < x1 + 1; i++) {
+            // SortedDictionary<int,float>.ValueCollection valueColl = mysorteddictionary.Values;
+            listToPlot.Add(mysorteddictionary[i]);
         }
+
+        plot.ShowGraph(listToPlot);
+        int n = listToPlot.Count();
+        // return n
     }
 
-  }
+
+    public void plotGraphFromInterval(Plot plot, int x0, int x1)    {
+        //Rellenamos listToPlot con los valores a representar entre x0 y x1
+        for (int i =x0; i < x1+1; i++) {
+            // SortedDictionary<int,float>.ValueCollection valueColl = mysorteddictionary.Values;
+             listToPlot.Add(mysorteddictionary[i]);
+            }
+
+           plot.ShowGraph(listToPlot);
+           int n= listToPlot.Count();  
+        // return n
+        }
+
+       
+
+    #endregion
+
+}
 
 
