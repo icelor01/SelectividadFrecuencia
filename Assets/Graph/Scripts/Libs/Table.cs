@@ -14,23 +14,35 @@ using UnityEngine.Networking;
 [Serializable]
 public class Table
 {
+    private static System.Random random = new System.Random();
 
     #region Fields
     [SerializeField] public string url;
     Boolean firstTime = true;
     List<float> lastResult = new List<float>(); //Valores recogidos del servidor
     private List<float> listToPlot = new List<float>();
+    private int id;
     // Create a new SortedDictionary of floats.
     SortedDictionary<int, float> mysorteddictionary = new SortedDictionary<int, float>();
     #endregion
 
     #region Methods
 
+    public Table()
+    {
+        id = random.Next();
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
     public IEnumerator RequestData(Plot plot, int x0, int x1)
     {
         if (firstTime == true)
         {
-            Debug.Log("Primera vez. Pido datos al servidor");
+            Debug.Log(id + " Primera vez. Pido datos al servidor para " + url);
             return GetText(url, plot, x0, x1);
         }
         plotGraphFromInterval(plot, x0, x1);
@@ -41,6 +53,7 @@ public class Table
     {
 
         UnityWebRequest www = UnityWebRequest.Get(url);
+        www.useHttpContinue = false;
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -63,7 +76,7 @@ public class Table
 
             for (int i = 0; i < lastResult.Count(); i++)
             {
-                Debug.Log("Elemento lista " + i + ":" + lastResult[i]);
+                Debug.Log(id + " Elemento lista " + i + ":" + lastResult[i]);
                 mysorteddictionary.Add(i, lastResult[i]);
             }
             // plot.ShowGraph(lastResult);
@@ -80,7 +93,7 @@ public class Table
             }
             catch
             {
-                Debug.Log("Url"+url+" no me da valores para i="+i);
+                Debug.Log(id + " Url " + url + " no me da valores para i="+i);
             }
         }
 
