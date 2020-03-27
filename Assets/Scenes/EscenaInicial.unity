@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url: http://localhost:5000/x?a=z.m&b=20
+    url: http://localhost:5000/f/z.m?b=20
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
   xMin: 0
   xMax: 6
@@ -2372,7 +2372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url: http://localhost:5000/x?a=sinewave.m&b=30&c=1
+    url: http://localhost:5000/f/sinewave.m?b=30&c=1
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
   xMin: 1
   xMax: 20
@@ -3141,7 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url: http://localhost:5000/x?a=z.m&b=6
+    url: http://localhost:5000/f/z.m?b=6
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
   xMin: 1
   xMax: 4

@@ -56,8 +56,12 @@ public class Plot : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log(GetInstanceID() + " - Solicito datos a Table " + table.getId(), this);
-        StartCoroutine(table.RequestData(this, xMin, xMax));
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        table.RequestData(this, xMin, xMax);
     }
 
 
@@ -68,7 +72,6 @@ public class Plot : MonoBehaviour
         //float yMaximum = 100*f; //Amplitud ó máximo valor de la gráfica -> En vez de asignar valor fijo, lo hacemos variable
         float graphWidth = getGraphContainer().sizeDelta.x;
         totalValores = listaFloats.Count();
-        Debug.Log(GetInstanceID() + " - Número de valores total de la lista:" + totalValores, this);
         float stepWidth = graphWidth / totalValores;
         float xSize = stepWidth;
         //float xSize = 50f; //Paso de 50 unidades. Habría que definir según número de puntos a representar
