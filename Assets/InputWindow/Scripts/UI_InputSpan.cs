@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// using CodeMonkey.Utils;
-// using TMPro;
+//using CodeMonkey.Utils;
+//using TMPro;
 
 public class UI_InputSpan : MonoBehaviour {
 
+    /*
     private static UI_InputSpan instance;
 
     private Button okBtn;
@@ -16,9 +17,11 @@ public class UI_InputSpan : MonoBehaviour {
     private Text XMax_text;
     private InputField Input_XMin;
     private InputField Input_XMax;
+    */
 
     // Use this for initialization
     private void Awake() {
+        /*
         instance = this;
 
         okBtn = transform.Find("okBtn").GetComponent<Button>();
@@ -27,8 +30,8 @@ public class UI_InputSpan : MonoBehaviour {
         XMax_text = transform.Find("XMax_text").GetComponent<Text>();
         Input_XMin = transform.Find("Input_XMin").GetComponent<InputField>();
         Input_XMax = transform.Find("Input_XMax").GetComponent<InputField>();
-
-        // Hide();
+        */
+         Hide();
     }
 
     private void Update()  {
@@ -42,10 +45,11 @@ public class UI_InputSpan : MonoBehaviour {
         */
     }
 
-/*
-    private void Show(string titleString, string inputString, string validCharacters, int characterLimit, Action onCancel, Action<string> onOk) {
+
+    public void Show() {
         
         gameObject.SetActive(true);
+        /*
         transform.SetAsLastSibling();
 
         titleText.text = titleString;
@@ -61,19 +65,20 @@ public class UI_InputSpan : MonoBehaviour {
         okBtn.ClickFunc = () => {
             Hide();
             onOk(inputField.text);
+            
         };
 
         cancelBtn.ClickFunc = () => {
             Hide();
             onCancel();
         };
-       
+       */
     }
 
-    private void Hide()  {
+    public void Hide()  {
         gameObject.SetActive(false);
     }
-
+    /*
     private char ValidateChar(string validCharacters, char addedChar) {
         if (validCharacters.IndexOf(addedChar) != -1)  {
             // Valid
@@ -92,7 +97,7 @@ public class UI_InputSpan : MonoBehaviour {
 
     public static void Show_Static(string titleString, int defaultInt, Action onCancel, Action<int> onOk)
     {
-        /*
+        
         instance.Show(titleString, defaultInt.ToString(), "0123456789-", 20, onCancel,
             (string inputText) => {
                 // Try to Parse input string

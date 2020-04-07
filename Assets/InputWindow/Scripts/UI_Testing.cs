@@ -17,10 +17,13 @@ using CodeMonkey.Utils;
 using CodeMonkey;
 
 public class UI_Testing : MonoBehaviour {
-    /*
-    [SerializeField] private HighscoreTable highscoreTable;
+    
+    //[SerializeField] private HighscoreTable highscoreTable;
+    [SerializeField] public UI_InputSpan inputSpan;
 
     private void Start() {
+        transform.Find("m_SpanButton").GetComponent<Button_UI>().ClickFunc = inputSpan.Show;
+        /*
         transform.Find("submitScoreBtn").GetComponent<Button_UI>().ClickFunc = () => {
             UI_Blocker.Show_Static();
 
@@ -39,6 +42,7 @@ public class UI_Testing : MonoBehaviour {
                 });
             });
         };
+        */
     }
-    */
+    
 }
