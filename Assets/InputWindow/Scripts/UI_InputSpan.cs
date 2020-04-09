@@ -16,6 +16,8 @@ public class UI_InputSpan : MonoBehaviour {
     private Text xMax_text;
     private InputField InputXMin;
     private InputField InputXMax;
+    [SerializeField] public GameObject plotComponent;
+
     
 
     // Use this for initialization
@@ -78,13 +80,11 @@ public class UI_InputSpan : MonoBehaviour {
             Debug.Log("XMin: " + InputXMin.text);
             Debug.Log("XMax: " + InputXMax.text);
             //Pedir a plot dibujar con estos valores
-            GameObject window_graph_channel = GameObject.Find("Window_graph_Channel").GetComponent<GameObject>();
-            //window_graph_channel.GetComponent<Plot>().FunctionName();
-            Plot wgch_plot = window_graph_channel.GetComponent<Plot>();
-            Table wgch_table = wgch_plot.getTable();
+            Plot plot = plotComponent.GetComponent<Plot>();
+            Table table = plot.getTable();
             int xMin = int.Parse(InputXMin.text);
             int xMax = int.Parse(InputXMax.text);
-            wgch_table.PlotGraphFromInterval(wgch_plot, xMin, xMax);
+            table.PlotGraphFromInterval(plot, xMin, xMax);
             onOk(InputXMin.text);
             Hide();
         };
