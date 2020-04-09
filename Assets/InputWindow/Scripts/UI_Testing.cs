@@ -19,10 +19,23 @@ using CodeMonkey;
 public class UI_Testing : MonoBehaviour {
     
     //[SerializeField] private HighscoreTable highscoreTable;
-    [SerializeField] public UI_InputSpan inputSpan;
+    //[SerializeField] public UI_InputSpan inputSpan;
 
     private void Start() {
-        transform.Find("m_SpanButton").GetComponent<Button_UI>().ClickFunc = inputSpan.Show;
+        //transform.Find("m_SpanButton").GetComponent<Button_UI>().ClickFunc=inputSpan.Show;
+        transform.Find("m_SpanButton").GetComponent<Button_UI>().ClickFunc = () => {
+            //inputSpan.Show(() => {
+            UI_InputSpan.Show_Static("",() => {
+                // Clicked Cancel
+                CMDebug.TextPopupMouse("Cancel!");
+             }, (string inputText) => {
+                 // Clicked Ok
+                 CMDebug.TextPopupMouse("Ok: "+inputText);
+                
+             });
+        };
+
+
         /*
         transform.Find("submitScoreBtn").GetComponent<Button_UI>().ClickFunc = () => {
             UI_Blocker.Show_Static();

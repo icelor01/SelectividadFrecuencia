@@ -27,6 +27,7 @@ public class Plot : MonoBehaviour
     private RectTransform container;
     private List<float> listaFloats = new List<float>();
     private List<GameObject> last = new List<GameObject>();
+    public Plot plot;
 
     #endregion
 
@@ -56,12 +57,13 @@ public class Plot : MonoBehaviour
 
     public void Initialize()
     {
+        plot = this;
         Refresh();
     }
 
     public void Refresh()
     {
-        table.RequestData(this, xMin, xMax);
+        table.RequestData(plot, xMin, xMax);
     }
 
 

@@ -1,83 +1,107 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using CodeMonkey.Utils;
+using CodeMonkey.Utils;
 //using TMPro;
 
 public class UI_InputSpan : MonoBehaviour {
 
-    /*
+    
     private static UI_InputSpan instance;
-
-    private Button okBtn;
-    private Button cancelBtn;
-
-    private Text XMin_text;
-    private Text XMax_text;
-    private InputField Input_XMin;
-    private InputField Input_XMax;
-    */
+    private Button_UI okBtn;
+    private Button_UI cancelBtn;
+    private Text xMin_text;
+    private Text xMax_text;
+    private InputField InputXMin;
+    private InputField InputXMax;
+    
 
     // Use this for initialization
     private void Awake() {
-        /*
+        
         instance = this;
+        
+        Hide();
+        okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
+        cancelBtn = transform.Find("cancelBtn").GetComponent<Button_UI>();
+        //xMin_text = transform.Find("xMin_text").GetComponent<Text>();
+        //xMax_text = transform.Find("xMax_text").GetComponent<Text>();
+        //Input_XMin = transform.Find("Input_XMin").GetComponent<InputField>();
+        //Input_XMax = transform.Find("Input_XMax").GetComponent<InputField>();
+        InputField InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
+        InputField InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
 
-        okBtn = transform.Find("okBtn").GetComponent<Button>();
-        cancelBtn = transform.Find("cancelBtn").GetComponent<Button>();
-        XMin_text = transform.Find("XMin_text").GetComponent<Text>();
-        XMax_text = transform.Find("XMax_text").GetComponent<Text>();
-        Input_XMin = transform.Find("Input_XMin").GetComponent<InputField>();
-        Input_XMax = transform.Find("Input_XMax").GetComponent<InputField>();
-        */
-         Hide();
     }
 
     private void Update()  {
-        /*
+        
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
             okBtn.ClickFunc();
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             cancelBtn.ClickFunc();
         }
-        */
+        
     }
 
 
-    public void Show() {
-        
-        gameObject.SetActive(true);
+    //public void Show(string titleString, string inputString) {
+    //public void Show(string validCharacters, Action onCancel, Action<string> onOk)    {
+    private void Show(string inputString, Action onCancel, Action<string> onOk)   {
+            gameObject.SetActive(true);
+       // InputXMin.text = inputString;
         /*
         transform.SetAsLastSibling();
-
-        titleText.text = titleString;
-
-        inputField.characterLimit = characterLimit;
-        inputField.onValidateInput = (string text, int charIndex, char addedChar) => {
+        xMin_text.text = titleString;
+              
+        Input_XMin.onValidateInput = (string text, int charIndex, char addedChar) => {
             return ValidateChar(validCharacters, addedChar);
         };
+         */
 
-        inputField.text = inputString;
-        inputField.Select();
+        //Input_XMin.Select();
+
+        
+        //String ObjectsText = txt_Input.text;
+        int characterLimit = 2;
+        InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
+        InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
+        InputXMin.characterLimit = characterLimit;
+        InputXMax.characterLimit = characterLimit;
+        InputField.ContentType IntegerNumber = default(InputField.ContentType);
+        InputXMin.contentType= IntegerNumber;
+        InputXMax.contentType = IntegerNumber;
 
         okBtn.ClickFunc = () => {
+            Debug.Log("XMin: " + InputXMin.text);
+            Debug.Log("XMax: " + InputXMax.text);
+            //Pedir a plot dibujar con estos valores
+            GameObject window_graph_channel = GameObject.Find("Window_graph_Channel").GetComponent<GameObject>();
+            //window_graph_channel.GetComponent<Plot>().FunctionName();
+            Plot wgch_plot = window_graph_channel.GetComponent<Plot>();
+            Table wgch_table = wgch_plot.getTable();
+            int xMin = int.Parse(InputXMin.text);
+            int xMax = int.Parse(InputXMax.text);
+            wgch_table.PlotGraphFromInterval(wgch_plot, xMin, xMax);
+            onOk(InputXMin.text);
             Hide();
-            onOk(inputField.text);
-            
         };
 
         cancelBtn.ClickFunc = () => {
             Hide();
             onCancel();
         };
-       */
+       
     }
 
     public void Hide()  {
         gameObject.SetActive(false);
     }
+
+    // public delegate char OnValidateInput(string text, int charIndex, char addedChar); //Dentro de TextMeshPro
+
     /*
     private char ValidateChar(string validCharacters, char addedChar) {
         if (validCharacters.IndexOf(addedChar) != -1)  {
@@ -89,7 +113,8 @@ public class UI_InputSpan : MonoBehaviour {
             return '\0';
         }
     }
-
+    
+ 
     public static void Show_Static(string titleString, string inputString, string validCharacters, int characterLimit, Action onCancel, Action<string> onOk)
     {
         instance.Show(titleString, inputString, validCharacters, characterLimit, onCancel, onOk);
@@ -112,4 +137,28 @@ public class UI_InputSpan : MonoBehaviour {
         
     } 
 */
+
+    public static void Show_Static(string inputString, Action onCancel, Action<string> onOk)  {
+        instance.Show(inputString, onCancel, onOk);
+
+        /*
+        instance.Show(onCancel,
+            (string inputText) => {
+                // Try to Parse input string
+                if (int.TryParse(inputText, out int i))
+                {
+                    onOk(_i);
+                }
+                else
+                {
+                    onOk(defaultInt);
+                }
+            }
+        );
+        */
+
+    }
+
+
+
 }
