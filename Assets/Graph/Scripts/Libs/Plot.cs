@@ -19,8 +19,6 @@ public class Plot : MonoBehaviour
 
     [SerializeField] public Table table;
     [SerializeField] private Sprite circleSprite;
-    [SerializeField] private int xMin;
-    [SerializeField] private int xMax;
     [SerializeField] private float yMin;
     [SerializeField] private float yMax;
     private int totalValores;
@@ -58,13 +56,15 @@ public class Plot : MonoBehaviour
     public void Initialize()
     {
         plot = this;
+
         Refresh();
     }
 
     public void Refresh()
     {
-        table.RequestData(plot, xMin, xMax);
-    }
+        table.Initialize();
+        table.RequestData(plot);
+            }
 
 
     public void ShowGraph(List<float> listaFloats)
