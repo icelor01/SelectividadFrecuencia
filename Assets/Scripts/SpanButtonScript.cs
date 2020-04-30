@@ -6,6 +6,7 @@ using UnityEditor;
 
 public class SpanButtonScript : MonoBehaviour {
 
+    /*
     //Make sure to attach these Buttons in the Inspector
     public Button m_SpanButton;
     private GameObject UI_InputSpan;
@@ -36,4 +37,6 @@ public class SpanButtonScript : MonoBehaviour {
         //Output this to console when the Button3 is clicked
         Debug.Log("Button clicked = " + buttonNo);
     }
+
+    */
 }

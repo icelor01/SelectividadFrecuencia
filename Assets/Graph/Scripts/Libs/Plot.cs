@@ -19,8 +19,12 @@ public class Plot : MonoBehaviour
 
     [SerializeField] public Table table;
     [SerializeField] private Sprite circleSprite;
-    [SerializeField] private float yMin;
-    [SerializeField] private float yMax;
+    private RectTransform labelTemplateX;
+    private RectTransform labelTemplateY;
+    //private RectTransform dashTemplateX;
+    //private RectTransform dashTemplateY;
+    //[SerializeField] private float yMin;
+    //[SerializeField] private float yMax;
     private int totalValores;
     private RectTransform container;
     private List<float> listaFloats = new List<float>();
@@ -50,6 +54,10 @@ public class Plot : MonoBehaviour
     protected virtual void Awake()
     {
         container = transform.Find("graphContainer").GetComponent<RectTransform>();
+        labelTemplateX = container.Find("labelTemplateX").GetComponent<RectTransform>();
+        labelTemplateY = container.Find("labelTemplateY").GetComponent<RectTransform>();
+        //dashTemplateX = container.Find("dashTemplateX").GetComponent<RectTransform>();
+        //dashTemplateY = container.Find("dashTemplateY").GetComponent<RectTransform>();
         Initialize();
     }
 
@@ -67,11 +75,21 @@ public class Plot : MonoBehaviour
             }
 
 
-    public void ShowGraph(List<float> listaFloats)
+    public void ShowGraph(List<float> listaFloats, Func<float, string> getAxisLabelX = null, Func<float, string> getAxisLabelY = null)
     {
+
+        if (getAxisLabelX == null)
+        {
+            getAxisLabelX = delegate (float _i) { return _i.ToString(); };
+        }
+        if (getAxisLabelY == null)
+        {
+            getAxisLabelY = delegate (float _f) { return Mathf.RoundToInt(_f).ToString(); };
+        }
+
         this.listaFloats = listaFloats;
         float graphHeight = getGraphContainer().sizeDelta.y;
-        //float yMaximum = 100*f; //Amplitud ó máximo valor de la gráfica -> En vez de asignar valor fijo, lo hacemos variable
+        //float yMaximum = 100f; //Amplitud ó máximo valor de la gráfica -> En vez de asignar valor fijo, lo hacemos variable
         float graphWidth = getGraphContainer().sizeDelta.x;
         totalValores = listaFloats.Count();
         float stepWidth = graphWidth / totalValores;
@@ -85,16 +103,38 @@ public class Plot : MonoBehaviour
         }
         last.Clear();
 
+        
+        float yMaximum = listaFloats[0];
+        float yMinimum = listaFloats[0];
+
+        foreach (int value in listaFloats)
+        {
+            if (value > yMaximum)
+            {
+                yMaximum = value;
+            }
+            if (value < yMinimum)
+            {
+                yMinimum = value;
+            }
+        }
+
+        yMaximum = yMaximum + ((yMaximum - yMinimum) * 0.2f);
+        yMinimum = yMinimum - ((yMaximum - yMinimum) * 0.2f);
+
         GameObject lastCircleGameObject = null;
         for (int i = 0; i < listaFloats.Count; i++)
         {
-            float xPosition = i * xSize;
-            float yPosition = (listaFloats[i] / yMax) * graphHeight;
-            if (yMin < 0)
+            //float xPosition = i * xSize;
+            //float yPosition = (listaFloats[i] / yMax) * graphHeight;
+            float xPosition = xSize + i * xSize;
+            float yPosition = ((listaFloats[i] - yMinimum) / (yMaximum - yMinimum)) * graphHeight;
+            
+            if (yMinimum < 0)
             {
-                yPosition = graphHeight / 2 + (listaFloats[i] / yMax) * graphHeight / 2; //Normalizamos el valor de y
+                yPosition = graphHeight / 2 + (listaFloats[i] / yMaximum) * graphHeight / 2; //Normalizamos el valor de y
             }
-
+            
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition)); //create circle
             last.Add(circleGameObject);
             if (lastCircleGameObject != null)
@@ -104,9 +144,53 @@ public class Plot : MonoBehaviour
                     circleGameObject.GetComponent<RectTransform>().anchoredPosition)); //create connection between dots
             }
             lastCircleGameObject = circleGameObject;
+
+            int separatorCountX = 10;
+            for (int i_X = 0; i_X <= separatorCountX; i_X++)
+            {
+                RectTransform labelX = Instantiate(labelTemplateX);
+                labelX.SetParent(container, false);
+                labelX.gameObject.SetActive(true);
+                float normalizedValue = i_X * 1f / separatorCountX; // valor normalizado entre 0 y 1
+                //labelX.anchoredPosition = new Vector2(xPosition, -7f);
+                labelX.anchoredPosition = new Vector2(normalizedValue * graphWidth, -7f);
+                //labelX.GetComponent<Text>().text = i.ToString();
+                //labelX.GetComponent<Text>().text = getAxisLabelX(i);
+                int xmin = table.getxmin();
+                int xmax = table.getxmax();
+                labelX.GetComponent<Text>().text = getAxisLabelX((xmin + (normalizedValue * (xmax - xmin))));
+                last.Add(labelX.gameObject);
+            }
+            /*
+            RectTransform dashX = Instantiate(dashTemplateX);
+            dashX.SetParent(container, false);
+            dashX.gameObject.SetActive(true);
+            dashX.anchoredPosition = new Vector2(xPosition, -7f);
+            //gameObjectList.Add(dashX.gameObject);
+            */
+        }
+
+        int separatorCountY = 10;
+        for (int i_Y = 0; i_Y <= separatorCountY; i_Y++)
+        {
+            RectTransform labelY = Instantiate(labelTemplateY);
+            labelY.SetParent(container, false);
+            labelY.gameObject.SetActive(true);
+            float normalizedValue = i_Y * 1f / separatorCountY; // valor normalizado entre 0 y 1
+            labelY.anchoredPosition = new Vector2(-7f, normalizedValue * graphHeight);
+            //labelY.GetComponent<Text>().text = (normalizedValue * yMaximum).ToString();
+            labelY.GetComponent<Text>().text = getAxisLabelY(yMinimum + (normalizedValue * (yMaximum - yMinimum)));
+            last.Add(labelY.gameObject);
+
+            /*
+            RectTransform dashY = Instantiate(dashTemplateY);
+            dashY.SetParent(container, false);
+            dashY.gameObject.SetActive(true);
+            dashY.anchoredPosition = new Vector2(-4f, normalizedValue * graphHeight);
+            //gameObjectList.Add(dashY.gameObject);
+           */ 
         }
     }
-
 
     private GameObject CreateCircle(Vector2 anchoredPosition)
     {

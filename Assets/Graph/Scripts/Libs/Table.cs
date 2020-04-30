@@ -50,6 +50,15 @@ public class Table
         url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString();
     } 
 
+    public int getxmin()
+    {
+        return xmin;
+    }
+
+    public int getxmax()
+    {
+        return xmax;
+    }
     #region Methods
     public void RequestData(Plot plot)
         {
