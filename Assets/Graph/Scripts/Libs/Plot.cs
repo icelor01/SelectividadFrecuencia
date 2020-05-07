@@ -80,11 +80,11 @@ public class Plot : MonoBehaviour
 
         if (getAxisLabelX == null)
         {
-            getAxisLabelX = delegate (float _i) { return _i.ToString(); };
+            getAxisLabelX = delegate (float _i) { return System.Math.Round(_i,1).ToString(); };
         }
         if (getAxisLabelY == null)
         {
-            getAxisLabelY = delegate (float _f) { return Mathf.RoundToInt(_f).ToString(); };
+            getAxisLabelY = delegate (float _f) { return System.Math.Round(_f, 1).ToString(); };
         }
 
         this.listaFloats = listaFloats;
@@ -92,8 +92,7 @@ public class Plot : MonoBehaviour
         //float yMaximum = 100f; //Amplitud ó máximo valor de la gráfica -> En vez de asignar valor fijo, lo hacemos variable
         float graphWidth = getGraphContainer().sizeDelta.x;
         totalValores = listaFloats.Count();
-        float stepWidth = graphWidth / totalValores;
-        float xSize = stepWidth;
+        float xSize = graphWidth / (totalValores-1);
         //float xSize = 50f; //Paso de 50 unidades. Habría que definir según número de puntos a representar
 
 
@@ -123,13 +122,14 @@ public class Plot : MonoBehaviour
         yMinimum = yMinimum - ((yMaximum - yMinimum) * 0.2f);
 
         GameObject lastCircleGameObject = null;
-        for (int i = 0; i < listaFloats.Count; i++)
+        for (int i = 0; i < totalValores; i++)
         {
             //float xPosition = i * xSize;
             //float yPosition = (listaFloats[i] / yMax) * graphHeight;
-            float xPosition = xSize + i * xSize;
-            float yPosition = ((listaFloats[i] - yMinimum) / (yMaximum - yMinimum)) * graphHeight;
-            
+            float xPosition = i * xSize;
+            //float yPosition = ((listaFloats[i] - yMinimum) / (yMaximum - yMinimum)) * graphHeight;
+            float yPosition = listaFloats[i]* graphHeight/ yMaximum;
+
             if (yMinimum < 0)
             {
                 yPosition = graphHeight / 2 + (listaFloats[i] / yMaximum) * graphHeight / 2; //Normalizamos el valor de y
@@ -145,42 +145,44 @@ public class Plot : MonoBehaviour
             }
             lastCircleGameObject = circleGameObject;
 
-            int separatorCountX = 10;
-            for (int i_X = 0; i_X <= separatorCountX; i_X++)
-            {
-                RectTransform labelX = Instantiate(labelTemplateX);
-                labelX.SetParent(container, false);
-                labelX.gameObject.SetActive(true);
-                float normalizedValue = i_X * 1f / separatorCountX; // valor normalizado entre 0 y 1
-                //labelX.anchoredPosition = new Vector2(xPosition, -7f);
-                labelX.anchoredPosition = new Vector2(normalizedValue * graphWidth, -7f);
-                //labelX.GetComponent<Text>().text = i.ToString();
-                //labelX.GetComponent<Text>().text = getAxisLabelX(i);
-                int xmin = table.getxmin();
-                int xmax = table.getxmax();
-                labelX.GetComponent<Text>().text = getAxisLabelX((xmin + (normalizedValue * (xmax - xmin))));
-                last.Add(labelX.gameObject);
-            }
-            /*
-            RectTransform dashX = Instantiate(dashTemplateX);
-            dashX.SetParent(container, false);
-            dashX.gameObject.SetActive(true);
-            dashX.anchoredPosition = new Vector2(xPosition, -7f);
-            //gameObjectList.Add(dashX.gameObject);
-            */
-        }
+            //int separatorCountX = 10;
+            //for (int i_X = 0; i_X <= separatorCountX; i_X++)
+               
 
-        int separatorCountY = 10;
-        for (int i_Y = 0; i_Y <= separatorCountY; i_Y++)
+        }
+        for (int i_X = 0; i_X <= totalValores; i_X++)
+        {
+            RectTransform labelX = Instantiate(labelTemplateX);
+            labelX.SetParent(container, false);
+            labelX.gameObject.SetActive(true);
+            float normalizedValue = i_X * 1f / totalValores; // valor normalizado entre 0 y 1
+                                                             //labelX.anchoredPosition = new Vector2(xPosition, -7f);
+            labelX.anchoredPosition = new Vector2(normalizedValue * graphWidth, -7f);
+            //labelX.GetComponent<Text>().text = i.ToString();
+            //labelX.GetComponent<Text>().text = getAxisLabelX(i);
+            int xmin = table.getxmin();
+            int xmax = table.getxmax();
+            labelX.GetComponent<Text>().text = getAxisLabelX((xmin + (normalizedValue * (xmax - xmin))));
+            last.Add(labelX.gameObject);
+        }
+        /*
+        RectTransform dashX = Instantiate(dashTemplateX);
+        dashX.SetParent(container, false);
+        dashX.gameObject.SetActive(true);
+        dashX.anchoredPosition = new Vector2(xPosition, -7f);
+        //gameObjectList.Add(dashX.gameObject);
+        */
+        //int separatorCountY = 10;
+        for (int i_Y = 0; i_Y <= totalValores; i_Y++)
         {
             RectTransform labelY = Instantiate(labelTemplateY);
             labelY.SetParent(container, false);
             labelY.gameObject.SetActive(true);
-            float normalizedValue = i_Y * 1f / separatorCountY; // valor normalizado entre 0 y 1
+            float normalizedValue = i_Y * 1f / totalValores; // valor normalizado entre 0 y 1
             labelY.anchoredPosition = new Vector2(-7f, normalizedValue * graphHeight);
             //labelY.GetComponent<Text>().text = (normalizedValue * yMaximum).ToString();
-            labelY.GetComponent<Text>().text = getAxisLabelY(yMinimum + (normalizedValue * (yMaximum - yMinimum)));
-            last.Add(labelY.gameObject);
+            labelY.GetComponent<Text>().text = getAxisLabelY(listaFloats[i_Y]);
+            //last.Add(labelY.gameObject);[
 
             /*
             RectTransform dashY = Instantiate(dashTemplateY);
@@ -188,8 +190,9 @@ public class Plot : MonoBehaviour
             dashY.gameObject.SetActive(true);
             dashY.anchoredPosition = new Vector2(-4f, normalizedValue * graphHeight);
             //gameObjectList.Add(dashY.gameObject);
-           */ 
+           */
         }
+
     }
 
     private GameObject CreateCircle(Vector2 anchoredPosition)
