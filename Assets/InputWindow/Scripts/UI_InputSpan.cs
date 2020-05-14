@@ -92,7 +92,7 @@ public class UI_InputSpan : MonoBehaviour {
             int xMax = int.Parse(InputXMax.text);
             int n = int.Parse(Input_n.text);
             //table.PlotGraphFromInterval(plot, xMin, xMax);
-            table.changeUrl(xMin, xMax, n);
+            table.ChangeUrl(xMin, xMax, n);
             table.RequestData(plot);
             onOk(InputXMin.text);
             Hide();

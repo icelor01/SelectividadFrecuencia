@@ -34,6 +34,41 @@ public class Table
     SortedDictionary<int, float> sorted = new SortedDictionary<int, float>();
     #endregion
 
+    #region Properties
+
+    public void Setxmin(int xmin)
+    {
+        this.xmin = xmin;
+    }
+
+    public void Setxmax(int xmax)
+    {
+        this.xmax = xmax;
+    }
+
+    public void Setn(int n)
+    {
+        this.n = n;
+    }
+
+    public int Getxmin()
+    {
+        return xmin;
+    }
+
+    public int Getxmax()
+    {
+        return xmax;
+    }
+
+    public int Getn()
+    {
+        return n;
+    }
+
+    #endregion
+    #region Methods
+
     public void Initialize() {
 
         char[] delimiterChars = { '?', '=', '&' };
@@ -46,20 +81,15 @@ public class Table
 
     }
 
-    public void changeUrl (int xmin, int xmax, int n) {
+    public void ChangeUrl (int xmin, int xmax, int n) {
         url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString();
-    } 
-
-    public int getxmin()
-    {
-        return xmin;
+        Setxmin(xmin);
+        Setxmax(xmax);
+        Setn(n);
     }
 
-    public int getxmax()
-    {
-        return xmax;
-    }
-    #region Methods
+    
+  
     public void RequestData(Plot plot)
         {
         /*
@@ -90,6 +120,7 @@ public class Table
     //public IEnumerator RequestFromServer(Plot plot, int xmin, int xmax, int n)
     public IEnumerator RequestFromServer(String url, Plot plot)
     {
+        sorted.Clear();
         UnityWebRequest www = UnityWebRequest.Get(url);
         www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
         www.SetRequestHeader("Pragma", "no-cache");
