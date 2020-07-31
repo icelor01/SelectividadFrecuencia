@@ -36,19 +36,11 @@ public class Window_Graph : MonoBehaviour {
 
         gameObjectList = new List<GameObject>();
 
-        List<int> valueList = new List<int>() { 5, 98, 56, 45, 30, 22, 17, 15, 13, 17, 25, 37, 40, 36, 33 };
-        ShowGraph(valueList, (int _i) => "Day " + (_i + 1), (float _f) => "$" + Mathf.RoundToInt(_f));
-
-        /*FunctionPeriodic.Create(() => {
-            valueList.Clear();
-            for (int i = 0; i < 15; i++) {
-                valueList.Add(UnityEngine.Random.Range(0, 500));
-            }
-            ShowGraph(valueList, (int _i) => "Day " + (_i + 1), (float _f) => "$" + Mathf.RoundToInt(_f));
-        }, .5f);*/
+        List<int> valueList = new List<int>() { 5, 98, 56, 45, 30, 22, 17, 15, 13, 17, 25, 37, 40, 36, 33, 50, 30, 60, 50, 40, 20, 5, 20, 10, 50, 30, 20, 11 };
+        ShowGraph(valueList, -1, (int _i) => "Day " + (_i + 1), (float _f) => "$" + Mathf.RoundToInt(_f));
     }
 
-    private void ShowGraph(List<int> valueList, Func<int, string> getAxisLabelX = null, Func<float, string> getAxisLabelY = null) {
+    private void ShowGraph(List<int> valueList, int maxVisibleValueAmount = -1, Func<int, string> getAxisLabelX = null, Func<float, string> getAxisLabelY = null) {
         if (getAxisLabelX == null) {
             getAxisLabelX = delegate (int _i) { return _i.ToString(); };
         }
@@ -56,17 +48,23 @@ public class Window_Graph : MonoBehaviour {
             getAxisLabelY = delegate (float _f) { return Mathf.RoundToInt(_f).ToString(); };
         }
 
+        if (maxVisibleValueAmount <= 0) {
+            maxVisibleValueAmount = valueList.Count;
+        }
+
         foreach (GameObject gameObject in gameObjectList) {
             Destroy(gameObject);
         }
         gameObjectList.Clear();
-
+        
+        float graphWidth = graphContainer.sizeDelta.x;
         float graphHeight = graphContainer.sizeDelta.y;
 
         float yMaximum = valueList[0];
         float yMinimum = valueList[0];
-
-        foreach (int value in valueList) {
+        
+        for (int i = Mathf.Max(valueList.Count - maxVisibleValueAmount, 0); i < valueList.Count; i++) {
+            int value = valueList[i];
             if (value > yMaximum) {
                 yMaximum = value;
             }
@@ -75,14 +73,22 @@ public class Window_Graph : MonoBehaviour {
             }
         }
 
-        yMaximum = yMaximum + ((yMaximum - yMinimum) * 0.2f);
-        yMinimum = yMinimum - ((yMaximum - yMinimum) * 0.2f);
+        float yDifference = yMaximum - yMinimum;
+        if (yDifference <= 0) {
+            yDifference = 5f;
+        }
+        yMaximum = yMaximum + (yDifference * 0.2f);
+        yMinimum = yMinimum - (yDifference * 0.2f);
 
-        float xSize = 50f;
+        yMinimum = 0f; // Start the graph at zero
+
+        float xSize = graphWidth / (maxVisibleValueAmount + 1);
+
+        int xIndex = 0;
 
         GameObject lastCircleGameObject = null;
-        for (int i = 0; i < valueList.Count; i++) {
-            float xPosition = xSize + i * xSize;
+        for (int i = Mathf.Max(valueList.Count - maxVisibleValueAmount, 0); i < valueList.Count; i++) {
+            float xPosition = xSize + xIndex * xSize;
             float yPosition = ((valueList[i] - yMinimum) / (yMaximum - yMinimum)) * graphHeight;
             GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition));
             gameObjectList.Add(circleGameObject);
@@ -104,6 +110,8 @@ public class Window_Graph : MonoBehaviour {
             dashX.gameObject.SetActive(true);
             dashX.anchoredPosition = new Vector2(xPosition, -3f);
             gameObjectList.Add(dashX.gameObject);
+
+            xIndex++;
         }
 
         int separatorCount = 10;
