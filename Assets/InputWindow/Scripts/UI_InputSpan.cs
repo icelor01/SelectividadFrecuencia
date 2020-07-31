@@ -68,7 +68,7 @@ public class UI_InputSpan : MonoBehaviour {
 
         
         //String ObjectsText = txt_Input.text;
-        int characterLimit = 2;
+        int characterLimit = 3;
         InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
         InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
         Input_n = GameObject.Find("Input_n").GetComponent<InputField>();

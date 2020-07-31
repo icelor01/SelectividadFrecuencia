@@ -24,6 +24,11 @@ public class Table
     private int xmin;
     private int xmax;
     private int n;
+    private float fc;
+    public GameObject Graphname;
+    private int xmin_solution;
+    private int xmax_solution;
+    private float fc_solution;
 
     // Boolean firstTime = true; // Queremos que siempre pida los datos al servidor
 
@@ -66,18 +71,44 @@ public class Table
         return n;
     }
 
+    public int Getxmin_solution()
+    {
+        return xmin_solution;
+    }
+
+    public int Getxmax_solution()
+    {
+        return xmax_solution;
+    }
+
     #endregion
     #region Methods
 
     public void Initialize() {
 
+        //Graphname = GameObject.Find("Window_graph_Channel");
+        // if (Graphname != null)
+
         char[] delimiterChars = { '?', '=', '&' };
         string[] url_args = url_inicial.Split(delimiterChars);
-        url_function = url_args[0];
+         url_function = url_args[0];
+
+        if (url_function== "http://localhost:5000/f/sincwave") {
+                    
+            xmin_solution = 1;
+            xmax_solution = 15;
+            xmin = -50;
+            xmax = 50;
+            n = 50;
+            url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString();
+        }
+        else { 
+      
         xmin = int.Parse(url_args[2]);
         xmax = int.Parse(url_args[4]);
         n = int.Parse(url_args[6]);
         url = url_inicial;
+        }
 
     }
 
