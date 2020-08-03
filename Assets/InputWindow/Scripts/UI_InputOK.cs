@@ -9,8 +9,8 @@ using CodeMonkey.Utils;
 public class UI_InputOK : MonoBehaviour {
 
     private static UI_InputOK instance;
-    public Button_UI okBtn;
-     //private Button_UI cancelBtn;
+    private Button_UI okBtn;
+    private Button_UI cancelBtn;
     [SerializeField] public GameObject plotComponent;
     private int xMin;
     private int xMax;
@@ -104,50 +104,6 @@ public class UI_InputOK : MonoBehaviour {
         instance.Show(inputString, onCancel, onOk);
 
      }
-
-
-
-    /*
-    void TaskOnClick1()  {
-        //Output this to console when ButtonOK is clicked
-        //Comprobamos si los valores de xmin y max introducidos coinciden con los de la solucion esperada
-
-        Plot plot = plotComponent.GetComponent<Plot>();
-        Table table = plot.getTable();
-        xMin = table.Getxmin();
-        xMax = table.Getxmax();
-        n = table.Getn();
-        xMin_solution = table.Getxmin_solution();
-        xMax_solution = table.Getxmax_solution();
-
-        if (xMin_solution==xMin & xMax_solution == xMax) { 
-        Debug.Log("Respuesta correcta");
-
-            feedbackOK.SetActive(true);
-
-        }
-        else
-        {
-            feedbackNOK.SetActive(true);
-            Debug.Log("Respuesta incorrecta");
-            //respuestaIncorrecta.SetActive(true);
-        }
-
-    }
-
-    void TaskOnClick2()
-    {
-        feedbackOK.SetActive(false);
-
-    }
-
-    void TaskOnClick3()
-    {
-        feedbackNOK.SetActive(false);
-
-    }
-    */
-
 
 
 

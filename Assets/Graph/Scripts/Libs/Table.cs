@@ -56,6 +56,11 @@ public class Table
         this.n = n;
     }
 
+    public void Setfc(float fc)
+    {
+        this.fc = fc;
+    }
+
     public int Getxmin()
     {
         return xmin;
@@ -69,6 +74,11 @@ public class Table
     public int Getn()
     {
         return n;
+    }
+
+    public float Getfc()
+    {
+        return fc;
     }
 
     public int Getxmin_solution()
@@ -111,6 +121,14 @@ public class Table
         }
 
     }
+
+    public void Changefc(float fc)
+    {
+        float valormediorango = (xmax - xmin) / 2;
+        int xmin_fc = (int)(fc - valormediorango);
+        int xmax_fc = (int)(fc + valormediorango);
+        ChangeUrl(xmin_fc, xmax_fc, Getn());
+     }
 
     public void ChangeUrl (int xmin, int xmax, int n) {
         url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString();
