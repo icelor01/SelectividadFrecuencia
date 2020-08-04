@@ -19,6 +19,8 @@ public class UI_InputOK : MonoBehaviour {
     private int xMax_solution;
     public GameObject feedbackOK;
     public GameObject feedbackNOK;
+    public Slider sliderInstance;
+    public GameObject feedbackText;
 
     // Use this for initialization
     private void Awake()
@@ -26,7 +28,8 @@ public class UI_InputOK : MonoBehaviour {
         instance = this;
         Hide();
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
-      }
+        //feedbackText = transform.Find("FeedbackText").GetComponent<Text>();
+    }
 
     // Use this for initialization
     private void Update()
@@ -55,7 +58,16 @@ public class UI_InputOK : MonoBehaviour {
         xMin_solution = table.Getxmin_solution();
         xMax_solution = table.Getxmax_solution();
 
-        if (xMin_solution == xMin & xMax_solution == xMax)
+        if (sliderInstance.value == 1)
+        {
+            Debug.Log("Falta indicar si existe selectividad en frecuencia");
+            //feedbackText.GetComponent<Text>= "Recuerda indicar si existe selectividad en frecuencia o no";
+            //feedback = GameObject.Find("FeedbackOK");
+            feedbackText.SetActive(true);
+
+        }
+
+        else if (xMin_solution == xMin & xMax_solution == xMax & sliderInstance.value==2)
         {
             Debug.Log("Respuesta correcta");
 
@@ -94,6 +106,7 @@ public class UI_InputOK : MonoBehaviour {
     {
         feedbackOK.SetActive(false);
         feedbackNOK.SetActive(false);
+        feedbackText.SetActive(false);
         gameObject.SetActive(false);
        
     }
