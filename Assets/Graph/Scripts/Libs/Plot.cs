@@ -217,6 +217,10 @@ public class Plot : MonoBehaviour
         //Label Y // haria falta pintar escala entre yMinimum e yMaximun con n valores ordenados
         int separatorCountY=10;
 
+        //Borro contenido de AxisLabelY: ¿Cómo puedo borrar el contenido de labelY?
+       
+       
+
         for (int i_Y = 0; i_Y < separatorCountY; i_Y++)
         {
             RectTransform labelY = Instantiate(labelTemplateY);
@@ -231,8 +235,20 @@ public class Plot : MonoBehaviour
             //labelY.GetComponent<Text>().text = getAxisLabelY(listaFloats[i_Y]);
             //last.Add(labelY.gameObject);
             Debug.Log("Valor " + i_Y + ":" + labelY.GetComponent<Text>().text);
-
             
+            
+            /*
+            //Pintamos eje Y con el mismo equiespaciado siempre
+                RectTransform labelY = Instantiate(labelTemplateY);
+                labelY.SetParent(container, false);
+                labelY.gameObject.SetActive(true);
+                float normalizedValueY = i_Y * 1f / (separatorCountY - 1); // valor normalizado entre 0 y 1
+                 //Escala                                                         //labelX.anchoredPosition = new Vector2(xPosition, -7f);
+                labelY.anchoredPosition = new Vector2(normalizedValueY * graphWidth, -7f);
+                labelY.GetComponent<Text>().text = getAxisLabelY((xmin + (normalizedValueY * (yMaximum - yMinimum))));
+                last.Add(labelY.gameObject);
+            */
+
             /*
             //Dash Y
             RectTransform dashY = Instantiate(dashTemplateY);
