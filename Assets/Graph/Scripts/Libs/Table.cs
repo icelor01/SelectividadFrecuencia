@@ -25,10 +25,12 @@ public class Table
     private int xmax;
     private int n;
     private float fc;
-    public GameObject Graphname;
+    private GameObject Graphname;
     private int xmin_solution;
     private int xmax_solution;
     private float fc_solution;
+    private int amplitude;
+    private int amplitude_solution;
 
     // Boolean firstTime = true; // Queremos que siempre pida los datos al servidor
 
@@ -61,6 +63,16 @@ public class Table
         this.fc = fc;
     }
 
+    public void SetAmplitude(int amplitude)
+    {
+        this.amplitude = amplitude;
+    }
+
+    public void SetAmplitudeSolution(int amplitude_solution)
+    {
+        this.amplitude_solution = amplitude_solution;
+    }
+
     public int Getxmin()
     {
         return xmin;
@@ -74,6 +86,11 @@ public class Table
     public int Getn()
     {
         return n;
+    }
+
+    public int GetAmplitude()
+    {
+        return amplitude;
     }
 
     public float Getfc()
@@ -91,6 +108,10 @@ public class Table
         return xmax_solution;
     }
 
+    public int GetAmplitude_solution()
+    {
+        return amplitude_solution;
+    }
     #endregion
     #region Methods
 
@@ -107,16 +128,20 @@ public class Table
                     
             xmin_solution = 1;
             xmax_solution = 15;
+            amplitude_solution = 2;
             xmin = -50;
             xmax = 50;
             n = 50;
-            url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString();
+            amplitude = 1;
+            url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
+            //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
         }
         else { 
       
         xmin = int.Parse(url_args[2]);
         xmax = int.Parse(url_args[4]);
         n = int.Parse(url_args[6]);
+        amplitude= int.Parse(url_args[8]);
         url = url_inicial;
         }
 
@@ -127,11 +152,12 @@ public class Table
         float valormediorango = (xmax - xmin) / 2;
         int xmin_fc = (int)(fc - valormediorango);
         int xmax_fc = (int)(fc + valormediorango);
-        ChangeUrl(xmin_fc, xmax_fc, Getn());
+        ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
      }
 
-    public void ChangeUrl (int xmin, int xmax, int n) {
-        url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString();
+    public void ChangeUrl (int xmin, int xmax, int n, int amplitude) {
+        url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
+        //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
         Setxmin(xmin);
         Setxmax(xmax);
         Setn(n);

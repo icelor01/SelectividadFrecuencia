@@ -29,7 +29,7 @@ public class Plot : MonoBehaviour
     private RectTransform container;
     private List<float> listaFloats = new List<float>();
     private List<GameObject> last = new List<GameObject>();
-    public Plot plot;
+    private Plot plot;
 
     #endregion
 

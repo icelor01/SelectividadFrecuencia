@@ -14,9 +14,11 @@ public class UI_InputOK : MonoBehaviour {
     [SerializeField] public GameObject plotComponent;
     private int xMin;
     private int xMax;
-    private int n;
+    private int amplitude;
+    //private int n;
     private int xMin_solution;
     private int xMax_solution;
+    private int amplitude_solution;
     public GameObject feedbackOK;
     public GameObject feedbackNOK;
     public Slider sliderInstance;
@@ -54,9 +56,11 @@ public class UI_InputOK : MonoBehaviour {
         Table table = plot.getTable();
         xMin = table.Getxmin();
         xMax = table.Getxmax();
-        n = table.Getn();
+        amplitude = table.GetAmplitude();
+        //n = table.Getn();
         xMin_solution = table.Getxmin_solution();
         xMax_solution = table.Getxmax_solution();
+        amplitude_solution = table.GetAmplitude_solution();
 
         if (sliderInstance.value == 1)
         {
@@ -67,7 +71,7 @@ public class UI_InputOK : MonoBehaviour {
 
         }
 
-        else if (xMin_solution == xMin & xMax_solution == xMax & sliderInstance.value==2)
+        else if (xMin_solution == xMin & xMax_solution == xMax & amplitude_solution==amplitude & sliderInstance.value==2)
         {
             Debug.Log("Respuesta correcta");
 
