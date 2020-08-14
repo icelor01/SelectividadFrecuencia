@@ -23,8 +23,8 @@ public class Plot : MonoBehaviour
     private RectTransform labelTemplateY;
     //private RectTransform dashTemplateX;
     //private RectTransform dashTemplateY;
-    //[SerializeField] private float yMin;
-    //[SerializeField] private float yMax;
+    [SerializeField] private float yMin;
+    [SerializeField] private float yMax;
     private int totalValores;
     private RectTransform container;
     private List<float> listaFloats = new List<float>();
@@ -129,9 +129,9 @@ public class Plot : MonoBehaviour
         last.Clear();
 
         
-        float yMaximum = listaFloats[0];
-        float yMinimum = listaFloats[0];
-
+        float yMaximum = yMax; // listaFloats[0];
+        float yMinimum = yMin; // listaFloats[0];
+/*
         foreach (float value in listaFloats)
         {
             if (value > yMaximum)
@@ -143,7 +143,7 @@ public class Plot : MonoBehaviour
                 yMinimum = value;
             }
         }
-
+*/
         for (int i = 0; i < totalValores; i++)
         {
             float xPosition = RangeToScreenX(i, 0, totalValores, 0, graphWidth);
@@ -233,10 +233,9 @@ public class Plot : MonoBehaviour
             labelY.GetComponent<Text>().text = getAxisLabelY(yMinimum + normalizedValueY * (yMaximum - yMinimum));
             //labelY.GetComponent<Text>().text = (normalizedValue * yMaximum).ToString();
             //labelY.GetComponent<Text>().text = getAxisLabelY(listaFloats[i_Y]);
-            //last.Add(labelY.gameObject);
+            last.Add(labelY.gameObject);
             Debug.Log("Valor " + i_Y + ":" + labelY.GetComponent<Text>().text);
-            
-            
+                       
             /*
             //Pintamos eje Y con el mismo equiespaciado siempre
                 RectTransform labelY = Instantiate(labelTemplateY);

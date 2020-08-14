@@ -2383,6 +2383,8 @@ MonoBehaviour:
   table:
     url_inicial: http://localhost:5000/f/square_signal?xmin=1&xmax=15&n=15&a=7&b=1
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  yMin: 0
+  yMax: 10
 --- !u!1 &547544204
 GameObject:
   m_ObjectHideFlags: 0
@@ -6552,6 +6554,8 @@ MonoBehaviour:
   table:
     url_inicial: http://localhost:5000/f/sincwave?xmin=-50&xmax=15&n=15&a=1
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  yMin: 0
+  yMax: 10
 --- !u!1 &1709778147
 GameObject:
   m_ObjectHideFlags: 0
@@ -7268,6 +7272,8 @@ MonoBehaviour:
   table:
     url_inicial: http://localhost:5000/f/sincwave_pulse?xmin=1&xmax=15&n=15&a=7&b=2
   circleSprite: {fileID: 21300000, guid: fd953103e33cc714aae3e9358656be4c, type: 3}
+  yMin: 0
+  yMax: 10
 --- !u!1 &1810129301
 GameObject:
   m_ObjectHideFlags: 0
