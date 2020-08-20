@@ -155,18 +155,24 @@ public class Table
         ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
      }
 
-    public void ChangeAmplitude(int amplitude)
+    public void ChangeSpan(int xmin_new, int xmax_new)
     {
-        SetAmplitude(amplitude);
-        url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
+        ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
     }
 
-    public void ChangeUrl (int xmin, int xmax, int n, int amplitude) {
+    public void ChangeAmplitude(int amp_new)
+    {
+        SetAmplitude(amp_new);
+        url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
+        
+    }
+
+    public void ChangeUrl (int xmin_new, int xmax_new, int n, int amp_new) {
+        Setxmin(xmin_new);
+        Setxmax(xmax_new);
+        Setn(n);
         url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
         //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
-        Setxmin(xmin);
-        Setxmax(xmax);
-        Setn(n);
     }
 
     
