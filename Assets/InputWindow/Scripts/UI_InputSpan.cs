@@ -14,10 +14,10 @@ public class UI_InputSpan : MonoBehaviour {
     private Button_UI cancelBtn;
     private Text xMin_text;
     private Text xMax_text;
-    private Text n_text;
+    //private Text n_text;
     private InputField InputXMin;
     private InputField InputXMax;
-    private InputField Input_n;
+    // private InputField Input_n;
     [SerializeField] public GameObject plotComponent;
 
     // Use this for initialization
@@ -34,7 +34,7 @@ public class UI_InputSpan : MonoBehaviour {
         //Input_XMax = transform.Find("Input_XMax").GetComponent<InputField>();
         InputField InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
         InputField InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
-        InputField Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
+        //InputField Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
 
     }
 
@@ -71,18 +71,18 @@ public class UI_InputSpan : MonoBehaviour {
         int characterLimit = 3;
         InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
         InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
-        Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
+        //Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
         InputXMin.characterLimit = characterLimit;
         InputXMax.characterLimit = characterLimit;
         InputField.ContentType IntegerNumber = default(InputField.ContentType);
         InputXMin.contentType= IntegerNumber;
         InputXMax.contentType = IntegerNumber;
-        Input_n.contentType = IntegerNumber;
+        //Input_n.contentType = IntegerNumber;
 
         okBtn.ClickFunc = () => {
             InputField InputXMin = GameObject.Find("Input_XMin").GetComponent<InputField>();
             InputField InputXMax = GameObject.Find("Input_XMax").GetComponent<InputField>();
-            InputField Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
+            //InputField Input_n = GameObject.Find("Input_n").GetComponent<InputField>();
             Debug.Log("XMin: " + InputXMin.text);
             Debug.Log("XMax: " + InputXMax.text);
             //Pedir a plot dibujar con estos valores
@@ -90,10 +90,10 @@ public class UI_InputSpan : MonoBehaviour {
             Table table = plot.getTable();
             int xMin = int.Parse(InputXMin.text);
             int xMax = int.Parse(InputXMax.text);
-            int n = int.Parse(Input_n.text);
+            //int n = int.Parse(Input_n.text);
             //int amplitude = table.GetAmplitude();
             //table.PlotGraphFromInterval(plot, xMin, xMax);
-            table.ChangeUrl(xMin, xMax, n, table.GetAmplitude());
+            table.ChangeUrl(xMin, xMax, table.Getn(), table.GetAmplitude());
             table.RequestData(plot);
             onOk(InputXMin.text);
             Hide();
