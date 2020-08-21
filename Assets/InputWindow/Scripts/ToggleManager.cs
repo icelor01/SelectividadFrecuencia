@@ -12,21 +12,25 @@ public class ToggleManager : MonoBehaviour
     [SerializeField] public Toggle toggleNo;
     int activeToggleid = 0;
 
+    void Awake() {
+        toggleYes.onValueChanged.AddListener(delegate { ReportUpdate(toggleYes.isOn, false); });
+        toggleNo.onValueChanged.AddListener(delegate { ReportUpdate(false, toggleNo.isOn); });
+    }
+
     // Update is called once per frame
     void Update()
     {
 
     }
 
-
-    public void ActiveToggle()
+    public void ReportUpdate(bool yes, bool no)
     {
-        if (toggleYes.isOn)
+        if (yes)
         {
             activeToggleid = 2;
             Debug.Log("Toggle Yes pressed" + activeToggleid);
         }
-       else if (toggleNo.isOn)
+        else if (no)
         {
             activeToggleid = 1;
             Debug.Log("Toggle No pressed" + activeToggleid);

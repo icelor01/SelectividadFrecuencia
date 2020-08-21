@@ -32,6 +32,8 @@ public class Table
     private int amplitude;
     private int amplitude_solution;
 
+    private int waitingForInputToStabilize = 0;
+
     // Boolean firstTime = true; // Queremos que siempre pida los datos al servidor
 
     // ultimo resultado para url
@@ -176,9 +178,23 @@ public class Table
     }
 
     
+    public IEnumerator DoTheDance(Plot plot) {
+        waitingForInputToStabilize ++;
+        Debug.Log(waitingForInputToStabilize);
+        yield return new WaitForSeconds(1f); 
+        waitingForInputToStabilize --; // will make the update method pick up 
+        Debug.Log(waitingForInputToStabilize);
+        if (waitingForInputToStabilize == 0) {
+            RealRequestData(plot);
+        }
+    }
+    public void RequestData(Plot plot) {
+        Debug.Log("would now update plot", plot);
+        plot.StartCoroutine(DoTheDance(plot));
+    }
   
-    public void RequestData(Plot plot)
-        {
+    public void RealRequestData(Plot plot)
+    {
         /*
       if (firstTime == true)
       {
