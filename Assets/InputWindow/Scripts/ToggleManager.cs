@@ -10,7 +10,8 @@ public class ToggleManager : MonoBehaviour
 
     [SerializeField] public Toggle toggleYes;
     [SerializeField] public Toggle toggleNo;
-    int activeToggleid = 0;
+    // Active Toggle: Without being pressed=0, No=1, Yes=2
+    public int activeToggleid = 0;
 
     void Awake() {
         toggleYes.onValueChanged.AddListener(delegate { ReportUpdate(toggleYes.isOn, false); });
@@ -23,6 +24,7 @@ public class ToggleManager : MonoBehaviour
 
     }
 
+    // Active Toggle: Without being pressed=0, No=1, Yes=2
     public void ReportUpdate(bool yes, bool no)
     {
         if (yes)

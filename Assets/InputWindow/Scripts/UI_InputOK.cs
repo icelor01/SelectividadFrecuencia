@@ -21,7 +21,7 @@ public class UI_InputOK : MonoBehaviour {
     private int amplitude_solution;
     public GameObject feedbackOK;
     public GameObject feedbackNOK;
-    public Slider sliderInstance;
+    public ToggleManager toggleManagerInstance;
     public GameObject feedbackText;
 
     // Use this for initialization
@@ -62,7 +62,9 @@ public class UI_InputOK : MonoBehaviour {
         xMax_solution = table.Getxmax_solution();
         amplitude_solution = table.GetAmplitude_solution();
 
-        if (sliderInstance.value == 1)
+        
+        // Si no está seleccionado
+        if (toggleManagerInstance.activeToggleid == 0)
         {
             Debug.Log("Falta indicar si existe selectividad en frecuencia");
             //feedbackText.GetComponent<Text>= "Recuerda indicar si existe selectividad en frecuencia o no";
@@ -71,7 +73,8 @@ public class UI_InputOK : MonoBehaviour {
 
         }
 
-        else if (xMin_solution == xMin & xMax_solution == xMax & amplitude_solution==amplitude & sliderInstance.value==2)
+        // Si la solución es correcta
+        else if (((xMin >= xMin_solution-1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 2)
         {
             Debug.Log("Respuesta correcta");
 
@@ -79,6 +82,7 @@ public class UI_InputOK : MonoBehaviour {
             feedbackOK.SetActive(true);
 
         }
+        // Si la solución es incorrecta
         else
         {
             //feedback = GameObject.Find("FeedbackNOK");

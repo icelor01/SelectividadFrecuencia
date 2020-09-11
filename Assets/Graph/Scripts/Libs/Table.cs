@@ -129,11 +129,11 @@ public class Table
         if (url_function== "http://localhost:5000/f/sincwave") {
                     
             xmin_solution = 1;
-            xmax_solution = 15;
+            xmax_solution = 16;
             amplitude_solution = 2;
             xmin = -50;
             xmax = 50;
-            n = 50;
+            n = 100;
             amplitude = 1;
             url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
             //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
@@ -149,16 +149,24 @@ public class Table
 
     }
 
-    public void Changefc(float fc)
-    {
-        float valormediorango = (xmax - xmin) / 2;
-        int xmin_fc = (int)(fc - valormediorango);
-        int xmax_fc = (int)(fc + valormediorango);
+    public void Changefc(float fc)  {
+        Debug.Log("Valor inicial xmin:" + Getxmin());
+        Debug.Log("Valor inicial xmin:" + Getxmax());
+        float valormediorango = ((xmax - xmin+1) / 2);
+        int xmin_fc = (int) (fc - valormediorango);
+        int xmax_fc = (int) (fc + valormediorango);
+        Debug.Log("Valor final xmin:" + xmin_fc);
+        Debug.Log("Valor final xmax:" + xmax_fc);
+        Setfc(fc);
         ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
      }
 
-    public void ChangeSpan(int xmin_new, int xmax_new)
+    public void ChangeSpan(float span)
     {
+
+        float half_span = (span+1)/ 2;
+        int xmin_new = (int) (fc - half_span);
+        int xmax_new = (int)(fc + half_span);
         ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
     }
 
