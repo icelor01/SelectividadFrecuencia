@@ -25,6 +25,7 @@ public class Table
     private int xmax;
     private int n;
     private float fc;
+    private float span;
     private GameObject Graphname;
     private int xmin_solution;
     private int xmax_solution;
@@ -65,6 +66,11 @@ public class Table
         this.fc = fc;
     }
 
+    public void SetSpan(float span)
+    {
+        this.span = span;
+    }
+
     public void SetAmplitude(int amplitude)
     {
         this.amplitude = amplitude;
@@ -100,6 +106,11 @@ public class Table
         return fc;
     }
 
+    public float GetSpan()
+    {
+        return span;
+    }
+
     public int Getxmin_solution()
     {
         return xmin_solution;
@@ -133,6 +144,7 @@ public class Table
             amplitude_solution = 2;
             xmin = -50;
             xmax = 50;
+            span = xmax - xmin;
             n = 100;
             amplitude = 1;
             url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
@@ -167,6 +179,7 @@ public class Table
         float half_span = (span+1)/ 2;
         int xmin_new = (int) (fc - half_span);
         int xmax_new = (int)(fc + half_span);
+        SetSpan(span);
         ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
     }
 

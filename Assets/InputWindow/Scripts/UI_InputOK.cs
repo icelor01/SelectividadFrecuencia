@@ -19,10 +19,10 @@ public class UI_InputOK : MonoBehaviour {
     private int xMin_solution;
     private int xMax_solution;
     private int amplitude_solution;
-    public GameObject feedbackOK;
-    public GameObject feedbackNOK;
+    //public GameObject feedbackOK;
+    //public GameObject feedbackNOK;
     public ToggleManager toggleManagerInstance;
-    public GameObject feedbackText;
+    public Text feedbackText;
 
     // Use this for initialization
     private void Awake()
@@ -57,7 +57,6 @@ public class UI_InputOK : MonoBehaviour {
         xMin = table.Getxmin();
         xMax = table.Getxmax();
         amplitude = table.GetAmplitude();
-        //n = table.Getn();
         xMin_solution = table.Getxmin_solution();
         xMax_solution = table.Getxmax_solution();
         amplitude_solution = table.GetAmplitude_solution();
@@ -67,29 +66,27 @@ public class UI_InputOK : MonoBehaviour {
         if (toggleManagerInstance.activeToggleid == 0)
         {
             Debug.Log("Falta indicar si existe selectividad en frecuencia");
-            //feedbackText.GetComponent<Text>= "Recuerda indicar si existe selectividad en frecuencia o no";
-            //feedback = GameObject.Find("FeedbackOK");
-            feedbackText.SetActive(true);
-
+            feedbackText.color = Color.blue;
+            feedbackText.text= "Recuerda indicar si existe selectividad en frecuencia o no";
+          
         }
 
         // Si la solución es correcta
         else if (((xMin >= xMin_solution-1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 2)
         {
             Debug.Log("Respuesta correcta");
-
-            //feedback = GameObject.Find("FeedbackOK");
-            feedbackOK.SetActive(true);
+            feedbackText.color = Color.green;
+            feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
+            GameManager.instance.solution1_isCorrect = true;
+            
 
         }
         // Si la solución es incorrecta
         else
         {
-            //feedback = GameObject.Find("FeedbackNOK");
-            feedbackNOK.SetActive(true);
-            Debug.Log("Respuesta incorrecta");
-            //respuestaIncorrecta.SetActive(true);
-        }
+            feedbackText.color = Color.red;
+            feedbackText.text = "¡Vaya! No has ajustado correctamente el canal. Vuelve a intentarlo o revisa las fórmulas";
+         }
 
 
 
@@ -112,9 +109,6 @@ public class UI_InputOK : MonoBehaviour {
 
     public void Hide()
     {
-        feedbackOK.SetActive(false);
-        feedbackNOK.SetActive(false);
-        feedbackText.SetActive(false);
         gameObject.SetActive(false);
        
     }

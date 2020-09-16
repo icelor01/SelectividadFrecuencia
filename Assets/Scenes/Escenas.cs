@@ -13,7 +13,9 @@ public class Escenas : MonoBehaviour {
 	public void GoToScene (int sceneIndex) {
 
         SceneManager.LoadScene(sceneIndex);
-	}
+        DontDestroyOnLoad(GameManager.instance);
+
+    }
 
     private void Awake() {
         instance = this;

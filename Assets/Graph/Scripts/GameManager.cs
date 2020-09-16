@@ -1,25 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Clase estática para acceder desde cualquier escena
 
 public class GameManager : MonoBehaviour { 
 
     public static GameManager instance; //instancia de GameManeger
-   // public Plot_Graph_from_txtfile_Server plotter; 
+    /*
+    public int vida;
+    public int maxVida = 3;
+    public GameObject[] corazones;
+    */
+    public int score=0;
+    public Text ScoreT;
+    public bool solution1_isCorrect = false;
+    public bool solution2_isCorrect = false;
 
     private void Awake()    {
-        print("Awake GameManager");
+        //print("Awake GameManager");
         instance = this;
+       ScoreT.text = "Créditos: " + score;
     }
 
-    // Use this for initialization
-    void Start() {
-    }
+    public void AddScore(int add) {
+        score += add;
+        ScoreT.text = "Créditos: " + score;
+      }
 
-    // Update is called once per frame
-    void Update()  {
 
-    }
 }
