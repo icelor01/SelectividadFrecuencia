@@ -6,11 +6,12 @@ using UnityEngine.UI;
 using CodeMonkey.Utils;
 //using TMPro;
 
-public class UI_InputOK : MonoBehaviour {
+public class UI_InputOK1 : MonoBehaviour
+{
 
-    private static UI_InputOK instance;
+    private static UI_InputOK1 instance;
     private Button_UI okBtn;
-    private Button_UI cancelBtn;
+    //private Button_UI cancelBtn;
     [SerializeField] public GameObject plotComponent;
     private int xMin;
     private int xMax;
@@ -57,28 +58,29 @@ public class UI_InputOK : MonoBehaviour {
         xMin = table.Getxmin();
         xMax = table.Getxmax();
         amplitude = table.GetAmplitude();
-        xMin_solution = table.Getxmin_solution();
-        xMax_solution = table.Getxmax_solution();
-        amplitude_solution = table.GetAmplitude_solution();
+        //Valores solucion para Ejercicio 1
+        xMin_solution = 1;
+        xMax_solution = 6;
+        amplitude_solution = 1;
 
-        
+
         // Si no está seleccionado
         if (toggleManagerInstance.activeToggleid == 0)
         {
             Debug.Log("Falta indicar si existe selectividad en frecuencia");
             feedbackText.color = Color.blue;
-            feedbackText.text= "Recuerda indicar si existe selectividad en frecuencia o no";
-          
+            feedbackText.text = "Recuerda indicar si existe selectividad en frecuencia o no";
+
         }
 
         // Si la solución es correcta
-        else if (((xMin >= xMin_solution-1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 2)
+        else if (((xMin >= xMin_solution - 1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 1)
         {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
-            GameManager.instance.solution1_isCorrect = true;
-            
+            GameManager.instance.solution_isCorrect = true;
+
 
         }
         // Si la solución es incorrecta
@@ -86,7 +88,7 @@ public class UI_InputOK : MonoBehaviour {
         {
             feedbackText.color = Color.red;
             feedbackText.text = "¡Vaya! No has ajustado correctamente el canal. Vuelve a intentarlo o revisa las fórmulas";
-         }
+        }
 
 
 
@@ -94,10 +96,10 @@ public class UI_InputOK : MonoBehaviour {
         gameObject.SetActive(true);
 
 
-    
+
 
         okBtn.ClickFunc = () => {
-                        Hide();
+            Hide();
         };
 
         /*cancelBtn.ClickFunc = () => {
@@ -110,15 +112,15 @@ public class UI_InputOK : MonoBehaviour {
     public void Hide()
     {
         gameObject.SetActive(false);
-       
+
     }
 
- 
+
     public static void Show_Static(string inputString, Action onCancel, Action<string> onOk)
     {
         instance.Show(inputString, onCancel, onOk);
 
-     }
+    }
 
 
 

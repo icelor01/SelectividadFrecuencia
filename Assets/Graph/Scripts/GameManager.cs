@@ -13,11 +13,10 @@ public class GameManager : MonoBehaviour {
     public int maxVida = 3;
     public GameObject[] corazones;
     */
-    public int score=0;
+    public int score;
     public Text ScoreT;
-    public bool solution1_isCorrect = false;
-    public bool solution2_isCorrect = false;
-
+    public bool solution_isCorrect = false;
+   
     private void Awake()    {
         //print("Awake GameManager");
         instance = this;

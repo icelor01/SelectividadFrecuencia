@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 //Clase estática para acceder desde cualquier escena
 
-public class GameManager2 : MonoBehaviour
+public class GameManager3 : MonoBehaviour
 {
 
-    public static GameManager2 instance2; //instancia de GameManager2
+    public static GameManager3 instance3; //instancia de GameManager2
 
     public int score = 0;
     public Text ScoreT;
@@ -16,10 +16,10 @@ public class GameManager2 : MonoBehaviour
 
     private void Awake()
     {
-        int initial_score = GameManager.instance.score;
+        int initial_score = GameManager2.instance2.score;
         //int initial_score = ProjectVars.Instance.score;
         ScoreT.text = "Créditos: " + initial_score;
-        instance2 = this;
+        instance3 = this;
     }
 
     public void AddScore(int add)

@@ -22,8 +22,8 @@ public class ReplyMessage : MonoBehaviour {
         }
 
 
-        myReplyText.text = "[Enviar respuesta]: Hay que ajustar el analizador para centrarlo en "+ System.Math.Round(myTable.Getfc(),2)+
-            "kHz, abarcando un ancho de banda de "+ myTable.GetSpan() +" kHz y amplitud de "+ myTable.GetAmplitude() + " dB. " + "\n\r" + selectivity_text;
+        myReplyText.text = "[Enviar respuesta]: Hay que ajustar el analizador para centrarlo en "+ System.Math.Round(myTable.Getfc(),1)+
+            " kHz, abarcando un ancho de banda de "+ System.Math.Round(myTable.GetSpan(), 2) + " kHz y amplitud de "+ myTable.GetAmplitude() + " dB. " + "\n\r" + selectivity_text;
 
 
     }
@@ -39,8 +39,8 @@ public class ReplyMessage : MonoBehaviour {
         }
 
 
-        myReplyText.text = "[Enviar respuesta]: Hay que ajustar el analizador para centrarlo en " + System.Math.Round(myTable.Getfc(), 2) +
-            "kHz, abarcando un ancho de banda de " + myTable.GetSpan() + " kHz y amplitud de " + myTable.GetAmplitude() + " dB. " + "\n\r" + selectivity_text;
+        myReplyText.text = "[Enviar respuesta]: Hay que ajustar el analizador para centrarlo en " + System.Math.Round(myTable.Getfc(), 1) +
+            " kHz, abarcando un ancho de banda de " + System.Math.Round(myTable.GetSpan(),2) + " kHz y amplitud de " + myTable.GetAmplitude() + " dB. " + "\n\r" + selectivity_text;
 
     }
 }

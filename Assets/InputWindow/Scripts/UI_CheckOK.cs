@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI_CheckOK : MonoBehaviour {
 
     public Button OKBtn;
-    public int puntos = 20;
+    public int puntos;
     
     // Use this for initialization
     void Start()  {
@@ -14,12 +15,22 @@ public class UI_CheckOK : MonoBehaviour {
     }
 
     void TaskOnClick()  {
-        if (GameManager.instance.solution1_isCorrect == true)
+        if (GameManager.instance.solution_isCorrect == true)
         {
-            Debug.Log("Solution 1 is correct");
+            int nextScene = 6;
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            Debug.Log("Solution scene"+ sceneName + "is correct");
             GameManager.instance.AddScore(puntos);
-            // Debemos cambiar a la escena 3 al pulsar el boton OK
-            Escenas.instance.GoToScene(3);
+            // Debemos cambiar a la escena siguiente a no ser que estemos en la escena ultima 7, que regresamos al menú principal id.0
+            if (sceneName == "Escena3")
+            {
+                Escenas.instance.GoToScene(0);
+            }
+            else{Escenas.instance.GoToScene(nextScene);
+                nextScene += 1;
+            }
         }
         else
         {

@@ -20,7 +20,7 @@ public class CheckSpan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (System.Math.Round(myTable.GetSpan(),1) == 15.0)
+        if (System.Math.Round(myTable.GetSpan(),1) == 30.0)
         {
             Escenas.instance.GoToScene(3);
         }

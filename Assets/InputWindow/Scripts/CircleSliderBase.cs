@@ -27,11 +27,11 @@ public abstract class CircleSliderBase : MonoBehaviour {
 
 
     private void Awake() {
-              
+         /*    
         labelTemplateTransform = transform.Find("labelTemplate");
         labelTemplateTransform.gameObject.SetActive(false);
         CreateLabels();
-
+         
         //Valor inicial manilla
         Vector2 dir = handle.position;
         Debug.Log("Positición manilla:" + dir);
@@ -41,7 +41,7 @@ public abstract class CircleSliderBase : MonoBehaviour {
         Debug.Log("Rotación inicial:" + initial_rotation);
         Quaternion r = Quaternion.AngleAxis(angle-ROTATION+initial_rotation, Vector3.forward);
         handle.rotation = r;
-        
+        */
         
      
     }
