@@ -20,7 +20,25 @@ public class GameManager : MonoBehaviour {
     private void Awake()    {
         //print("Awake GameManager");
         instance = this;
-       ScoreT.text = "Créditos: " + score;
+        ScoreT.text = "Créditos: " + score;
+/*
+        // You can use Tracker via Singleton:
+        TrackerAsset.Instance.Settings = new TrackerAssetSettings();
+        TrackerAsset.Instance.Bridge = new Bridge();
+        TrackerAsset.Instance.Start ();
+
+        TrackerAsset.Instance.Alternative.Selected("AlternativeID", "SelectedAnswer");
+        TrackerAsset.Instance.Flush();
+
+        //You can create your own Tracker instance and manage it yourself.
+        TrackerAsset player2tracker = new TrackerAsset();
+        player2tracker.Settings = new TrackerAssetSettings();
+        player2tracker.Bridge = new Bridge();
+        player2tracker.Start ();
+
+        player2tracker.Alternative.Selected("AlternativeID", "SelectedAnswer2");
+        player2tracker.Flush();        
+*/        
     }
 
     public void AddScore(int add) {
