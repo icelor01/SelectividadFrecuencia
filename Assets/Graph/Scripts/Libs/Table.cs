@@ -3,20 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Globalization;
+
 using UnityEngine;
 using UnityEngine.Networking;
 
 /*
  * TableLib: Librería TableAdventure para representar una colección de puntos * 
  * conjunto de puntos en coma flotante, con valores entre 0 y 1
-  */
+ */
 
 
 [Serializable]
 public class Table
 {
     private static System.Random random = new System.Random();
-
+    
     #region Fields
     [SerializeField] public string url_inicial;
     private String url;
@@ -265,16 +267,14 @@ public class Table
 
             int i = 0;
             foreach (string s in parts) {
+                float f = float.NaN;
                 try
                 {
-
-                    float f = Single.Parse(s.Trim());
-                    //float f = float.Parse(s.Trim());
-                    sorted.Add(i++, f);
-                                        
+                    f = Single.Parse(s.Trim(), CultureInfo.InvariantCulture);                    
+                    sorted.Add(i++, f);              
                 }
                 catch {
-                    Debug.Log("Valor de s: " + s + " valor de single s: " + Single.Parse(s));
+                    Debug.Log("Valor de s: " + s + " valor de single s: " + f);
                     Debug.Log("=> Invalid float string: '" + s.Trim() + "'", plot);
                 }
             }
