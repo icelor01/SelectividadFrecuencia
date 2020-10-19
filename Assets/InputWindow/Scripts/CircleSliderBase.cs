@@ -54,10 +54,10 @@ public abstract class CircleSliderBase : MonoBehaviour {
         Vector2 dir = mousePos - handle.position;
         // Calculamos el incremento de ángulo
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Debug.Log("Ángulo:" +angle);
+        //Debug.Log("Ángulo:" +angle);
         
         angle = (angle <= 0) ? (angle + CIRCUMFERENCE_DEGREES) : angle; // módulo del ángulo: si el ángulo es <=0, suma 360º, si no, toma el valor del ángulo 
-        Debug.Log("Módulo del ángulo:" + angle);
+        //Debug.Log("Módulo del ángulo:" + angle);
         //Angle within the allowed zone
         if (angle <= ZERO_ANGLE || angle >= MAX_ANGLE)   {
             

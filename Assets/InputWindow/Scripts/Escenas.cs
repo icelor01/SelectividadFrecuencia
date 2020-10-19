@@ -13,8 +13,18 @@ public class Escenas : MonoBehaviour {
 	public void GoToScene (int sceneIndex) {
 
         SceneManager.LoadScene(sceneIndex);
-        DontDestroyOnLoad(GameManager.instance);
 
+        //En la Escena 2 (id=6), no queremos destruir el GameManager anterior: GameManager
+        if (sceneIndex == 6)
+        {
+            DontDestroyOnLoad(GameManager.instance);
+        }
+        //En la Escena 3 (id=7), no queremos destruir el GameManager anterior: GameManager2
+        else if (sceneIndex == 7)
+        {
+            DontDestroyOnLoad(GameManager2.instance2);
+        }
+        else { }
     }
 
     private void Awake() {

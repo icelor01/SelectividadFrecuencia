@@ -164,13 +164,13 @@ public class Table
     }
 
     public void Changefc(float fc)  {
-        Debug.Log("Valor inicial xmin:" + Getxmin());
-        Debug.Log("Valor inicial xmin:" + Getxmax());
+        //Debug.Log("Valor inicial xmin:" + Getxmin());
+        //Debug.Log("Valor inicial xmin:" + Getxmax());
         float valormediorango = ((xmax - xmin+1) / 2);
         int xmin_fc = (int) (fc - valormediorango);
         int xmax_fc = (int) (fc + valormediorango);
-        Debug.Log("Valor final xmin:" + xmin_fc);
-        Debug.Log("Valor final xmax:" + xmax_fc);
+        //Debug.Log("Valor final xmin:" + xmin_fc);
+        //Debug.Log("Valor final xmax:" + xmax_fc);
         Setfc(fc);
         ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
      }

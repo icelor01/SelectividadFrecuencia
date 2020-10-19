@@ -234,7 +234,7 @@ public class Plot : MonoBehaviour
             //labelY.GetComponent<Text>().text = (normalizedValue * yMaximum).ToString();
             //labelY.GetComponent<Text>().text = getAxisLabelY(listaFloats[i_Y]);
             last.Add(labelY.gameObject);
-            Debug.Log("Valor " + i_Y + ":" + labelY.GetComponent<Text>().text);
+            //Debug.Log("Valor " + i_Y + ":" + labelY.GetComponent<Text>().text);
                        
             /*
             //Pintamos eje Y con el mismo equiespaciado siempre
