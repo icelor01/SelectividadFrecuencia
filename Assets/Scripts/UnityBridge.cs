@@ -77,6 +77,7 @@ namespace AssetPackage
 		/// <param name="fileData"> Information describing the file. </param>
 		public void Save(string fileId, string fileData)
 		{
+			Debug.LogWarning("Writing to " + Path.Combine(StorageDir, fileId));
 			File.WriteAllText(Path.Combine(StorageDir, fileId), fileData);
 		}
 		/// <summary>

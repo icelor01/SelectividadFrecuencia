@@ -25,14 +25,6 @@ public class Music : MonoBehaviour
     public void backsoundOnOff()
     {
         AudioSource bgsound = Backsound.GetComponent<AudioSource>();
-
-        if (bgsound.mute = true)
-        {
-            bgsound.mute = false;
-        }
-        else
-        {
-            bgsound.mute = true;
-        }
+        bgsound.mute = !bgsound.mute;
     }
 }
