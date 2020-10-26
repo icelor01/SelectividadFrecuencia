@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //Métodos que no tienen tiempo, llamadas
 
@@ -9,11 +10,19 @@ public class Escenas : MonoBehaviour {
 
     //Lo hacemos singleton para poder acceder a él  desde cualquier sitio
     public static Escenas instance;
+    private Scene scene;
 
-	public void GoToScene (int sceneIndex) {
 
-        SceneManager.LoadScene(sceneIndex);
+    public void GoToScene (string sceneName) {
 
+        var parameters = new LoadSceneParameters(LoadSceneMode.Single);
+        scene= SceneManager.LoadScene(sceneName, parameters);
+
+       DontDestroyOnLoad(GameManager_tutorial.manager);
+        //DontDestroyOnLoad(GameObject.FindGameObjectWithTag("TutorialMusic"));
+
+        //DontDestroyOnLoad(GameManager.instance);
+        /*
         //En la Escena 2 (id=6), no queremos destruir el GameManager anterior: GameManager
         if (sceneIndex == 6)
         {
@@ -25,6 +34,7 @@ public class Escenas : MonoBehaviour {
             DontDestroyOnLoad(GameManager2.instance2);
         }
         else { }
+        */
     }
 
     private void Awake() {

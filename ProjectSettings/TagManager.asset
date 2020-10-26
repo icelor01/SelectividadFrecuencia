@@ -6,6 +6,15 @@ TagManager:
   tags:
   - GraphOutput
   - PromptWindow
+  - TutorialMusic
+  - SoundButton
+  - Permanente
+  - GameManager
+  - MenuMusic
+  - SoundImage
+  - NoSoundImage
+  - Scene1Music
+  - Scene2Music
   layers:
   - Default
   - TransparentFX

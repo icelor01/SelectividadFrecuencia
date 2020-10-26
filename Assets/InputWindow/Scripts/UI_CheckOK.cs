@@ -26,9 +26,9 @@ public class UI_CheckOK : MonoBehaviour {
             // Debemos cambiar a la escena siguiente a no ser que estemos en la escena ultima 7, que regresamos al menú principal id.0
             if (sceneName == "Escena3")
             {
-                Escenas.instance.GoToScene(0);
+                Escenas.instance.GoToScene("Menu");
             }
-            else{Escenas.instance.GoToScene(nextScene);
+            else{Escenas.instance.GoToScene("Escena2");
                 nextScene += 1;
             }
         }
