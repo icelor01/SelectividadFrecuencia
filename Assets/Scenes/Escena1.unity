@@ -2120,7 +2120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &311767194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4100,7 +4100,6 @@ MonoBehaviour:
   plotComponent: {fileID: 1677527898}
   min_value: -30
   max_value: 30
-  labelAmount: 0
   initial_value: 0
 --- !u!1 &644106564
 GameObject:
@@ -5812,7 +5811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1008216931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9213,7 +9212,6 @@ MonoBehaviour:
   plotComponent: {fileID: 1677527898}
   min_value: 10
   max_value: 100
-  labelAmount: 5
   initial_value: 50
 --- !u!1 &1677527898
 GameObject:
@@ -10541,7 +10539,6 @@ MonoBehaviour:
   plotComponent: {fileID: 1677527898}
   min_value: 1
   max_value: 5
-  labelAmount: 5
   initial_value: 1
 --- !u!1 &1915395592
 GameObject:
