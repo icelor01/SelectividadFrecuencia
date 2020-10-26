@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Preload.unity
+    guid: 9f93c98b36e620443a63943fa3bc5eae
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: d022481b80dfa8b43ab8f46656be7a6f
@@ -29,3 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Escena3.unity
     guid: 991b4d03e231c37498ce49f030bcc934
+  m_configObjects: {}

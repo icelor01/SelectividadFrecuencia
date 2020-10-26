@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using AssetPackage;
 
@@ -9,7 +10,7 @@ using AssetPackage;
 
 public class GameManager : MonoBehaviour { 
 
-    public static GameManager instance; //instancia de GameManeger
+    public static GameManager instance; //instancia de GameManager
     /*
     public int vida;
     public int maxVida = 3;
@@ -18,11 +19,13 @@ public class GameManager : MonoBehaviour {
     public int score;
     public Text ScoreT;
     public bool solution_isCorrect = false;
-   
+       
     private void Awake()    {
         //print("Awake GameManager");
         instance = this;
-        ScoreT.text = "Créditos: " + score;
+        //ScoreT.text = "Créditos: " + score;
+        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(reproductor);
 
         TrackerAsset.Instance.Settings = new TrackerAssetSettings(); // New TrackerAsset instance
         Debug.Log("Tracking parece funcionar...", this);
@@ -92,6 +95,12 @@ public class GameManager : MonoBehaviour {
         */
 
     }
+
+
+    public void Start()    {
+        SceneManager.LoadScene("Menu");
+    }
+
 
     public void AddScore(int add) {
 score += add;
