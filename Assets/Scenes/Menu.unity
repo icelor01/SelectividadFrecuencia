@@ -889,6 +889,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 0}
   SoundOn: 1
+  SoundButton: {fileID: 0}
+  SoundImage: {fileID: 0}
+  NoSoundImage: {fileID: 0}
 --- !u!4 &1050324874
 Transform:
   m_ObjectHideFlags: 0
@@ -915,6 +918,8 @@ GameObject:
   - component: {fileID: 1206892294}
   - component: {fileID: 1206892293}
   - component: {fileID: 1206892292}
+  - component: {fileID: 1206892296}
+  - component: {fileID: 1206892297}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -995,6 +1000,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206892296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206892291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5579175cfa3258e45b2281f5ad5f7ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawCopy: 0
+  flushInterval: 3
+  checkInterval: 3
+  storageType: local
+  traceFormat: xapi
+  host: https://analytics.e-ucm.es/
+  trackingCode: 
+  debug: 0
+  username: 
+  password: 
+--- !u!114 &1206892297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206892291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ddbe0304d186f46a849c7f1d1c5b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  ScoreT: {fileID: 0}
+  solution_isCorrect: 0
 --- !u!1 &1229592752
 GameObject:
   m_ObjectHideFlags: 0

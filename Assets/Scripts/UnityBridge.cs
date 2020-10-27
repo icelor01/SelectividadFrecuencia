@@ -33,6 +33,7 @@ namespace AssetPackage
     public class UnityBridge : IBridge, IDataStorage, IAppend, IWebServiceRequest, ILog
 	{
 		readonly String StorageDir = Application.temporaryCachePath;
+		
 		/// <summary>
 		/// Initializes a new instance of the asset_proof_of_concept_demo_CSharp.Bridge class.
 		/// </summary>
@@ -77,7 +78,7 @@ namespace AssetPackage
 		/// <param name="fileData"> Information describing the file. </param>
 		public void Save(string fileId, string fileData)
 		{
-			Debug.LogWarning("Writing to " + Path.Combine(StorageDir, fileId));
+			Debug.LogWarning("Writing to analytics to " + Path.Combine(StorageDir, fileId));
 			File.WriteAllText(Path.Combine(StorageDir, fileId), fileData);
 		}
 		/// <summary>

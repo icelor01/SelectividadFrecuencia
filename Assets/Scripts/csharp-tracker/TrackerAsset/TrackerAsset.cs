@@ -615,7 +615,7 @@ namespace AssetPackage
         /// <summary>
         /// Flushes the queue.
         /// </summary>
-        public void Flush()
+        public void Flush(Action a = null)
         {
 #if ASYNC
             // If its waiting for flush, lets wake it up
@@ -632,6 +632,7 @@ namespace AssetPackage
 #else
             ProcessQueue();
 #endif
+            if (a != null) a();
         }
 
 #if ASYNC
@@ -904,7 +905,7 @@ namespace AssetPackage
         /// <summary>
         /// Exit the tracker before closing to guarantee the thread closing.
         /// </summary>
-        public void Exit()
+        public void Exit(Action a = null)
         {
             exit = true;
             Flush();
@@ -912,6 +913,7 @@ namespace AssetPackage
             flushThread.Join();
             flushThread = null;
 #endif
+            if (a != null) a();
         }
 
         /// <summary>

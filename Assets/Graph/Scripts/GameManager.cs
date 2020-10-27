@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 using AssetPackage;
 
 //Clase estática para acceder desde cualquier escena
@@ -14,55 +13,41 @@ public class GameManager : MonoBehaviour {
     public int score;
     public Text ScoreT;
     public bool solution_isCorrect = false;
-    
-    private string ID;
-
-    private static TrackerAsset tracker;
-
     public static GameManager instance;
 
     private void Awake()    {
         DontDestroyOnLoad(this);
         
         if (instance != null) {
-            Debug.LogError("Tried to instantiate a vile copy of GameManager");
-            Destroy(gameObject);
             return;
         }
         instance = this; // only done once
 
-        Debug.Log("Initializing tracking...", this);
-        tracker = TrackerAsset.Instance;
-        tracker.Bridge = new UnityBridge();        
-        ID = "" + Random.Range(10000, 99999);
-        TrackerAssetSettings settings = new TrackerAssetSettings()
-        {
-            LogFile = "trazas_" + ID + ".log",
-            StorageType = TrackerAsset.StorageTypes.local,
-            TraceFormat = TrackerAsset.TraceFormats.xapi,
-            BackupStorage = true
-        };
-        tracker.Settings = settings;
-
-        tracker.Start();
-        Debug.Log("Tracking parece funcionar... c:" +  tracker.Connected + " x:" + tracker.Active);
-
-        tracker.Alternative.Selected("AlternativeID", "SelectedAnswer");
-        tracker.Flush();
-
+        // ver https://raw.githubusercontent.com/e-ucm/unity-tracker/master/Tracker.cs
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded<Scene> (Scene scene, LoadSceneMode mode) {
-        Debug.Log("Scene Loaded " + scene);
-        tracker.Completable.Initialized("" + scene);
-        tracker.Flush();
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if ( ! Tracker.T.Active) {
+            Tracker.T.Start();
+        }
+
+        string name = scene.name;
+        Debug.Log("Scene Loaded " + name);
+        Tracker.T.Completable.Initialized(name);
+        Tracker.T.Flush();
     }
-    void OnSceneUnloaded<Scene> (Scene scene) {
-        Debug.Log("Scene Unloaded " + scene);
-        tracker.Completable.Completed("" + scene);
-        tracker.Flush();
+    void OnSceneUnloaded(Scene scene) {
+        string name = scene.name;
+        Debug.Log("Scene Unloaded " + name);
+        Tracker.T.Completable.Completed(name);
+        Tracker.T.Flush();
+    }
+
+    public void TrackSliderValue(string key, string value) {
+        Tracker.T.setVar(key, value);
+        Tracker.T.GameObject.Interacted(key);
     }
 
     public void Start()    {
@@ -70,7 +55,11 @@ public class GameManager : MonoBehaviour {
 
     public void AddScore(int add) {
         score += add;
-        ScoreT.text = "Créditos: " + score;
+        if (ScoreT != null) {
+            ScoreT.text = "Créditos: " + score;
+        }
+        Tracker.T.setScore(score);
+        Tracker.T.setCompletion(true); // because we only set score when we win
     }
 
     void OnDisable()
