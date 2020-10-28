@@ -137,10 +137,12 @@ public class Table
 
         char[] delimiterChars = { '?', '=', '&' };
         string[] url_args = url_inicial.Split(delimiterChars);
-         url_function = url_args[0];
+        string url_function_total = url_args[0];
+        string[] url_function_args = url_args[0].Split('/');
+        url_function= url_function_args[4];
 
-        if (url_function== "http://localhost:5000/f/sincwave") {
-                    
+        if (url_function == "sincwave") 
+        {                    
             xmin_solution = 1;
             xmax_solution = 16;
             amplitude_solution = 2;
@@ -149,16 +151,24 @@ public class Table
             span = xmax - xmin;
             n = 100;
             amplitude = 1;
-            url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
+            url = GameManager.octaveServerEndpoint + url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
             //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
+            Debug.Log("La función url es: " + url_function + "Estoy en el if");
+            Debug.Log("La url es: " + url);
         }
-        else { 
-      
-        xmin = int.Parse(url_args[2]);
-        xmax = int.Parse(url_args[4]);
-        n = int.Parse(url_args[6]);
-        amplitude= int.Parse(url_args[8]);
-        url = url_inicial;
+        else 
+        { 
+        
+            xmin = int.Parse(url_args[2]);
+            xmax = int.Parse(url_args[4]);
+            n = int.Parse(url_args[6]);
+            amplitude= int.Parse(url_args[8]);
+            
+            // garantiza que la url empieza por GameManager.octaveServerEndpoint
+            int ultimaBarra = url_inicial.LastIndexOf('/');
+            url = GameManager.octaveServerEndpoint + url_inicial.Substring(ultimaBarra+1);
+            Debug.Log("La función url es: " + url_function +"Estoy en el else");
+            Debug.Log("La url es: " + url);
         }
 
     }
@@ -188,7 +198,7 @@ public class Table
     public void ChangeAmplitude(int amp_new)
     {
         SetAmplitude(amp_new);
-        url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
+        url = GameManager.octaveServerEndpoint + url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
         
     }
 
@@ -196,8 +206,9 @@ public class Table
         Setxmin(xmin_new);
         Setxmax(xmax_new);
         Setn(n);
-        url = url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
+        url = GameManager.octaveServerEndpoint + url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
         //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
+        Debug.Log("La nueva url es: "+url);
     }
 
     

@@ -19,7 +19,8 @@ public class GameManager_tutorial : MonoBehaviour {
     public GameObject SoundButton;
     public GameObject SoundImage;
     public GameObject NoSoundImage;
-
+    public bool solution_isCorrect = false;
+    
 
     void Awake () {
         //Check if instance already exists

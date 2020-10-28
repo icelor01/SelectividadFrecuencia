@@ -6,24 +6,19 @@ using UnityEngine.UI;
 using CodeMonkey.Utils;
 //using TMPro;
 
-public class UI_InputOK1 : MonoBehaviour
+public class UI_InputOK_Tutorial : MonoBehaviour
 {
 
-    private static UI_InputOK1 instance;
+    private static UI_InputOK_Tutorial instance;
     private Button_UI okBtn;
-    //private Button_UI cancelBtn;
-    [SerializeField] public GameObject plotComponent;
+   [SerializeField] public GameObject plotComponent;
     private int xMin;
     private int xMax;
     private int amplitude;
-    //private int n;
     //Valores solucion para cada Ejercicio
     public int xMin_solution;
     public int xMax_solution;
     public int amplitude_solution;
-    //public GameObject feedbackOK;
-    //public GameObject feedbackNOK;
-    public ToggleManager toggleManagerInstance;
     public Text feedbackText;
 
     // Use this for initialization
@@ -43,12 +38,7 @@ public class UI_InputOK1 : MonoBehaviour
         {
             okBtn.ClickFunc();
         }
-        /* if (Input.GetKeyDown(KeyCode.Escape))
-         {
-            cancelBtn.ClickFunc();
-        }*/
-
-    }
+     }
 
 
     private void Show(string inputString, Action onCancel, Action<string> onOk)
@@ -61,17 +51,8 @@ public class UI_InputOK1 : MonoBehaviour
         amplitude = table.GetAmplitude();
 
 
-        // Si no está seleccionado
-        if (toggleManagerInstance.activeToggleid == 0)
-        {
-            Debug.Log("Falta indicar si existe selectividad en frecuencia");
-            feedbackText.color = Color.blue;
-            feedbackText.text = "Recuerda indicar si existe selectividad en frecuencia o no";
-
-        }
-
         // Si la solución es correcta
-        else if (((xMin >= xMin_solution - 1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 1)
+        if (((xMin >= xMin_solution - 1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)))
         {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;

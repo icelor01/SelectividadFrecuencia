@@ -18,7 +18,7 @@ public class Escenas : MonoBehaviour {
         var parameters = new LoadSceneParameters(LoadSceneMode.Single);
         scene= SceneManager.LoadScene(sceneName, parameters);
 
-       DontDestroyOnLoad(GameManager_tutorial.manager);
+       DontDestroyOnLoad(GameManager.manager);
         //DontDestroyOnLoad(GameObject.FindGameObjectWithTag("TutorialMusic"));
 
         //DontDestroyOnLoad(GameManager.instance);

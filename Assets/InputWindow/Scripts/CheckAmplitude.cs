@@ -22,7 +22,7 @@ public class CheckAmplitude : MonoBehaviour
     {
         if (myTable.GetAmplitude()== 4.0)
         {
-            Escenas.instance.GoToScene("Tutorial4");
+            Escenas.instance.GoToScene("Tutorial4a");
         }
         else
         {

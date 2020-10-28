@@ -16,7 +16,7 @@ public class GameManager2 : MonoBehaviour
 
     private void Awake()
     {
-        int initial_score = GameManager.instance.score;
+        int initial_score = GameManager.manager.score;
         //int initial_score = ProjectVars.Instance.score;
         ScoreT.text = "Créditos: " + initial_score;
         instance2 = this;

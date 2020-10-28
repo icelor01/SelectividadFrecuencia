@@ -44,10 +44,11 @@ public class SoundController : MonoBehaviour
     public void CustomButton_OnClick()
     {
         //soundcontroller.TurnSoundOff();
-        GameManager_tutorial.manager.SoundControl();
+
+         GameManager.manager.SoundControl();
 
         // Image
-        if (GameManager_tutorial.manager.SoundOn == true)
+        if (GameManager.manager.SoundOn == true)
         {
             SoundImage.SetActive(true);
             NoSoundImage.SetActive(false);
