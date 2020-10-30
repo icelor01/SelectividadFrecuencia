@@ -15,7 +15,7 @@ public class UI_CheckOK : MonoBehaviour {
     }
 
     void TaskOnClick()  {
-        if (GameManager.manager.solution_isCorrect == true)
+        if (GameManager.manager.solutionIsCorrect == true)
         {
             //int nextScene = 6;
             Scene currentScene = SceneManager.GetActiveScene();

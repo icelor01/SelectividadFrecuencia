@@ -30,8 +30,6 @@ public class UI_InputOK1 : MonoBehaviour {
         instance = this;
         Hide();
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
-        //feedbackText = transform.Find("FeedbackText").GetComponent<Text>();
-        GameManager.manager.solution_isCorrect = false;
     }
 
     // Use this for initialization
@@ -42,16 +40,17 @@ public class UI_InputOK1 : MonoBehaviour {
         {
             okBtn.ClickFunc();
         }
-        /* if (Input.GetKeyDown(KeyCode.Escape))
-         {
-            cancelBtn.ClickFunc();
-        }*/
+    }
 
+    private Single relativeError(Single actual, Single expected) {
+        return System.Math.Abs(actual - expected) / expected;
     }
 
 
     private void Show(string inputString, Action onCancel, Action<string> onOk)
     {
+
+        GameManager.manager.solutionIsCorrect = false;
 
         Plot plot = plotComponent.GetComponent<Plot>();
         Table table = plot.getTable();
@@ -59,102 +58,73 @@ public class UI_InputOK1 : MonoBehaviour {
         xMax = table.Getxmax();
         amplitude = table.GetAmplitude();
 
+        Single spanError = relativeError(xMax - xMin, plot.table.GetSpan());
+        Single freqError = relativeError((xMax - xMin) / 2, plot.table.Getfc());
+        Single ampError = relativeError(amplitude, amplitude_solution);
+        int errores = 0;
 
-        // Si no está seleccionado
+        // Si el span es incorrecto
+        if (spanError > 0.1)
+        {
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y el ancho de banda de la señal";
+            errores ++;
+        }
+
+        // Si la frecuencia es incorrecta
+        if (freqError > 0.1)
+        {
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y la frecuencia de la señal";
+            errores ++;
+        }
+               
+
+        // Si la amplitud es incorrecta
+        if (ampError > 0.1)
+        {
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y la amplitud de la señal";
+            errores ++;
+        }
+
+        // Si selectividad mal
         if (toggleManagerInstance.activeToggleid == 0)
         {
             Debug.Log("Falta indicar si existe selectividad en frecuencia");
             feedbackText.color = Color.blue;
             feedbackText.text = "Recuerda indicar si existe selectividad en frecuencia o no";
-
+            errores ++;
         }
-
-        // Si el span es incorrecto
-        else if ( ((xMax - xMin) < (plot.table.GetSpan() - 1)) || ((xMax - xMin) > (plot.table.GetSpan() + 1)) )
-        {
-            Debug.Log("Span incorrecto. El span debería ser: "+ plot.table.GetSpan());
-            feedbackText.color = Color.red;
-            feedbackText.text = "Revisa las fórmulas y el ancho de banda de la señal";
-        }
-
-        // Si la frecuencia es incorrecta
-        else if ((((xMax - xMin) / 2) < (plot.table.Getfc() - 1)) || (((xMax-xMin)/2)>(plot.table.Getfc()+1))  )
-        {
-            Debug.Log("Frecuencia incorrecta. La frecuencia debería ser: "+ plot.table.Getfc());
-            feedbackText.color = Color.red;
-            feedbackText.text = "Revisa las fórmulas y la frecuencia de la señal";
-        }
-               
-
-        // Si la amplitud es incorrecta
-        else if ((amplitude <= amplitude_solution - 1) & (amplitude > amplitude_solution + 1))
-        {
-            Debug.Log("Amplitud incorrecta");
-            feedbackText.color = Color.red;
-            feedbackText.text = "Revisa las fórmulas y la amplitud de la señal";
-        }
-
-        // Si selectividad mal
         else if (toggleManagerInstance.activeToggleid != toggle_solution)
         {
             Debug.Log("Selectividad en frecuencia incorrecto");
             feedbackText.color = Color.red;
             feedbackText.text = "Revisa las fórmulas y si existe selectividad en frecuencia o no";
+            errores ++;
         }
 
-
-        // Si la solución es correcta
-        else if (  ((((xMax - xMin) / 2) > (plot.table.Getfc() + 1)) || (((xMax - xMin) / 2) > (plot.table.Getfc() - 1))) &
-           ((xMax - xMin) < (plot.table.GetSpan() - 1)) || ((xMax - xMin) > (plot.table.GetSpan() + 1)) & 
-           ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1))  &
-           (toggleManagerInstance.activeToggleid == toggle_solution))
-        {
+        if (errores == 0) {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
-            GameManager.manager.solution_isCorrect = true;
-
-
-        }
-        // Si la solución es incorrecta
-        else
-        {
-            feedbackText.color = Color.red;
-            feedbackText.text = "¡Vaya! No has ajustado correctamente el canal. Vuelve a intentarlo o revisa las fórmulas";
+            GameManager.manager.solutionIsCorrect = true;
         }
 
-
-
+        Debug.Log("After check " + errores + " errors, from se=" + spanError + " fe=" + freqError + " ae="+ampError);
 
         gameObject.SetActive(true);
 
-
-
-
-        okBtn.ClickFunc = () => {
-            Hide();
-        };
-
-        /*cancelBtn.ClickFunc = () => {
-            Hide();
-            onCancel();
-        };*/
-
+        okBtn.ClickFunc = () => Hide();
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
-
     }
-
 
     public static void Show_Static(string inputString, Action onCancel, Action<string> onOk)
     {
         instance.Show(inputString, onCancel, onOk);
-
     }
-
-
-
 }

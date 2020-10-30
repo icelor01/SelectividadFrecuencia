@@ -11,7 +11,7 @@ using AssetPackage;
 public class GameManager : MonoBehaviour { 
     
     public Text ScoreT;
-    public bool solution_isCorrect = false;
+    public bool solutionIsCorrect = false;
     public static GameManager manager; //instancia de GameManager
     
     public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour {
         if ( ! Tracker.T.Active) {
             Tracker.T.Start();
         }
-
         string name = scene.name;
         Debug.Log("Scene Loaded " + name);
         Tracker.T.Completable.Initialized(name);

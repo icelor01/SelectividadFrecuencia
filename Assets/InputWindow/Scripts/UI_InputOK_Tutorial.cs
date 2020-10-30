@@ -56,7 +56,7 @@ public class UI_InputOK_Tutorial : MonoBehaviour
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
-            GameManager.manager.solution_isCorrect = true;
+            GameManager.manager.solutionIsCorrect = true;
 
 
         }

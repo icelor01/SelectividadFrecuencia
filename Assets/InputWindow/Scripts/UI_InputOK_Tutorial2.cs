@@ -55,7 +55,7 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Efectivamente, el canal es selectivo en frecuencia y su respuesta en frecuencia no es plana durante el ancho de banda del radiocanal";
-            GameManager.manager.solution_isCorrect = true;
+            GameManager.manager.solutionIsCorrect = true;
 
 
         }
