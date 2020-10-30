@@ -18,12 +18,13 @@ public class UI_CheckOK_Tutorial : MonoBehaviour
 
     void TaskOnClick()
     {
-        if (GameManager_tutorial.manager.solution_isCorrect == true)
-        {
-            Scene currentScene = SceneManager.GetActiveScene();
-            string sceneName = currentScene.name;
 
-            Debug.Log("Solution scene" + sceneName + "is correct");
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (GameManager.manager.solution_isCorrect == true)
+        {
+            Debug.Log("Solution scene: " + sceneName + "is correct");
             GameManager.manager.AddScore(puntos_tutorial);
             // Debemos cambiar a la escena siguiente a no ser que estemos en la escena ultima 7, que regresamos al menú principal id.0
 
@@ -31,12 +32,16 @@ public class UI_CheckOK_Tutorial : MonoBehaviour
             {
                 Escenas.instance.GoToScene("Tutorial5a");
             }
-           
-        
-        else
+
+            if (sceneName == "Tutorial5c")
+            {
+                Escenas.instance.GoToScene("Menu");
+            }
+
+            else
         {
-            Debug.Log("Solution 1 is incorrect");
-            puntos_tutorial -= 2;
+                Debug.Log("Solution scene: " + sceneName + "is incorrect");
+                puntos_tutorial -= 2;
             // Debemos mantenernos en la misma escena
             //do nothing
         }

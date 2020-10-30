@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using CodeMonkey.Utils;
 //using TMPro;
 
-public class UI_InputOK1 : MonoBehaviour
-{
+public class UI_InputOK1 : MonoBehaviour {
 
     private static UI_InputOK1 instance;
     private Button_UI okBtn;
@@ -21,8 +20,7 @@ public class UI_InputOK1 : MonoBehaviour
     public int xMin_solution;
     public int xMax_solution;
     public int amplitude_solution;
-    //public GameObject feedbackOK;
-    //public GameObject feedbackNOK;
+    public int toggle_solution=1; // No existe selectividad en frecuencia No=1
     public ToggleManager toggleManagerInstance;
     public Text feedbackText;
 
@@ -33,6 +31,7 @@ public class UI_InputOK1 : MonoBehaviour
         Hide();
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
         //feedbackText = transform.Find("FeedbackText").GetComponent<Text>();
+        GameManager.manager.solution_isCorrect = false;
     }
 
     // Use this for initialization
@@ -70,8 +69,45 @@ public class UI_InputOK1 : MonoBehaviour
 
         }
 
+        // Si el span es incorrecto
+        else if ( ((xMax - xMin) < (plot.table.GetSpan() - 1)) || ((xMax - xMin) > (plot.table.GetSpan() + 1)) )
+        {
+            Debug.Log("Span incorrecto. El span debería ser: "+ plot.table.GetSpan());
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y el ancho de banda de la señal";
+        }
+
+        // Si la frecuencia es incorrecta
+        else if ((((xMax - xMin) / 2) < (plot.table.Getfc() - 1)) || (((xMax-xMin)/2)>(plot.table.Getfc()+1))  )
+        {
+            Debug.Log("Frecuencia incorrecta. La frecuencia debería ser: "+ plot.table.Getfc());
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y la frecuencia de la señal";
+        }
+               
+
+        // Si la amplitud es incorrecta
+        else if ((amplitude <= amplitude_solution - 1) & (amplitude > amplitude_solution + 1))
+        {
+            Debug.Log("Amplitud incorrecta");
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y la amplitud de la señal";
+        }
+
+        // Si selectividad mal
+        else if (toggleManagerInstance.activeToggleid != toggle_solution)
+        {
+            Debug.Log("Selectividad en frecuencia incorrecto");
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y si existe selectividad en frecuencia o no";
+        }
+
+
         // Si la solución es correcta
-        else if (((xMin >= xMin_solution - 1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)) & toggleManagerInstance.activeToggleid == 1)
+        else if (  ((((xMax - xMin) / 2) > (plot.table.Getfc() + 1)) || (((xMax - xMin) / 2) > (plot.table.Getfc() - 1))) &
+           ((xMax - xMin) < (plot.table.GetSpan() - 1)) || ((xMax - xMin) > (plot.table.GetSpan() + 1)) & 
+           ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1))  &
+           (toggleManagerInstance.activeToggleid == toggle_solution))
         {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;

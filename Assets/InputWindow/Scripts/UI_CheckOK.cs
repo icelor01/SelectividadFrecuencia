@@ -17,19 +17,36 @@ public class UI_CheckOK : MonoBehaviour {
     void TaskOnClick()  {
         if (GameManager.manager.solution_isCorrect == true)
         {
-            int nextScene = 6;
+            //int nextScene = 6;
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
 
             Debug.Log("Solution scene"+ sceneName + "is correct");
             GameManager.manager.AddScore(puntos);
             // Debemos cambiar a la escena siguiente a no ser que estemos en la escena ultima 7, que regresamos al menú principal id.0
-            if (sceneName == "Escena3")
+
+            if (sceneName == "Escena1")
+            {
+                Escenas.instance.GoToScene("Escena2");
+            }
+            else if (sceneName == "Escena2")
+            {
+                Escenas.instance.GoToScene("Escena3");
+            }
+            else if (sceneName == "Escena3")
             {
                 Escenas.instance.GoToScene("Menu");
             }
-            else{Escenas.instance.GoToScene("Escena2");
-                nextScene += 1;
+
+            else if (sceneName == "FinalScene")
+            {
+                Escenas.instance.GoToScene("Menu");
+            }
+
+            else
+            {
+                //nextScene += 1;
+                Debug.Log("Estoy en escena: " + sceneName + " y no sé a qué escena siguiente tengo que ir.");
             }
         }
         else

@@ -5,19 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using CodeMonkey.Utils;
 
-public class UI_InputOK_Tutorial : MonoBehaviour
+public class UI_InputOK_Tutorial2 : MonoBehaviour
 {
-
-    private static UI_InputOK_Tutorial instance;
+    private static UI_InputOK_Tutorial2 instance;
     private Button_UI okBtn;
-   [SerializeField] public GameObject plotComponent;
-    private int xMin;
-    private int xMax;
-    private int amplitude;
+   
     //Valores solucion para cada Ejercicio
-    public int xMin_solution;
-    public int xMax_solution;
-    public int amplitude_solution;
+    public ToggleManager toggleManagerInstance;
+    public int toggle_solution = 2; // No existe selectividad en frecuencia =1, Sí existe selectividad en frecuencia =2
     public Text feedbackText;
 
     // Use this for initialization
@@ -37,25 +32,29 @@ public class UI_InputOK_Tutorial : MonoBehaviour
         {
             okBtn.ClickFunc();
         }
-     }
+    }
 
 
     private void Show(string inputString, Action onCancel, Action<string> onOk)
     {
 
-        Plot plot = plotComponent.GetComponent<Plot>();
-        Table table = plot.getTable();
-        xMin = table.Getxmin();
-        xMax = table.Getxmax();
-        amplitude = table.GetAmplitude();
+      
 
+        // Si no está seleccionado
+        if (toggleManagerInstance.activeToggleid == 0)
+        {
+            Debug.Log("Falta indicar si existe selectividad en frecuencia");
+            feedbackText.color = Color.blue;
+            feedbackText.text = "Recuerda indicar si existe selectividad en frecuencia o no";
+
+        }
 
         // Si la solución es correcta
-        if (((xMin >= xMin_solution - 1) & (xMin <= xMin_solution + 1)) & ((xMax >= xMax_solution - 1) & (xMax <= xMax_solution + 1)) & ((amplitude >= amplitude_solution - 1) & (amplitude <= amplitude_solution + 1)))
+        else if (toggleManagerInstance.activeToggleid == toggle_solution)
         {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
-            feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
+            feedbackText.text = "¡¡Muy bien!! Efectivamente, el canal es selectivo en frecuencia y su respuesta en frecuencia no es plana durante el ancho de banda del radiocanal";
             GameManager.manager.solution_isCorrect = true;
 
 
@@ -64,7 +63,7 @@ public class UI_InputOK_Tutorial : MonoBehaviour
         else
         {
             feedbackText.color = Color.red;
-            feedbackText.text = "¡Vaya! No has ajustado correctamente el canal. Vuelve a intentarlo o revisa las fórmulas";
+            feedbackText.text = "¡Vaya! Ten en cuenta que la forma de onda de la entrada, se modifica a la salida y que Bw=14 kHz y Bc=4kHz.Revisa las fórmulas y vuelve a intentarlo o r";
         }
 
 

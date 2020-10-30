@@ -9,7 +9,7 @@ using AssetPackage;
 //Clase estática para acceder desde cualquier escena
 
 public class GameManager : MonoBehaviour { 
-    public int score;
+    
     public Text ScoreT;
     public bool solution_isCorrect = false;
     public static GameManager manager; //instancia de GameManager
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
     public GameObject SoundButton;
     public GameObject SoundImage;
     public GameObject NoSoundImage;
+    int score=0;
 
     void Awake()
     {
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour {
         // ver https://raw.githubusercontent.com/e-ucm/unity-tracker/master/Tracker.cs
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        ScoreT.text = "Créditos: " + score;
 
         string activeScene = SceneManager.GetActiveScene().name;
         if (activeScene == "Menu")
