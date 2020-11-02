@@ -35,14 +35,10 @@ public class UI_CheckOK : MonoBehaviour {
             }
             else if (sceneName == "Escena3")
             {
-                Escenas.instance.GoToScene("Menu");
+                Escenas.instance.GoToScene("FinalScene");
             }
 
-            else if (sceneName == "FinalScene")
-            {
-                Escenas.instance.GoToScene("Menu");
-            }
-
+            
             else
             {
                 //nextScene += 1;

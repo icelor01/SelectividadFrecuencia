@@ -38,8 +38,6 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
     private void Show(string inputString, Action onCancel, Action<string> onOk)
     {
 
-      
-
         // Si no está seleccionado
         if (toggleManagerInstance.activeToggleid == 0)
         {
@@ -63,7 +61,7 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
         else
         {
             feedbackText.color = Color.red;
-            feedbackText.text = "¡Vaya! Ten en cuenta que la forma de onda de la entrada, se modifica a la salida y que Bw=14 kHz y Bc=4kHz.Revisa las fórmulas y vuelve a intentarlo o r";
+            feedbackText.text = "¡Vaya! Ten en cuenta que la forma de onda de la entrada, se modifica a la salida y que Bw=14 kHz y Bc=4kHz. Revisa las fórmulas y vuelve a intentarlo";
         }
 
 

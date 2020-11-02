@@ -11,7 +11,7 @@ public class CircleSlider_Freq : CircleSliderBase {
 
         float fc_new = value;
       
-        if ((int)fc_new != (int)fc)
+        if (fc_new != fc)
         {
             table.Changefc(fc_new);
             table.RequestData(plot);

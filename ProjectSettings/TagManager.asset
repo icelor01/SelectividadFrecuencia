@@ -15,6 +15,9 @@ TagManager:
   - NoSoundImage
   - Scene1Music
   - Scene2Music
+  - Scene3Music
+  - Creditos
+  - CheckImage
   layers:
   - Default
   - TransparentFX

@@ -35,6 +35,8 @@ public class UI_CheckOK_Tutorial : MonoBehaviour
 
             if (sceneName == "Tutorial5c")
             {
+                GameManager.manager.completed_tutorial = true;
+                Debug.Log("He completado el tutorial y voy al menu");
                 Escenas.instance.GoToScene("Menu");
             }
 

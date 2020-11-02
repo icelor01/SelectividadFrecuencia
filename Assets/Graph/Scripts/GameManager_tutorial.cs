@@ -41,12 +41,15 @@ public class GameManager_tutorial : MonoBehaviour {
         
         string activeScene = SceneManager.GetActiveScene().name;
         if (activeScene == "Menu")
+            Debug.Log("Estoy en escena Menu");
         {
             if (clip != null) {
                 Destroy(clip);
+                Debug.Log("Y destruyo el clip");
             }
             else { 
             clip = GameObject.FindGameObjectWithTag("MenuMusic");
+                Debug.Log("Pongo clip de MenuMusic");
             }
          }
         if (activeScene== "Tutorial1") { 

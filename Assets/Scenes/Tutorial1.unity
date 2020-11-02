@@ -1202,7 +1202,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 99e59868b2e5c844e9bc0514fa16b6d1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c6224cb6d5295774a96ed2f521a195a6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3483,7 +3483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -290, y: 183}
+  m_AnchoredPosition: {x: -567, y: 354}
   m_SizeDelta: {x: 48.154816, y: 42.391296}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1009618173
@@ -3596,6 +3596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3c2690fc2883c49ba24019c44b9eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posX: -465
+  posY: 287
+  posZ: 0
 --- !u!1 &1016114578
 GameObject:
   m_ObjectHideFlags: 0
@@ -6163,6 +6166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3c2690fc2883c49ba24019c44b9eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posX: 0
+  posY: 0
+  posZ: 0
 --- !u!1 &1665114535
 GameObject:
   m_ObjectHideFlags: 0
@@ -6858,9 +6864,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.653, g: 0.93725497, b: 0, a: 1}
-    m_PressedColor: {r: 0.20000002, g: 0.822, b: 0, a: 1}
-    m_SelectedColor: {r: 0.653, g: 0.93725497, b: 0, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.48383474, b: 0.9372549, a: 1}
+    m_PressedColor: {r: 0, g: 0.13560292, b: 0.8235294, a: 1}
+    m_SelectedColor: {r: 0, g: 0.65067613, b: 0.9372549, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

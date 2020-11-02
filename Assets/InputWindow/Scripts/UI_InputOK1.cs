@@ -12,11 +12,13 @@ public class UI_InputOK1 : MonoBehaviour {
     private Button_UI okBtn;
     //private Button_UI cancelBtn;
     [SerializeField] public GameObject plotComponent;
+    private float fc;
     private int xMin;
     private int xMax;
     private int amplitude;
     //private int n;
     //Valores solucion para cada Ejercicio
+    public float fc_solution;
     public int xMin_solution;
     public int xMax_solution;
     public int amplitude_solution;
@@ -54,14 +56,26 @@ public class UI_InputOK1 : MonoBehaviour {
 
         Plot plot = plotComponent.GetComponent<Plot>();
         Table table = plot.getTable();
+        fc = table.Getfc();
         xMin = table.Getxmin();
         xMax = table.Getxmax();
         amplitude = table.GetAmplitude();
 
-        Single spanError = relativeError(xMax - xMin, plot.table.GetSpan());
-        Single freqError = relativeError((xMax - xMin) / 2, plot.table.Getfc());
+        //Single freqError = relativeError((xMax - xMin) / 2, table.Getfc());
+        //Single spanError = relativeError(xMax - xMin, table.GetSpan());
+        Single freqError = relativeError(fc, fc_solution);
+        Single spanError = relativeError((xMax - xMin), (xMax_solution - xMin_solution));
         Single ampError = relativeError(amplitude, amplitude_solution);
         int errores = 0;
+
+        // Si la frecuencia es incorrecta
+        if (freqError > 0.1)
+        {
+            feedbackText.color = Color.red;
+            feedbackText.text = "Revisa las fórmulas y la frecuencia de la señal";
+            Debug.Log("La frecuencia marcada es: ");
+            errores++;
+        }
 
         // Si el span es incorrecto
         if (spanError > 0.1)
@@ -70,15 +84,7 @@ public class UI_InputOK1 : MonoBehaviour {
             feedbackText.text = "Revisa las fórmulas y el ancho de banda de la señal";
             errores ++;
         }
-
-        // Si la frecuencia es incorrecta
-        if (freqError > 0.1)
-        {
-            feedbackText.color = Color.red;
-            feedbackText.text = "Revisa las fórmulas y la frecuencia de la señal";
-            errores ++;
-        }
-               
+              
 
         // Si la amplitud es incorrecta
         if (ampError > 0.1)
@@ -111,7 +117,9 @@ public class UI_InputOK1 : MonoBehaviour {
             GameManager.manager.solutionIsCorrect = true;
         }
 
-        Debug.Log("After check " + errores + " errors, from se=" + spanError + " fe=" + freqError + " ae="+ampError);
+        Debug.Log("After check " + errores + " errors, from fe= " + freqError + "se=  " +spanError  + " ae="+ampError);
+        Debug.Log("Respuesta: Frecuencia: " + fc + " ,span: " + (xMax-xMin) + " amplitud: " + amplitude);
+        Debug.Log("Respuesta correcta: Frecuencia: " + fc_solution + " ,span: " + (xMax_solution - xMin_solution) + " amplitud: " + amplitude_solution);
 
         gameObject.SetActive(true);
 
