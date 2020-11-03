@@ -49,7 +49,7 @@ public class UI_InputOK_Tutorial : MonoBehaviour
     private void Show(string inputString, Action onCancel, Action<string> onOk)
     {
 
-        GameManager.manager.solutionIsCorrect = false;
+        GameManager.manager.tutorial_solutionIsCorrect = false;
 
         Plot plot = plotComponent.GetComponent<Plot>();
         Table table = plot.getTable();
@@ -96,7 +96,7 @@ public class UI_InputOK_Tutorial : MonoBehaviour
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
-            GameManager.manager.solutionIsCorrect = true;
+            GameManager.manager.tutorial_solutionIsCorrect = true;
         }
 
         Debug.Log("After check " + errores + " errors, from fe= " + freqError + "se=  " + spanError + " ae=" + ampError);

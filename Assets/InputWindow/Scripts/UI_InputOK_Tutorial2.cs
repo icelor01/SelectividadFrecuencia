@@ -38,6 +38,8 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
     private void Show(string inputString, Action onCancel, Action<string> onOk)
     {
 
+        GameManager.manager.tutorial_solutionIsCorrect = false;
+
         // Si no está seleccionado
         if (toggleManagerInstance.activeToggleid == 0)
         {
@@ -53,7 +55,7 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Efectivamente, el canal es selectivo en frecuencia y su respuesta en frecuencia no es plana durante el ancho de banda del radiocanal";
-            GameManager.manager.solutionIsCorrect = true;
+            GameManager.manager.tutorial_solutionIsCorrect = true;
 
 
         }

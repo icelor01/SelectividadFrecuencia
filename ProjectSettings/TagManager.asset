@@ -18,6 +18,8 @@ TagManager:
   - Scene3Music
   - Creditos
   - CheckImage
+  - TutorialMusic2
+  - FinalSceneMusic
   layers:
   - Default
   - TransparentFX

@@ -22,7 +22,7 @@ public class UI_CheckOK_Tutorial : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
-        if (GameManager.manager.solutionIsCorrect == true)
+        if (GameManager.manager.tutorial_solutionIsCorrect == true)
         {
             Debug.Log("Solution scene: " + sceneName + "is correct");
             GameManager.manager.AddScore(puntos_tutorial);

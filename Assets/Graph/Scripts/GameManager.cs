@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     
     public Text ScoreT;
     public bool solutionIsCorrect = false;
+    public bool tutorial_solutionIsCorrect = false;
     public static GameManager manager; //instancia de GameManager
     
     public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
@@ -32,13 +33,167 @@ public class GameManager : MonoBehaviour {
     public GameObject CheckImage;
     public int score;
 
+    void updateReferences(Scene scene, LoadSceneMode mode) {
+
+        string activeScene = scene.name;
+
+        //permanente = GameObject.FindWithTag("Permanente");
+        permanente = GameObject.Find("CanvasPermanente");
+        AudioSource bgsound;
+
+        switch (activeScene) {
+            case "Menu":
+            {
+                score = 0;
+                /*
+                if (clip != null)
+                {
+                    Destroy(clip);
+                    Debug.Log("Y destruyo el clip");
+                }
+                else
+                {
+                    clip = GameObject.FindWithTag("MenuMusic");
+                    Debug.Log("Pongo clip de MenuMusic");
+                }
+
+                Debug.Log("Estoy en escena Menu");
+                */
+                try
+                {
+                    // Si hay TutorialMusic, lo destruimos
+                    if (clip.tag == "TutorialMusic")
+                    {
+                        Destroy(GameObject.FindWithTag("TutorialMusic"));
+                    }
+                }
+                catch
+                {
+                    // Si no hay TutorialMusic, activamos MenuMusic
+                    clip = GameObject.FindWithTag("MenuMusic");
+                    bgsound = clip.GetComponent<AudioSource>();
+                    Debug.Log("Suena MenuMusic");
+                    previousMusicPlaying = SoundOn;
+                };
+
+                    //CheckImage = GameObject.Find("CanvasPermanente/CheckImage");
+                    CheckImage= permanente.transform.Find("CheckImage").gameObject;
+                    if (completed_tutorial == true)
+                    {
+                        CheckImage.SetActive(true);
+                    }
+                    else
+                    {
+                        CheckImage.SetActive(false);
+                    }
+
+                    break;
+            }
+            case "Tutorial1":
+            {                
+                if (SoundOn == false & previousMusicPlaying == false)
+                {
+                    // Apagamos la música
+                    TurnSoundOff();
+                    SoundButton = GameObject.FindWithTag("SoundButton");
+                    SoundImage = SoundButton.transform.Find("ImagenSonido").gameObject;
+                    NoSoundImage = SoundButton.transform.Find("ImagenSinSonido").gameObject;
+                    SoundImage.SetActive(false);
+                    NoSoundImage.SetActive(true);
+                    previousMusicPlaying = true;
+                }
+                else
+                {
+                    GameObject[] gameObjects;
+                    gameObjects = GameObject.FindGameObjectsWithTag("TutorialMusic");
+                    // Si estamos en la escena Menu, hay que revisar que no esté sonando la música de otros reproductores
+                    //como podría ser la de TutorialMusic procedente de la escena 2 (dos reproductores)
+
+                    if (gameObjects.Length > 1)
+                    {
+                        // Si hay dos TutorialMusic, debemos destruir un reproductor  
+                        // Ver como destruir un reproductor
+                        Destroy(gameObjects[1]);
+                    }
+
+                    // Si no hay dos TutorialMusic, activamos TutorialMusic
+                    clip = GameObject.FindWithTag("TutorialMusic");
+                    bgsound = clip.GetComponent<AudioSource>();
+                    Debug.Log("Suena TutorialMusic");
+                    DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
+                }
+                break;
+            }
+            case "Tutorial4a":
+            {
+                    try
+                    {
+                        // Si hay TutorialMusic, lo destruimos
+                        if (clip.tag == "TutorialMusic")
+                        {
+                            Destroy(GameObject.FindWithTag("TutorialMusic"));
+                        }
+                    }
+                    catch
+                    {
+                        // Si no hay TutorialMusic, activamos TutorialMusic2
+                        clip = GameObject.FindWithTag("TutorialMusic2");
+                        bgsound = clip.GetComponent<AudioSource>();
+                        Debug.Log("Suena TutorialMusic2");
+                        previousMusicPlaying = SoundOn;
+                        DontDestroyOnLoad(clip);
+                    };
+                    break;
+            } 
+            case "Escena1": InitLevel("Scene1Music"); break;
+            case "Escena2": InitLevel("Scene2Music"); break;
+            case "Escena3": InitLevel("Scene3Music"); break;
+
+            case "FinalScene":
+                {
+                    try
+                    {
+                        // Si hay TutorialMusic, lo destruimos
+                        if (clip.tag == "Scene3Music")
+                        {
+                            Destroy(GameObject.FindWithTag("Scene3Music"));
+                        }
+                    }
+                    catch
+                    {
+                        // Si no hay TutorialMusic, activamos TutorialMusic2
+                        clip = GameObject.FindWithTag("FinalSceneMusic");
+                        bgsound = clip.GetComponent<AudioSource>();
+                        Debug.Log("Suena FinalSceneMusic");
+                        previousMusicPlaying = SoundOn;
+                        
+                    };
+                    break;
+                }
+        }
+
+
+    }
+
+    private void InitLevel(string music) {
+            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
+            ScoreT= creditos.GetComponent<Text>();
+            ScoreT.text = "Créditos: " + score;
+            if (clip != null)
+            {
+                Destroy(clip);
+            }
+            else
+            {
+                clip = GameObject.FindWithTag(music);
+                DontDestroyOnLoad(clip);
+        }
+    }
+
     void Awake()
     {
         //Check if instance already exists
-        if (manager != null)
-        {
-            return;
-        }
+        if (manager != null) return;
 
         manager = this;
         //Sets this to not be destroyed when reloading scene
@@ -48,85 +203,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        string activeScene = SceneManager.GetActiveScene().name;
-        if (activeScene == "Menu")
-            Debug.Log("Estoy en escena Menu");
-        //permanente = GameObject.FindGameObjectWithTag("Permanente");
-        permanente = GameObject.Find("CanvasPermanente");
-        {
-            if (clip != null)
-            {
-                Destroy(clip);
-                Debug.Log("Y destruyo el clip");
-            }
-            else
-            {
-                clip = GameObject.FindGameObjectWithTag("MenuMusic");
-                Debug.Log("Pongo clip de MenuMusic");
-            }
-        }
-        if (activeScene == "Tutorial1")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            permanente = GameObject.Find("CanvasPermanente");
-            clip = GameObject.FindGameObjectWithTag("TutorialMusic");
-            DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
-        }
-
-        if (activeScene == "Tuturial4a")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            permanente = GameObject.Find("Permanente");
-            if (clip != null)
-            {
-                Destroy(clip);
-                Debug.Log("Y destruyo el clip");
-            }
-            else
-            {
-                clip = GameObject.FindGameObjectWithTag("TutorialMusic");
-                Debug.Log("Pongo nuevo clip de TutorialMusic");
-            }
-        }
-
-        if (activeScene == "Escena1")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            permanente = GameObject.Find("CanvasPermanente");
-            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT.text = "Créditos: " + score;
-            clip = GameObject.FindGameObjectWithTag("Scene1Music");
-            DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
-        }
-        if (activeScene == "Escena2")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            permanente = GameObject.Find("CanvasPermanente");
-            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT.text = "Créditos: " + score;
-            clip = GameObject.FindGameObjectWithTag("Scene2Music");
-            DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
-        }
-        if (activeScene == "Escena3")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            permanente = GameObject.Find("CanvasPermanente");
-            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT.text = "Créditos: " + score;
-            clip = GameObject.FindGameObjectWithTag("Scene3Music");
-            DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
-        }
-
-        CheckImage = GameObject.FindGameObjectWithTag("CheckImage");
-        if (completed_tutorial == true)
-        {
-            CheckImage.SetActive(true);
-        }
-
-        else
-        {
-            CheckImage.SetActive(false);
-        }
+        SceneManager.sceneLoaded += updateReferences;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -169,159 +246,6 @@ public class GameManager : MonoBehaviour {
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
-
-    public void Update()
-    {
-        string activeScene = SceneManager.GetActiveScene().name;
-        AudioSource audio;
-
-        if (activeScene == "Menu")
-        {
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-
-            permanente = GameObject.Find("CanvasPermanente");
-            //CheckImage = permanente.transform.Find("CheckImage").gameObject;
-            //CheckImage = GameObject.FindGameObjectWithTag("CheckImage");
-            CheckImage = GameObject.Find("CanvasPermanente/CheckImage");
-            if (completed_tutorial == true)
-            {
-                
-                CheckImage.SetActive(true);
-            }
-
-            else {
-                CheckImage.SetActive(false);
-            }
-            // Si estamos en la escena Menu, hay que revisar que no esté sonando la música de otros reproductores
-            //como podría ser la de TutorialMusic 
-            try
-            {
-
-                // Si hay TutorialMusic, lo destruimos
-                if (clip.tag == "TutorialMusic")
-                {
-                    Destroy(GameObject.FindGameObjectWithTag("TutorialMusic"));
-                }
-            }
-            catch
-            {
-
-                // Si no hay TutorialMusic, activamos MenuMusic
-                clip = GameObject.FindGameObjectWithTag("MenuMusic");
-                audio = clip.GetComponent<AudioSource>();
-                Debug.Log("Suena MenuMusic");
-                previousMusicPlaying = SoundOn;
-            };
-
-            // Si la música está sonando
-        }
-
-        if (activeScene == "Tutorial1")
-        {
-            permanente = GameObject.Find("CanvasPermanente");
-            //Intento de mejora: Si no sonaba la música en la escena anterior, que siga sin sonar
-            if (SoundOn == false & previousMusicPlaying == false)
-            {
-                // Apagamos la música
-                TurnSoundOff();
-                SoundButton = GameObject.FindGameObjectWithTag("SoundButton");
-                SoundImage = SoundButton.transform.Find("ImagenSonido").gameObject;
-                NoSoundImage = SoundButton.transform.Find("ImagenSinSonido").gameObject;
-                SoundImage.SetActive(false);
-                NoSoundImage.SetActive(true);
-                previousMusicPlaying = true;
-            }
-            else
-            {
-                GameObject[] gameObjects;
-                gameObjects = GameObject.FindGameObjectsWithTag("TutorialMusic");
-                // Si estamos en la escena Menu, hay que revisar que no esté sonando la música de otros reproductores
-                //como podría ser la de TutorialMusic procedente de la escena 2 (dos reproductores)
-
-                if (gameObjects.Length > 1)
-                {
-                    // Si hay dos TutorialMusic, debemos destruir un reproductor  
-                    // Ver como destruir un reproductor
-                    Destroy(gameObjects[1]);
-                }
-
-                // Si no hay dos TutorialMusic, activamos TutorialMusic
-                clip = GameObject.FindGameObjectWithTag("TutorialMusic");
-                audio = clip.GetComponent<AudioSource>();
-                Debug.Log("Suena TutorialMusic");
-                DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
-            }
-        }
-
-        if (activeScene == "Escena1")
-        {
-
-            //ScoreT = GameObject.FindGameObjectWithTag("Creditos").GetComponent<Text>();
-            permanente = GameObject.Find("CanvasPermanente");
-            //permanente = GameObject.FindGameObjectWithTag("Permanente");
-            //GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            //ScoreT = creditos.GetComponent<Text>();
-            ScoreT= GameObject.Find("CanvasPermanente/Creditos").GetComponent<Text>();
-            ScoreT.text = "Créditos: " + score;
-            // Si estamos en la Escena 1, hay que revisar que no esté sonando la música de otros reproductores
-            //como podría ser la de TutorialMusic o la de Escena 2
-            try
-            {
-
-                // Si hay TutorialMusic, lo destruimos
-                if (clip.tag == "TutorialMusic")
-                {
-                    Destroy(GameObject.FindGameObjectWithTag("TutorialMusic"));
-                }
-            }
-            catch
-            {
-                try
-                {
-
-                    // Si hay Scene2Music, lo destruimos
-                    if (clip.tag == "Scene2Music")
-                    {
-                        Destroy(GameObject.FindGameObjectWithTag("Scene2Music"));
-                    }
-
-                }
-                catch
-                {
-
-                    // Si no hay TutorialMusic ni Scene2, activamos Scene1Music
-                    clip = GameObject.FindGameObjectWithTag("Scene1Music");
-                    audio = clip.GetComponent<AudioSource>();
-                    Debug.Log("Suena Scene1Music");
-                };
-
-                // Si no hay TutorialMusic ni Scene2, activamos Scene1Music
-                clip = GameObject.FindGameObjectWithTag("Scene1Music");
-                audio = clip.GetComponent<AudioSource>();
-                Debug.Log("Suena Scene1Music");
-            };
-
-
-        }
-
-        if (activeScene == "Escena2" || activeScene == "Escena3")
-        {
-            //ScoreT = GameObject.FindGameObjectWithTag("Creditos").GetComponent<Text>();
-            permanente = GameObject.Find("CanvasPermanente");
-            //GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT = GameObject.Find("CanvasPermanente/Creditos").GetComponent<Text>();
-            //ScoreT = creditos.GetComponent<Text>();
-            ScoreT.text = "Créditos: " + score;
-            
-        }
-
-        }
-
-    private bool FindGameObjectsWithTag(string v)
-    {
-        throw new NotImplementedException();
-    }
-
     public bool IsSoundOn()
     {
         return SoundOn;
@@ -345,9 +269,7 @@ public class GameManager : MonoBehaviour {
             bgsound.mute = false;
             SoundOn = true;
         }
-
     }
-
 
     public void TurnSoundOn()
     {
@@ -360,5 +282,4 @@ public class GameManager : MonoBehaviour {
         AudioSource bgsound = clip.GetComponent<AudioSource>();
         bgsound.mute = ! bgsound.mute;
     }
-
 }
