@@ -35,21 +35,14 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         //Check if instance already exists
-        if (manager == null)
+        if (manager != null)
         {
-
-            //if not, set instance to this
-            manager = this;
-            //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
-        }
-
-       
-        else
-        {
-            // If instance already exists, exit
             return;
         }
+
+        manager = this;
+        //Sets this to not be destroyed when reloading scene
+        DontDestroyOnLoad(gameObject);
 
         // ver https://raw.githubusercontent.com/e-ucm/unity-tracker/master/Tracker.cs
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -58,7 +51,8 @@ public class GameManager : MonoBehaviour {
         string activeScene = SceneManager.GetActiveScene().name;
         if (activeScene == "Menu")
             Debug.Log("Estoy en escena Menu");
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
+        //permanente = GameObject.FindGameObjectWithTag("Permanente");
+        permanente = GameObject.Find("CanvasPermanente");
         {
             if (clip != null)
             {
@@ -73,14 +67,32 @@ public class GameManager : MonoBehaviour {
         }
         if (activeScene == "Tutorial1")
         {
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            permanente = GameObject.Find("CanvasPermanente");
             clip = GameObject.FindGameObjectWithTag("TutorialMusic");
             DontDestroyOnLoad(clip); //Necesario para que no deje de reproducir la musica
         }
 
+        if (activeScene == "Tuturial4a")
+        {
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            permanente = GameObject.Find("Permanente");
+            if (clip != null)
+            {
+                Destroy(clip);
+                Debug.Log("Y destruyo el clip");
+            }
+            else
+            {
+                clip = GameObject.FindGameObjectWithTag("TutorialMusic");
+                Debug.Log("Pongo nuevo clip de TutorialMusic");
+            }
+        }
+
         if (activeScene == "Escena1")
         {
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            permanente = GameObject.Find("CanvasPermanente");
             GameObject creditos = permanente.transform.Find("Creditos").gameObject;
             ScoreT.text = "Créditos: " + score;
             clip = GameObject.FindGameObjectWithTag("Scene1Music");
@@ -88,7 +100,8 @@ public class GameManager : MonoBehaviour {
         }
         if (activeScene == "Escena2")
         {
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            permanente = GameObject.Find("CanvasPermanente");
             GameObject creditos = permanente.transform.Find("Creditos").gameObject;
             ScoreT.text = "Créditos: " + score;
             clip = GameObject.FindGameObjectWithTag("Scene2Music");
@@ -96,7 +109,8 @@ public class GameManager : MonoBehaviour {
         }
         if (activeScene == "Escena3")
         {
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            permanente = GameObject.Find("CanvasPermanente");
             GameObject creditos = permanente.transform.Find("Creditos").gameObject;
             ScoreT.text = "Créditos: " + score;
             clip = GameObject.FindGameObjectWithTag("Scene3Music");
@@ -163,9 +177,12 @@ public class GameManager : MonoBehaviour {
 
         if (activeScene == "Menu")
         {
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
-            CheckImage = permanente.transform.Find("CheckImage").gameObject;
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+
+            permanente = GameObject.Find("CanvasPermanente");
+            //CheckImage = permanente.transform.Find("CheckImage").gameObject;
             //CheckImage = GameObject.FindGameObjectWithTag("CheckImage");
+            CheckImage = GameObject.Find("CanvasPermanente/CheckImage");
             if (completed_tutorial == true)
             {
                 
@@ -201,7 +218,7 @@ public class GameManager : MonoBehaviour {
 
         if (activeScene == "Tutorial1")
         {
-
+            permanente = GameObject.Find("CanvasPermanente");
             //Intento de mejora: Si no sonaba la música en la escena anterior, que siga sin sonar
             if (SoundOn == false & previousMusicPlaying == false)
             {
@@ -240,9 +257,11 @@ public class GameManager : MonoBehaviour {
         {
 
             //ScoreT = GameObject.FindGameObjectWithTag("Creditos").GetComponent<Text>();
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
-            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT = creditos.GetComponent<Text>();
+            permanente = GameObject.Find("CanvasPermanente");
+            //permanente = GameObject.FindGameObjectWithTag("Permanente");
+            //GameObject creditos = permanente.transform.Find("Creditos").gameObject;
+            //ScoreT = creditos.GetComponent<Text>();
+            ScoreT= GameObject.Find("CanvasPermanente/Creditos").GetComponent<Text>();
             ScoreT.text = "Créditos: " + score;
             // Si estamos en la Escena 1, hay que revisar que no esté sonando la música de otros reproductores
             //como podría ser la de TutorialMusic o la de Escena 2
@@ -288,9 +307,10 @@ public class GameManager : MonoBehaviour {
         if (activeScene == "Escena2" || activeScene == "Escena3")
         {
             //ScoreT = GameObject.FindGameObjectWithTag("Creditos").GetComponent<Text>();
-            permanente = GameObject.FindGameObjectWithTag("Permanente");
-            GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-            ScoreT = creditos.GetComponent<Text>();
+            permanente = GameObject.Find("CanvasPermanente");
+            //GameObject creditos = permanente.transform.Find("Creditos").gameObject;
+            ScoreT = GameObject.Find("CanvasPermanente/Creditos").GetComponent<Text>();
+            //ScoreT = creditos.GetComponent<Text>();
             ScoreT.text = "Créditos: " + score;
             
         }
