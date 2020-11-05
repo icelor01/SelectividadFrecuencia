@@ -5,64 +5,31 @@ using UnityEngine.UI;
 
 public class SoundController : MonoBehaviour
 {
-  
     public Button CustomButton;
     public GameObject SoundImage;
     public GameObject NoSoundImage;
 
-
     void Awake()
     {
-        CustomButton.onClick.AddListener(delegate { CustomButton_OnClick(); });
-        /*
-        if (GameManager_tutorial.manager.SoundOn == true)
-        {
-            SoundImage.SetActive (true);
-            NoSoundImage.SetActive(false);
-
-        }
-        else {
-            SoundImage.SetActive (false);
-            NoSoundImage.SetActive(true);
-        }
-        */
+        CustomButton.onClick.AddListener(delegate { OnClick(); });
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        bool on = GameManager.manager.IsSoundOn();
+        SoundImage.SetActive(on);
+        NoSoundImage.SetActive(!on);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.manager.PlaceMusicButton(GetComponent<Transform>());
     }
 
     //Handle the onClick event
-    public void CustomButton_OnClick()
+    public void OnClick()
     {
-        //soundcontroller.TurnSoundOff();
+        GameManager.manager.ToggleSound();
 
-         GameManager.manager.SoundControl();
-
-        // Image
-        if (GameManager.manager.SoundOn == true)
-        {
-            SoundImage.SetActive(true);
-            NoSoundImage.SetActive(false);
-
-        }
-        else
-        {
-            SoundImage.SetActive(false);
-            NoSoundImage.SetActive(true);
-        }
-
-
+        bool on = GameManager.manager.IsSoundOn();
+        SoundImage.SetActive(on);
+        NoSoundImage.SetActive(!on);
     }
-
-
-
 }
