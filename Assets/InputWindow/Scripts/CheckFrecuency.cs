@@ -19,7 +19,7 @@ public class CheckFrecuency : MonoBehaviour {
 	void Update () {
         myTable = myChannel.getTable();
         if (System.Math.Round(myTable.Getfc(), 0) == 10) {
-            Escenas.instance.GoToScene("Tutorial2");
+            GameManager.manager.GoToScene("Tutorial2");
         }
         else
         {

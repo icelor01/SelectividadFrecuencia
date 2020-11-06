@@ -4197,15 +4197,20 @@ MonoBehaviour:
   ScoreT: {fileID: 0}
   solutionIsCorrect: 0
   tutorial_solutionIsCorrect: 0
-  clip: {fileID: 0}
   SoundOn: 1
   permanente: {fileID: 0}
-  SoundButton: {fileID: 0}
-  SoundImage: {fileID: 0}
-  NoSoundImage: {fileID: 0}
   completed_tutorial: 0
   CheckImage: {fileID: 0}
   score: 0
+  menuMusic: {fileID: 0}
+  tutorialMusic1: {fileID: 0}
+  tutorialMusic2: {fileID: 0}
+  exerciseMusic1: {fileID: 0}
+  exerciseMusic2: {fileID: 0}
+  exerciseMusic3: {fileID: 0}
+  endGameMusic: {fileID: 0}
+  soundPosX: 0
+  soundPosY: 0
 --- !u!4 &887638321
 Transform:
   m_ObjectHideFlags: 0

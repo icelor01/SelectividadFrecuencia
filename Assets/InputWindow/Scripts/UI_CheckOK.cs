@@ -27,15 +27,15 @@ public class UI_CheckOK : MonoBehaviour {
 
             if (sceneName == "Escena1")
             {
-                Escenas.instance.GoToScene("Escena2");
+                GameManager.manager.GoToScene("Escena2");
             }
             else if (sceneName == "Escena2")
             {
-                Escenas.instance.GoToScene("Escena3");
+                GameManager.manager.GoToScene("Escena3");
             }
             else if (sceneName == "Escena3")
             {
-                Escenas.instance.GoToScene("FinalScene");
+                GameManager.manager.GoToScene("FinalScene");
             }
 
             

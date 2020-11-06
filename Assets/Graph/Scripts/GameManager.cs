@@ -87,6 +87,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void GoToScene(string sceneName) {
+        var parameters = new LoadSceneParameters(LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, parameters);
+    }
+
+    public void Quit() {
+        Tracker.T.Exit();
+        Application.Quit();
+    }
+
     public void PlaceMusicButton(Transform buttonTransform) {
         buttonTransform.localPosition = new Vector3(soundPosX, soundPosY, 0);
     }
@@ -124,6 +134,9 @@ public class GameManager : MonoBehaviour {
         SceneManager.sceneLoaded += updateReferences;
     }
 
+    void Start() {        
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if ( ! Tracker.T.Active) {
             Tracker.T.Start();
@@ -143,9 +156,6 @@ public class GameManager : MonoBehaviour {
     public void TrackSliderValue(string key, string value) {
         Tracker.T.setVar(key, value);
         Tracker.T.GameObject.Interacted(key);
-    }
-
-    public void Start()    {
     }
 
     public void AddScore(int add) {

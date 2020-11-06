@@ -22,7 +22,7 @@ public class CheckSpan : MonoBehaviour
     {
         if (System.Math.Round(myTable.GetSpan(),0) == 30)
         {
-            Escenas.instance.GoToScene("Tutorial3");
+            GameManager.manager.GoToScene("Tutorial3");
         }
         else
         {
