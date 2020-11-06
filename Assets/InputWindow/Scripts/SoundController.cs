@@ -19,8 +19,6 @@ public class SoundController : MonoBehaviour
         bool on = GameManager.manager.IsSoundOn();
         SoundImage.SetActive(on);
         NoSoundImage.SetActive(!on);
-
-        GameManager.manager.PlaceMusicButton(GetComponent<Transform>());
     }
 
     //Handle the onClick event

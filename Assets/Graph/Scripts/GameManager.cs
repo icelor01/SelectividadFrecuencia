@@ -97,10 +97,6 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public void PlaceMusicButton(Transform buttonTransform) {
-        buttonTransform.localPosition = new Vector3(soundPosX, soundPosY, 0);
-    }
-
     private void SetMusic(AudioClip music) {
         if (audioSource.clip != music) {
             audioSource.clip = music;
