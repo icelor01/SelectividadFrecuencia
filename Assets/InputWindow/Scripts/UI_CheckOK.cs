@@ -36,6 +36,7 @@ public class UI_CheckOK : MonoBehaviour {
             else if (sceneName == "Escena3")
             {
                 GameManager.manager.GoToScene("FinalScene");
+                GameManager.manager.completed_game = true;
             }
 
             

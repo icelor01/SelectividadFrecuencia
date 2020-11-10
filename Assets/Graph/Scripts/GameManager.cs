@@ -10,18 +10,22 @@ using AssetPackage;
 
 public class GameManager : MonoBehaviour { 
     
-    public Text ScoreT;
     public bool solutionIsCorrect = false;
     public bool tutorial_solutionIsCorrect = false;
     public static GameManager manager; 
     
-    public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
-    //public const string octaveServerEndpoint = "http://localhost:5000/f/";
+    //public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
+    public const string octaveServerEndpoint = "http://localhost:5000/f/";
 
     public bool SoundOn = true; //true=SoundOn false=SoundOff
+    public GameObject canvas;
     public GameObject permanente;
     public bool completed_tutorial = false;
+    public bool completed_game = false;
     public GameObject CheckImage;
+    public GameObject CheckImage2;
+    public GameObject Creditos;
+    public Text ScoreT;
     public int score;
 
     public AudioClip menuMusic;
@@ -40,8 +44,9 @@ public class GameManager : MonoBehaviour {
     void updateReferences(Scene scene, LoadSceneMode mode) {
 
         string activeScene = scene.name;
+        canvas = GameObject.Find("Canvas");
         permanente = GameObject.Find("CanvasPermanente");
-
+        
         switch (activeScene) {
             case "Menu":
             {
@@ -49,6 +54,8 @@ public class GameManager : MonoBehaviour {
                 score = 0;
                 CheckImage = permanente.transform.Find("CheckImage").gameObject;
                 CheckImage.SetActive(completed_tutorial);
+                CheckImage2 = permanente.transform.Find("CheckImage2").gameObject;
+                CheckImage2.SetActive(completed_game);
                 break;
             }
             case "Tutorial1":
@@ -107,8 +114,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private void InitLevel() {
-        GameObject creditos = permanente.transform.Find("Creditos").gameObject;
-        ScoreT= creditos.GetComponent<Text>();
+        Creditos = canvas.transform.Find("Creditos").gameObject;
+        ScoreT= Creditos.GetComponent<Text>();
         ScoreT.text = "Créditos: " + score;
     }
 

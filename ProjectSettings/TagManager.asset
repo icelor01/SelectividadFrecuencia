@@ -20,6 +20,8 @@ TagManager:
   - CheckImage
   - TutorialMusic2
   - FinalSceneMusic
+  - CheckImage2
+  - Canvas
   layers:
   - Default
   - TransparentFX

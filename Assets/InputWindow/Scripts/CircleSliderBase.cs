@@ -26,11 +26,11 @@ public abstract class CircleSliderBase : MonoBehaviour {
          
         //Valor inicial manilla
         Vector2 dir = handle.position;
-        Debug.Log("Positición manilla:" + dir);
+        //Debug.Log("Positición manilla:" + dir);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Debug.Log("Ángulo inicial:" + angle);
+        //Debug.Log("Ángulo inicial:" + angle);
         float initial_rotation = (CIRCUMFERENCE_DEGREES * initial_value) / (max_value - min_value);
-        Debug.Log("Rotación inicial:" + initial_rotation);
+        //Debug.Log("Rotación inicial:" + initial_rotation);
         Quaternion r = Quaternion.AngleAxis(angle + initial_rotation, Vector3.forward);
         handle.rotation = r;
 
