@@ -79,7 +79,11 @@ namespace AssetPackage
 		public void Save(string fileId, string fileData)
 		{
 			string outputFile = Path.Combine(StorageDir, fileId);
-			GameManager.manager.outputFile = outputFile;
+			if (GameManager.manager.outputFile == null || GameManager.manager.outputFile.Length == 0) {
+				GameManager.manager.outputFile = outputFile;
+				System.Diagnostics.Process.Start("explorer.exe", StorageDir.Replace("/", "\\"));
+				Debug.LogWarning("Pointing file explorer to analytics " + outputFile);
+			}
 			Debug.LogWarning("Writing to analytics " + fileData.Length + " bytes to " + outputFile);
 			File.WriteAllText(outputFile, fileData);
 		}

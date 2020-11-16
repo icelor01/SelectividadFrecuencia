@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     public bool tutorial_solutionIsCorrect = false;
     public static GameManager manager; 
     
-    public string outputFile;
+    public string outputFile = null;
 
     public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
     //public const string octaveServerEndpoint = "http://localhost:5000/f/";
