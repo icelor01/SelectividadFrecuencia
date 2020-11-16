@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour {
     public bool tutorial_solutionIsCorrect = false;
     public static GameManager manager; 
     
-    //public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
-    public const string octaveServerEndpoint = "http://localhost:5000/f/";
+    public string outputFile;
+
+    public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
+    //public const string octaveServerEndpoint = "http://localhost:5000/f/";
 
     public bool SoundOn = true; //true=SoundOn false=SoundOff
     public GameObject canvas;
@@ -161,6 +163,11 @@ public class GameManager : MonoBehaviour {
         Tracker.T.GameObject.Interacted(key);
     }
 
+    public void TrackAttempt(String result) {
+        Tracker.T.setResponse(result);
+        Tracker.T.GameObject.Interacted("attempt");
+    }
+
     public void AddScore(int add) {
         score += add;
         if (ScoreT != null) {
@@ -173,6 +180,7 @@ public class GameManager : MonoBehaviour {
     void OnDisable()
     {
         Debug.Log("OnDisable");
+        Tracker.T.Flush();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }

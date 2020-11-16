@@ -110,12 +110,15 @@ public class UI_InputOK1 : MonoBehaviour {
             errores ++;
         }
 
+        string response = "After check " + errores + " errors, from fe= " + freqError + " se=  " +spanError  + " ae=" + ampError;
+        GameManager.manager.TrackAttempt(response);
+
         if (errores == 0) {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Has ajustado correctamente el canal";
             GameManager.manager.solutionIsCorrect = true;
-        }
+        } 
 
         Debug.Log("After check " + errores + " errors, from fe= " + freqError + "se=  " +spanError  + " ae="+ampError);
         Debug.Log("Respuesta: Frecuencia: " + fc + " ,span: " + (xMax-xMin) + " amplitud: " + amplitude);

@@ -78,8 +78,10 @@ namespace AssetPackage
 		/// <param name="fileData"> Information describing the file. </param>
 		public void Save(string fileId, string fileData)
 		{
-			Debug.LogWarning("Writing to analytics to " + Path.Combine(StorageDir, fileId));
-			File.WriteAllText(Path.Combine(StorageDir, fileId), fileData);
+			string outputFile = Path.Combine(StorageDir, fileId);
+			GameManager.manager.outputFile = outputFile;
+			Debug.LogWarning("Writing to analytics " + fileData.Length + " bytes to " + outputFile);
+			File.WriteAllText(outputFile, fileData);
 		}
 		/// <summary>
 		/// Loads the given file.
@@ -124,6 +126,7 @@ namespace AssetPackage
 		/// <param name="fileData"> Information describing the file. </param>
 		public void Append(string fileId, string fileData)
 		{
+		    Debug.LogWarning("Appending to analytics " + fileData.Length + " bytes to " + fileId);
 			File.AppendAllText(Path.Combine(StorageDir, fileId), fileData);
 		}
 

@@ -1130,11 +1130,9 @@ namespace AssetPackage
                             append_storage.Append(settings.BackupFile, rawData);
                         }
                         else if(storage != null)
-                        {
-                            String previous = storage.Exists(settings.BackupFile) ? storage.Load(settings.BackupFile) : String.Empty;
-                            
+                        {                           
                             if (storage.Exists(settings.BackupFile))
-                                storage.Save(settings.BackupFile, previous + rawData);
+                                append_storage.Append(settings.BackupFile, rawData);
                             else
                                 storage.Save(settings.BackupFile, rawData);
                         }
@@ -1257,15 +1255,12 @@ namespace AssetPackage
 
                     if (storage != null)
                     {
-                        String previous = storage.Exists(settings.LogFile) ? storage.Load(settings.LogFile) : String.Empty;
-
-                        if (previous.Length > 0)
+                        if (storage.Exists(settings.LogFile))
                         {
-                            previous = previous.Replace("\r\n]", ",\r\n");
-                            data = data.Replace("[\r\n", "");
+                            append_storage.Append(settings.LogFile, data);
+                        } else {
+                            storage.Save(settings.LogFile, data);
                         }
-
-                        storage.Save(settings.LogFile, previous + data);
                     }
 
                     break;
