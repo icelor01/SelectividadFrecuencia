@@ -69,6 +69,9 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
 
 
 
+        GameManager.manager.TrackAttempt("" + GameManager.manager.tutorial_solutionIsCorrect);
+        
+
         gameObject.SetActive(true);
 
 

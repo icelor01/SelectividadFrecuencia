@@ -110,9 +110,6 @@ public class UI_InputOK1 : MonoBehaviour {
             errores ++;
         }
 
-        string response = "After check " + errores + " errors, from fe= " + freqError + " se=  " +spanError  + " ae=" + ampError;
-        GameManager.manager.TrackAttempt(response);
-
         if (errores == 0) {
             Debug.Log("Respuesta correcta");
             feedbackText.color = Color.green;
@@ -120,10 +117,13 @@ public class UI_InputOK1 : MonoBehaviour {
             GameManager.manager.solutionIsCorrect = true;
         } 
 
-        Debug.Log("After check " + errores + " errors, from fe= " + freqError + "se=  " +spanError  + " ae="+ampError);
-        Debug.Log("Respuesta: Frecuencia: " + fc + " ,span: " + (xMax-xMin) + " amplitud: " + amplitude);
+        String response = "After check " + errores + " errors, from fe= " + freqError + "se=  " + spanError + " ae=" + ampError;
+        Debug.Log(response);
+        Debug.Log("Respuesta: Frecuencia: " + fc + " ,span: " + (xMax - xMin) + " amplitud: " + amplitude);
         Debug.Log("Respuesta correcta: Frecuencia: " + fc_solution + " ,span: " + (xMax_solution - xMin_solution) + " amplitud: " + amplitude_solution);
 
+        GameManager.manager.TrackAttempt(response);
+        
         gameObject.SetActive(true);
 
         okBtn.ClickFunc = () => Hide();

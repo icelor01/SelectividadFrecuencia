@@ -99,10 +99,12 @@ public class UI_InputOK_Tutorial : MonoBehaviour
             GameManager.manager.tutorial_solutionIsCorrect = true;
         }
 
-        Debug.Log("After check " + errores + " errors, from fe= " + freqError + "se=  " + spanError + " ae=" + ampError);
+        String response = "After check " + errores + " errors, from fe= " + freqError + "se=  " + spanError + " ae=" + ampError;
+        Debug.Log(response);
         Debug.Log("Respuesta: Frecuencia: " + fc + " ,span: " + (xMax - xMin) + " amplitud: " + amplitude);
         Debug.Log("Respuesta correcta: Frecuencia: " + fc_solution + " ,span: " + (xMax_solution - xMin_solution) + " amplitud: " + amplitude_solution);
 
+        GameManager.manager.TrackAttempt(response);
         
         gameObject.SetActive(true);
 

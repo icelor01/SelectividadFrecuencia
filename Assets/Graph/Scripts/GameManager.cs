@@ -178,19 +178,10 @@ public class GameManager : MonoBehaviour {
         Tracker.T.setCompletion(true); // because we only set score when we win
     }
 
-    void OnDisable()
-    {
-        Debug.Log("OnDisable");
-        Tracker.T.Flush();
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
-    }
-
     public bool IsSoundOn()
     {
         return audioSource == null ||  ! audioSource.mute;
     }
-
 
     public void ToggleSound()
     {
