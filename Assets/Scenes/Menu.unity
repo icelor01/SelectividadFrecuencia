@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -299, y: -118}
+  m_AnchoredPosition: {x: -299, y: -81}
   m_SizeDelta: {x: 272.91586, y: 176.83968}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48927204
@@ -678,7 +678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294, y: 89}
+  m_AnchoredPosition: {x: 313, y: 126}
   m_SizeDelta: {x: 171.70845, y: 150.70392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464644150
@@ -752,7 +752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -323, y: 111.78}
+  m_AnchoredPosition: {x: -327, y: 136}
   m_SizeDelta: {x: 163.43124, y: 159.26038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &553750331
@@ -823,6 +823,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solutionIsCorrect: 0
   tutorial_solutionIsCorrect: 0
+  outputFile: 
+  outputFile_name: 
   SoundOn: 1
   canvas: {fileID: 0}
   permanente: {fileID: 0}
@@ -964,7 +966,7 @@ RectTransform:
   m_Children:
   - {fileID: 1853643743}
   m_Father: {fileID: 1769966747}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1510,8 +1512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -703.6, y: 158.9}
-  m_SizeDelta: {x: 1368.1923, y: 751.1335}
+  m_AnchoredPosition: {x: -707.2, y: 156.3}
+  m_SizeDelta: {x: 1516.8678, y: 845.7253}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1100021411
 MonoBehaviour:
@@ -1532,7 +1534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43758ccb52c48f8429ba90810cd499a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97c7f023086468b4593c441509be095f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2085,7 +2087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 308.05, y: -121.84}
+  m_AnchoredPosition: {x: 301, y: -90}
   m_SizeDelta: {x: 358.8761, y: 201.79436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1457124717
@@ -2124,6 +2126,99 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457124715}
+  m_CullTransparentMesh: 0
+--- !u!1 &1615482919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615482920}
+  - component: {fileID: 1615482923}
+  - component: {fileID: 1615482922}
+  - component: {fileID: 1615482921}
+  m_Layer: 8
+  m_Name: Texto_OutputFile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1615482920
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615482919}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.88482, y: 0.88482, z: 0.88482}
+  m_Children: []
+  m_Father: {fileID: 1769966747}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 29.059, y: -280.5}
+  m_SizeDelta: {x: 1092.8572, y: 92.07301}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1615482921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615482919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b28bdbc679f70419bd7e2371531a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Texto_OutputFile: {fileID: 1615482922}
+--- !u!114 &1615482922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615482919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9622642, g: 0.9032574, b: 0.9032574, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Recuerda entregar en el buz\xF3n de la actividad el fichero de juego,
+    con nombre: "
+--- !u!222 &1615482923
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615482919}
   m_CullTransparentMesh: 0
 --- !u!1 &1641170609
 GameObject:
@@ -2426,6 +2521,7 @@ RectTransform:
   - {fileID: 74647345}
   - {fileID: 553750330}
   - {fileID: 48927203}
+  - {fileID: 1615482920}
   - {fileID: 658884060}
   - {fileID: 1809845132}
   m_Father: {fileID: 0}
@@ -2510,7 +2606,7 @@ Transform:
   - {fileID: 1100021410}
   - {fileID: 60177496}
   m_Father: {fileID: 1769966747}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1809845133
 MonoBehaviour:

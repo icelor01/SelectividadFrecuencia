@@ -1920,7 +1920,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bien, \xA1pongamos en practica entonces estos conocimientos!... \n\xBFPodr\xEDas
+  m_Text: "Bien, \xA1pongamos en pr\xE1ctica entonces estos conocimientos!... \n\xBFPodr\xEDas
     ajustar en la grafica del canal por el que se ha transmitido la se\xF1al?"
 --- !u!222 &338416960
 CanvasRenderer:
@@ -4195,13 +4195,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ddbe0304d186f46a849c7f1d1c5b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreT: {fileID: 0}
   solutionIsCorrect: 0
   tutorial_solutionIsCorrect: 0
+  outputFile: 
+  outputFile_name: 
   SoundOn: 1
+  canvas: {fileID: 0}
   permanente: {fileID: 0}
   completed_tutorial: 0
+  completed_game: 0
   CheckImage: {fileID: 0}
+  CheckImage2: {fileID: 0}
+  Creditos: {fileID: 0}
+  ScoreT: {fileID: 0}
   score: 0
   menuMusic: {fileID: 0}
   tutorialMusic1: {fileID: 0}
@@ -9168,10 +9174,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 6
     m_AlignByGeometry: 0
@@ -10821,10 +10827,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0

@@ -486,7 +486,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bien, vamos a empezar conociendo como funciona el analizador de espectros.\nMediante
+  m_Text: "Bien, vamos a empezar conociendo c\xF3mo funciona el analizador de espectros.\nMediante
     el dial Frecuencia podemos ajustar la frecuencia central de la se\xF1al que tenemos
     en el analizador. \xA1Prueba a poner la se\xF1al centrada en f=10 kHz!"
 --- !u!222 &79845273
@@ -6389,8 +6389,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 14.300003, y: -10}
-  m_SizeDelta: {x: 24.14, y: 17.29}
+  m_AnchoredPosition: {x: 16.977, y: -10}
+  m_SizeDelta: {x: 29.493881, y: 17.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737607662
 MonoBehaviour:
@@ -6413,12 +6413,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 6
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -7805,10 +7805,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0

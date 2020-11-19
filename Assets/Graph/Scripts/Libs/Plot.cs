@@ -128,42 +128,33 @@ public class Plot : MonoBehaviour
         }
         last.Clear();
 
-        
-        float yMaximum = yMax; // listaFloats[0];
         float yMinimum = yMin; // listaFloats[0];
-/*
-        foreach (float value in listaFloats)
-        {
-            if (value > yMaximum)
-            {
-                yMaximum = value;
-            }
-            if (value < yMinimum)
-            {
-                yMinimum = value;
-            }
-        }
-*/
+        float yMaximum = yMax; // listaFloats[0];
+        
         for (int i = 0; i < totalValores; i++)
         {
             float xPosition = RangeToScreenX(i, 0, totalValores, 0, graphWidth);
-            float yPosition = RangeToScreenY(listaFloats[i], yMinimum, yMaximum, 0, graphHeight);            
+            float yPosition;
+            float margen=0.1f;
+
+            if (listaFloats[i] <= yMax)
+            {
+                
+                yPosition = RangeToScreenY(listaFloats[i], yMinimum, yMaximum, 0, graphHeight);
+            }
+
+            else {
+               yPosition = RangeToScreenY((1+margen)*yMaximum, yMinimum, yMaximum, 0, graphHeight);
+
+            }
+
             AddPoint(xPosition, yPosition);
 
             /*
-            //Label X
-            RectTransform labelX = Instantiate(labelTemplateX);
-            labelX.SetParent(container, false);
-            labelX.gameObject.SetActive(true);
-            float normalizedValueX = i * 1f / (totalValores - 1); // valor normalizado entre 0 y 1
-                                                                      
-            labelX.anchoredPosition = new Vector2(normalizedValueX * graphWidth, -7f);
-            int xmin = table.getxmin();
-            int xmax = table.getxmax();
-            labelX.GetComponent<Text>().text = getAxisLabelX((xmin + (normalizedValueX * (xmax - xmin))));
-            last.Add(labelX.gameObject);
+            if (listaFloats[i] <= yMaximum) { 
+            AddPoint(xPosition, yPosition);
+            }
             */
-
         }
 
         //Label X
@@ -171,7 +162,7 @@ public class Plot : MonoBehaviour
         int xmin = table.Getxmin();
         int xmax = table.Getxmax();
         
-        int valores_ejeX_max = 10;
+        int valores_ejeX_max = 7;
         int separatorCountX;
 
         if (totalValores <= valores_ejeX_max)   {
@@ -199,19 +190,12 @@ public class Plot : MonoBehaviour
                         labelX.gameObject.SetActive(true);
                         float normalizedValue = i_X * 1f / (separatorCountX - 1); // valor normalizado entre 0 y 1
                                                                      //labelX.anchoredPosition = new Vector2(xPosition, -7f);
-                    labelX.anchoredPosition = new Vector2(normalizedValue * graphWidth, -7f);
-                    labelX.GetComponent<Text>().text = getAxisLabelX((xmin + (normalizedValue * (xmax - xmin))));
+                    labelX.anchoredPosition = new Vector2((float)System.Math.Round((normalizedValue * graphWidth),1), -7f);
+                    labelX.GetComponent<Text>().text = getAxisLabelX((float)(System.Math.Round(xmin + ((normalizedValue * (xmax - xmin))),1)));
                     last.Add(labelX.gameObject);
                 }
         }
         
-        /*
-        RectTransform dashX = Instantiate(dashTemplateX);
-        dashX.SetParent(container, false);
-        dashX.gameObject.SetActive(true);
-        dashX.anchoredPosition = new Vector2(xPosition, -7f);
-        //gameObjectList.Add(dashX.gameObject);
-        */
         //int separatorCountY = 10;
         
         //Label Y // haria falta pintar escala entre yMinimum e yMaximun con n valores ordenados
@@ -235,28 +219,7 @@ public class Plot : MonoBehaviour
             //labelY.GetComponent<Text>().text = getAxisLabelY(listaFloats[i_Y]);
             last.Add(labelY.gameObject);
             //Debug.Log("Valor " + i_Y + ":" + labelY.GetComponent<Text>().text);
-                       
-            /*
-            //Pintamos eje Y con el mismo equiespaciado siempre
-                RectTransform labelY = Instantiate(labelTemplateY);
-                labelY.SetParent(container, false);
-                labelY.gameObject.SetActive(true);
-                float normalizedValueY = i_Y * 1f / (separatorCountY - 1); // valor normalizado entre 0 y 1
-                 //Escala                                                         //labelX.anchoredPosition = new Vector2(xPosition, -7f);
-                labelY.anchoredPosition = new Vector2(normalizedValueY * graphWidth, -7f);
-                labelY.GetComponent<Text>().text = getAxisLabelY((xmin + (normalizedValueY * (yMaximum - yMinimum))));
-                last.Add(labelY.gameObject);
-            */
-
-            /*
-            //Dash Y
-            RectTransform dashY = Instantiate(dashTemplateY);
-            dashY.SetParent(container, false);
-            dashY.gameObject.SetActive(true);
-            dashY.anchoredPosition = new Vector2(-4f, normalizedValue * graphHeight);
-            //gameObjectList.Add(dashY.gameObject);
-           */
-
+  
         }
 
     }
@@ -265,7 +228,7 @@ public class Plot : MonoBehaviour
     private void AddPoint(float x, float y)
     {
         GameObject circleGameObject = CreateCircle(new Vector2(x, y));
-        last.Add(circleGameObject);
+       last.Add(circleGameObject);
         if (lastCircleGameObject != null)
         {
             last.Add(CreateDotConnection(

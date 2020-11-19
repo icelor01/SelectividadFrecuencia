@@ -81,7 +81,8 @@ namespace AssetPackage
 			string outputFile = Path.Combine(StorageDir, fileId);
 			if (GameManager.manager.outputFile == null || GameManager.manager.outputFile.Length == 0) {
 				GameManager.manager.outputFile = outputFile;
-				System.Diagnostics.Process.Start("explorer.exe", StorageDir.Replace("/", "\\"));
+                GameManager.manager.outputFile_name = fileId;
+                System.Diagnostics.Process.Start("explorer.exe", StorageDir.Replace("/", "\\"));
 				Debug.LogWarning("Pointing file explorer to analytics " + outputFile);
 			}
 			Debug.LogWarning("Writing to analytics " + fileData.Length + " bytes to " + outputFile);

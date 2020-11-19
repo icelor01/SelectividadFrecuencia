@@ -487,7 +487,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\xBFY sabes qu\xE9 es el ancho de banda de coherencia? \xBFy la selectividad
-    en frecuencia? \xBFCuando decimos que un canal es o no selectivo en frecuencia?"
+    en frecuencia? \xBFCu\xE1ndo decimos que un canal es o no selectivo en frecuencia?"
 --- !u!222 &79845273
 CanvasRenderer:
   m_ObjectHideFlags: 0

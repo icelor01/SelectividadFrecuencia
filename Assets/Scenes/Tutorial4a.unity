@@ -487,8 +487,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\xA1Muy bien! \xA1Ya tienes controlados los diales de manejo del analizador
-    de espectros!\nAhora, vamos a repasar... \xBFRecuerdas que era la respuesta al
-    impulso y la funci\xF3n de transferencia de un sistema?"
+    de espectros!\nAhora, vamos a repasar... \xBFRecuerdas qu\xE9 era la respuesta
+    al impulso y la funci\xF3n de transferencia de un sistema?"
 --- !u!222 &79845273
 CanvasRenderer:
   m_ObjectHideFlags: 0
