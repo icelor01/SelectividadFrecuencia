@@ -972,7 +972,7 @@ namespace AssetPackage
         /// </summary>
         ///
         /// <param name="value"> New value for the variable. </param>
-        public void Trace(TrackerEvent trace)
+        public int Trace(TrackerEvent trace)
         {
             if (!this.Started)
                 throw new TrackerException("Tracker Has not been started");
@@ -983,6 +983,7 @@ namespace AssetPackage
                 extensions.Clear();
             }
             queue.Enqueue(trace);
+            return trace.id;
         }
 
         /// <summary>
@@ -1165,6 +1166,8 @@ namespace AssetPackage
             for (int i = 0; i < traces.Length; i++)
             {
                 item = traces[i];
+                Log(Severity.Information, "Processing trace with id " + item.id);
+
 
                 switch (format)
                 {
@@ -1195,7 +1198,7 @@ namespace AssetPackage
                     data = "<TrackEvents>\r\n" + String.Join("\r\n", sb.ToArray()) + "\r\n</TrackEvent>";
                     break;
                 case TraceFormats.xapi:
-                    data = "[\r\n" + String.Join(",\r\n", sb.ToArray()) + "\r\n]";
+                    data = "" + String.Join(",\r\n", sb.ToArray()) + ",\r\n";
                     break;
                 default:
                     data = String.Join("\r\n", sb.ToArray());
@@ -1525,15 +1528,20 @@ namespace AssetPackage
                 private TraceObject target;
 
                 private TraceResult result;
+
+                private static int lastId = 0;
+
+                public int id;
 #endregion Fields
 
 #region Constructors
 
             public TrackerEvent(TrackerAsset tracker)
             {
+                this.id = lastId ++;
                 this.Tracker = tracker;
                 this.TimeStamp = Math.Round(System.DateTime.Now.ToUniversalTime().Subtract(START_DATE).TotalMilliseconds);
-                this.Result = new TraceResult();
+                this.Result = new TraceResult();                
             }
 
 #endregion Constructors
@@ -1730,6 +1738,7 @@ namespace AssetPackage
                 JSONClass json = new JSONClass();
 
                 json.Add("actor", (Tracker.ActorObject == null) ? JSONNode.Parse("{}") : Tracker.ActorObject);
+                json.Add("id", new JSONData(id));
                 json.Add("event", Event.ToJson());
                 json.Add("target", Target.ToJson());
 
@@ -1737,7 +1746,9 @@ namespace AssetPackage
                 if (result.Count > 0)
                     json.Add("result", result);
 
-                json.Add("timestamp", new JSONData(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc).AddMilliseconds(TimeStamp).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")));
+                json.Add("timestamp", new JSONData(
+                    new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
+                        .AddMilliseconds(TimeStamp).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")));
 
                 return json.ToString();
             }
@@ -1772,6 +1783,7 @@ namespace AssetPackage
                 JSONClass json = new JSONClass();
 
                 json.Add("actor", (Tracker.ActorObject == null) ? JSONNode.Parse("{}") : Tracker.ActorObject);
+                json.Add("id", new JSONData(id));
                 json.Add("verb", Event.ToXapi());
                 json.Add("object", Target.ToXapi());
 

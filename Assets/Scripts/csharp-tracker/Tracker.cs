@@ -108,6 +108,7 @@ public class Tracker : MonoBehaviour
                 StorageType = storage,
 				TraceFormat = format,
 				BackupStorage = rawCopy,
+				BatchSize = 0,
                 LogFile = "trazas_" + UnityEngine.Random.Range(10000, 99999) + ".log",
 			};
 

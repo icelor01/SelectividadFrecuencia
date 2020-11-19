@@ -49,16 +49,18 @@ public class CompletableTracker : TrackerAsset.IGameObjectTracker
     /// Player initialized a completable.
     /// </summary>
     /// <param name="completableId">Completable identifier.</param>
-    public void Initialized(string completableId)
+    public int Initialized(string completableId)
     {
+        int rc = -1;
         if (tracker.Utils.check<TargetXApiException>(completableId, "xAPI Exception: Target ID is null or empty. Ignoring.", "xAPI Exception: Target ID can't be null or empty."))
         {
-            tracker.Trace(new TrackerAsset.TrackerEvent(tracker)
+            rc = tracker.Trace(new TrackerAsset.TrackerEvent(tracker)
             {
                 Event = new TrackerAsset.TrackerEvent.TraceVerb(TrackerAsset.Verb.Initialized),
                 Target = new TrackerAsset.TrackerEvent.TraceObject(Completable.Completable.ToString().ToLower(), completableId)
             });
         }
+        return rc;
     }
 
     /// <summary>
@@ -123,11 +125,12 @@ public class CompletableTracker : TrackerAsset.IGameObjectTracker
     /// Score = 1
     /// </summary>
     /// <param name="completableId">Completable identifier.</param>
-    public void Completed(string completableId)
+    public int Completed(string completableId)
     {
+        int rc = -1;
         if (tracker.Utils.check<TargetXApiException>(completableId, "xAPI Exception: Target ID is null or empty. Ignoring.", "xAPI Exception: Target ID can't be null or empty."))
         {
-            tracker.Trace(new TrackerAsset.TrackerEvent(tracker)
+            rc = tracker.Trace(new TrackerAsset.TrackerEvent(tracker)
             {
                 Event = new TrackerAsset.TrackerEvent.TraceVerb(TrackerAsset.Verb.Completed),
                 Target = new TrackerAsset.TrackerEvent.TraceObject(Completable.Completable.ToString().ToLower(), completableId),
@@ -138,6 +141,7 @@ public class CompletableTracker : TrackerAsset.IGameObjectTracker
                 }
             });
         }
+        return rc;
     }
 
     /// <summary>

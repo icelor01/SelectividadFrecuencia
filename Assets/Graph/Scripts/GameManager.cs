@@ -148,14 +148,14 @@ public class GameManager : MonoBehaviour {
             Tracker.T.Start();
         }
         string name = scene.name;
-        Debug.Log("Scene Loaded " + name);
-        Tracker.T.Completable.Initialized(name);
+        int rc = Tracker.T.Completable.Initialized(name);
+        Debug.Log("Scene Loaded " + name + " - id=" + rc);
         Tracker.T.Flush();
     }
     void OnSceneUnloaded(Scene scene) {
         string name = scene.name;
-        Debug.Log("Scene Unloaded " + name);
-        Tracker.T.Completable.Completed(name);
+        int rc = Tracker.T.Completable.Completed(name);
+        Debug.Log("Scene Unloaded " + name + " - id=" + rc);
         Tracker.T.Flush();
     }
 
