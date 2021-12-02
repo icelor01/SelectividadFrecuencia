@@ -176,7 +176,7 @@ public class Table
     public void Changefc(float fc)  {
         //Debug.Log("Valor inicial xmin:" + Getxmin());
         //Debug.Log("Valor inicial xmin:" + Getxmax());
-        float valormediorango = ((xmax - xmin+1) / 2);
+        float valormediorango = ((xmax - xmin +1) / 2);
         int xmin_fc = (int) (fc - valormediorango);
         int xmax_fc = (int) (fc + valormediorango);
         //Debug.Log("Valor final xmin:" + xmin_fc);
