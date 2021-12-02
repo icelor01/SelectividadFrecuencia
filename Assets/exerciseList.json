@@ -1,0 +1,21 @@
+{
+"Exercises":[{ 
+"id": 1,
+"type": "Tutorial",
+"url": "new_process/iname_theta?xmin=0&xmax=10&numValues=30&numGraphs=2&a=1&b=2", 
+"musica": "unfichero1.mp3"
+},
+{ 
+"id": 2,
+"type": "Scene",
+"url": "new_process/iname_theta?xmin=0&xmax=10&numValues=30&numGraphs=2&a=1&b=2", 
+"musica": "unfichero2.mp3"
+},
+{ 
+"id": 3,
+"type": "Formula",
+"url": "new_process/iname_theta?xmin=0&xmax=10&numValues=30&numGraphs=2&a=1&b=2", 
+"musica": "unfichero2.mp3"
+}
+]
+}
