@@ -7,6 +7,7 @@
  */
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,4 +23,9 @@ public class Math : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    internal static float Abs(float v)
+    {
+        throw new NotImplementedException();
+    }
 }
