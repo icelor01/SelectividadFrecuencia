@@ -1444,7 +1444,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438513788}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1593,9 +1593,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -304.46603, y: 619.0292}
+  m_AnchoredPosition: {x: -314.5631, y: 623.68933}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.34142396, y: 1.0733813}
+  m_Pivot: {x: 0.33616504, y: 1.0776979}
 --- !u!114 &275907817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4097,7 +4097,7 @@ RectTransform:
   - {fileID: 95982365}
   - {fileID: 1487944612}
   m_Father: {fileID: 1438513788}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4118,8 +4118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputSpan: {fileID: 614105648}
   plotComponent: {fileID: 1677527898}
-  min_value: 0
-  max_value: 100
+  min_value: 2
+  max_value: 2000
   initial_value: 0
 --- !u!114 &614105648
 MonoBehaviour:
@@ -4170,7 +4170,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 2
-  m_CharacterLimit: 3
+  m_CharacterLimit: 4
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -7342,7 +7342,7 @@ RectTransform:
   - {fileID: 1171323471}
   - {fileID: 1929683985}
   m_Father: {fileID: 1438513788}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8039,10 +8039,10 @@ RectTransform:
   - {fileID: 1493251094}
   - {fileID: 1915395593}
   - {fileID: 1937239410}
-  - {fileID: 1502260254}
-  - {fileID: 255324464}
   - {fileID: 1244459155}
+  - {fileID: 1502260254}
   - {fileID: 614105646}
+  - {fileID: 255324464}
   - {fileID: 1547793112}
   - {fileID: 604617712}
   - {fileID: 1927696787}
@@ -8320,7 +8320,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438513788}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8382,7 +8382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d49149fd6b66a4191e746ab0b41474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: El span debe estar entre -100 y 100kHz.
+  content: El span debe estar entre 2 y 2000kHz.
 --- !u!1 &1505863582
 GameObject:
   m_ObjectHideFlags: 0

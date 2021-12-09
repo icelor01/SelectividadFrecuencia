@@ -24,7 +24,7 @@ public class ChangeAmplitude_whenEnter : MonoBehaviour
             Table table = plot.getTable();
             int amplitude = table.GetAmplitude();
             int amplitude_new = int.Parse(InputAmplitude.text); 
-            //table.PlotGraphFromInterval(plot, xMin, xMax);
+            
             if (amplitude_new != amplitude)
             {
                 // Adjust amplitude to fit into its min & max values

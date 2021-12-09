@@ -16,15 +16,35 @@ public class ChangeSpan_whenEnter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+
+        if (Input.GetKeyDown(KeyCode.Return) || InputSpan.isFocused == false)
         {
             Debug.Log("Return key was pressed.");
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
-            float span = float.Parse(InputSpan.text);
-            table.ChangeSpan(span);
-            table.RequestData(plot);
+
+            float span = table.GetSpan();
+            float span_new = float.Parse(InputSpan.text);
+
+            if (span_new != span)
+            {
+                // Adjust amplitude to fit into its min & max values
+                if (span_new > max_value)
+                {
+                    span_new = max_value;
+                    InputSpan.text = span_new.ToString();
+                }
+                else if (span_new < min_value)
+                {
+                    span_new = min_value;
+                    InputSpan.text = span_new.ToString();
+                }
+
+                table.ChangeSpan(span_new);
+                table.RequestData(plot);
+
+            } 
 
         }
 
