@@ -16,17 +16,29 @@ public class ChangeAmplitude_whenEnter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || InputAmplitude.isFocused== false)
         {
             Debug.Log("Return key was pressed.");
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
             int amplitude = table.GetAmplitude();
-            int amplitude_new = int.Parse(InputAmplitude.text); ;
+            int amplitude_new = int.Parse(InputAmplitude.text); 
             //table.PlotGraphFromInterval(plot, xMin, xMax);
             if (amplitude_new != amplitude)
             {
+                // Adjust amplitude to fit into its min & max values
+                if (amplitude_new > max_value)
+                {
+                    amplitude_new = max_value;
+                    InputAmplitude.text = amplitude_new.ToString();
+                }
+                else if (amplitude_new < min_value)
+                {
+                    amplitude_new = min_value;
+                    InputAmplitude.text = amplitude_new.ToString();
+                }
+
                 table.ChangeAmplitude(amplitude_new);
                 table.RequestData(plot);
 
