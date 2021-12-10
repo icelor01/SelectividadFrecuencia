@@ -18,7 +18,10 @@ public class Plot : MonoBehaviour
     #region Fields
 
     [SerializeField] public Table table;
+    public GameObject Canvas_VideoPlayer;
+
     [SerializeField] private Sprite circleSprite;
+
     private RectTransform labelTemplateX;
     private RectTransform labelTemplateY;
     //private RectTransform dashTemplateX;
@@ -30,6 +33,7 @@ public class Plot : MonoBehaviour
     private List<float> listaFloats = new List<float>();
     private List<GameObject> last = new List<GameObject>();
     private Plot plot;
+    
 
     #endregion
 
@@ -78,6 +82,7 @@ public class Plot : MonoBehaviour
     #region Methods
     protected virtual void Awake()
     {
+        Canvas_VideoPlayer.SetActive(false);
         container = transform.Find("graphContainer").GetComponent<RectTransform>();
         labelTemplateX = container.Find("labelTemplateX").GetComponent<RectTransform>();
         labelTemplateY = container.Find("labelTemplateY").GetComponent<RectTransform>();
@@ -89,7 +94,6 @@ public class Plot : MonoBehaviour
     public void Initialize()
     {
         plot = this;
-
         Refresh();
     }
 

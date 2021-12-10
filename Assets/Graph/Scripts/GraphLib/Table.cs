@@ -36,6 +36,7 @@ public class Table
     private float amplitude_solution;
 
     private int waitingForInputToStabilize = 0;
+    bool askDataForFirstTime = true;
 
     // Boolean firstTime = true; // Queremos que siempre pida los datos al servidor
 
@@ -230,28 +231,14 @@ public class Table
   
     public void RealRequestData(Plot plot)
     {
-        /*
-      if (firstTime == true)
-      {
-          firstTime = false;
-          Debug.Log("Primera vez. Pido datos al servidor para " + url, plot);
-          //plot.StartCoroutine(RequestFromServer(url, plot, x0, x1));
-          plot.StartCoroutine(RequestFromServer(url, plot));
-      }
-      else
-      {
-          Debug.Log("Otra vez. Reutilizo datos viejos para " + url, plot);
-          //PlotGraphFromInterval(plot, x0, x1);
-          PlotGraphFromInterval(plot);
-      }
-      */
+
+        //Video enabled
+        if(!askDataForFirstTime) { 
+        plot.Canvas_VideoPlayer.SetActive(true);
+        }
         Debug.Log("Pido datos al servidor para " + url, plot);
 
-       
-
-        //plot.StartCoroutine(RequestFromServer(plot, xmin, xmax, n));
         plot.StartCoroutine(RequestFromServer(url, plot));
-
 
     }
 
@@ -320,6 +307,11 @@ public class Table
         Debug.Log("=> pintando n = " + sorted.Count() + ":\n" + pretty, plot);
 
         plot.ShowGraph(lastResult);
+
+        // Video disabled
+        plot.Canvas_VideoPlayer.SetActive(false);
+        askDataForFirstTime = false;
+
     }
 
 
