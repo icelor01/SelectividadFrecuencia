@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -10,7 +11,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter (PointerEventData eventData)
     {
-        TooltipSystem.Show(content);
+        TooltipSystem.Show(content);        
     }
 
     public void OnPointerExit(PointerEventData eventData)

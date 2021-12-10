@@ -22,12 +22,20 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
         Hide();
         okBtn = transform.Find("okBtn").GetComponent<Button_UI>();
         //feedbackText = transform.Find("FeedbackText").GetComponent<Text>();
+
+        okBtn.ClickFunc = () => {
+            Hide();
+        };
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     // Use this for initialization
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             okBtn.ClickFunc();
@@ -46,9 +54,7 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
             Debug.Log("Falta indicar si existe selectividad en frecuencia");
             feedbackText.color = Color.blue;
             feedbackText.text = "Recuerda indicar si existe selectividad en frecuencia o no";
-
         }
-
         // Si la solución es correcta
         else if (toggleManagerInstance.activeToggleid == toggle_solution)
         {
@@ -56,8 +62,6 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
             feedbackText.color = Color.green;
             feedbackText.text = "¡¡Muy bien!! Efectivamente, el canal es selectivo en frecuencia y su respuesta en frecuencia no es plana durante el ancho de banda del radiocanal";
             GameManager.manager.tutorial_solutionIsCorrect = true;
-
-
         }
         // Si la solución es incorrecta
         else
@@ -66,20 +70,8 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
             feedbackText.text = "¡Vaya! Ten en cuenta que la forma de onda de la entrada, se modifica a la salida y que Bw=14 kHz y Bc=4kHz. Revisa las fórmulas y vuelve a intentarlo";
         }
 
-
-
-
         GameManager.manager.TrackAttempt("" + GameManager.manager.tutorial_solutionIsCorrect);
-        
-
         gameObject.SetActive(true);
-
-
-
-
-        okBtn.ClickFunc = () => {
-            Hide();
-        };
 
         /*cancelBtn.ClickFunc = () => {
             Hide();
@@ -88,19 +80,10 @@ public class UI_InputOK_Tutorial2 : MonoBehaviour
 
     }
 
-    public void Hide()
-    {
-        gameObject.SetActive(false);
-
-    }
 
 
     public static void Show_Static(string inputString, Action onCancel, Action<string> onOk)
     {
         instance.Show(inputString, onCancel, onOk);
-
     }
-
-
-
 }

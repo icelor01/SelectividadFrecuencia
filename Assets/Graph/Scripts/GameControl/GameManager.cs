@@ -42,8 +42,6 @@ public class GameManager : MonoBehaviour {
 
     private AudioSource audioSource;
 
-    public Button playButton;
-
     public int soundPosX;
     public int soundPosY;
 
@@ -101,11 +99,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GoToScene(string sceneName) {
-        if (completed_tutorial)
-        {
-            playButton.interactable = true;
-        }
-       
+     
         var parameters = new LoadSceneParameters(LoadSceneMode.Single);
         SceneManager.LoadScene(sceneName, parameters);
     }
@@ -145,8 +139,6 @@ public class GameManager : MonoBehaviour {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneLoaded += updateReferences;
-
-        playButton.interactable = false;
         
     }
 

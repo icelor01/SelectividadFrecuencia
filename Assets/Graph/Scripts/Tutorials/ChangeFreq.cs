@@ -13,16 +13,16 @@ public class ChangeFreq : MonoBehaviour
     [SerializeField] protected int max_value;
     [SerializeField] protected float initial_value;
     float fill_ini = 1f; //FillAmount value from 0 to 1
+    bool wasFocused = false;
 
     // Use this for initialization
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Return) || InputFreq.isFocused == false)
+        if (Input.GetKeyDown(KeyCode.Return) || 
+            (wasFocused && ! InputFreq.isFocused))
         {
-            Debug.Log("Return key was pressed.");
-
+            Debug.Log("Enter / lost focused");
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
@@ -49,5 +49,6 @@ public class ChangeFreq : MonoBehaviour
 
         }
 
+        wasFocused = InputFreq.isFocused;
     }
 }
