@@ -15,7 +15,7 @@ public class UI_InputOK1 : MonoBehaviour {
     private float fc;
     private int xMin;
     private int xMax;
-    private int amplitude;
+    private float amplitude;
     //private int n;
     //Valores solucion para cada Ejercicio
     public float fc_solution;

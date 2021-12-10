@@ -20,7 +20,7 @@ public class CheckAmplitude : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (myTable.GetAmplitude()== 4.0)
+        if (System.Math.Round(myTable.GetAmplitude(),0)== 4.0)
         {
             GameManager.manager.GoToScene("Tutorial4a");
         }

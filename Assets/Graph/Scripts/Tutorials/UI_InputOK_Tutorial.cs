@@ -14,12 +14,12 @@ public class UI_InputOK_Tutorial : MonoBehaviour
     private float fc;
     private int xMin;
     private int xMax;
-    private int amplitude;
+    private float amplitude;
     //Valores solucion para cada Ejercicio
     public float fc_solution;
     public int xMin_solution;
     public int xMax_solution;
-    public int amplitude_solution;
+    public float amplitude_solution;
     public Text feedbackText;
 
     // Use this for initialization

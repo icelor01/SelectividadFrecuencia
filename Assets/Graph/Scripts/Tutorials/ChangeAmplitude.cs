@@ -10,20 +10,22 @@ public class ChangeAmplitude : MonoBehaviour
     // Each slider must have a min, max and an initital value
     [SerializeField] protected int min_value;
     [SerializeField] protected int max_value;
-    [SerializeField] protected float initial_value;
+    [SerializeField] protected int initial_value;
     float fill_ini = 1f; //FillAmount value from 0 to 1
+    bool wasFocused = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || InputAmplitude.isFocused== false)
+        if (Input.GetKeyDown(KeyCode.Return) ||
+            (wasFocused && !InputAmplitude.isFocused))
         {
             //Debug.Log("Return key was pressed.");
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
-            int amplitude = table.GetAmplitude();
-            int amplitude_new = int.Parse(InputAmplitude.text); 
+            float amplitude = table.GetAmplitude();
+            float amplitude_new = float.Parse(InputAmplitude.text); 
             
             if (amplitude_new != amplitude)
             {
@@ -39,10 +41,13 @@ public class ChangeAmplitude : MonoBehaviour
                     InputAmplitude.text = amplitude_new.ToString();
                 }
 
-                table.ChangeAmplitude(amplitude_new);
+                table.ChangeAmplitude((int)(System.Math.Round(amplitude_new, 0)));
                 table.RequestData(plot);
 
             }
+
         }
+
+        wasFocused = InputAmplitude.isFocused;
     }
 }

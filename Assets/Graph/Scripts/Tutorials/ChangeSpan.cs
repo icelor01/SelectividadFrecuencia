@@ -12,14 +12,15 @@ public class ChangeSpan : MonoBehaviour
     [SerializeField] protected int max_value;
     [SerializeField] protected float initial_value;
     float fill_ini = 1f; //FillAmount value from 0 to 1
+    bool wasFocused = false;
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Return) || InputSpan.isFocused == false)
+        if (Input.GetKeyDown(KeyCode.Return) ||
+            (wasFocused && !InputSpan.isFocused))
         {
-            //Debug.Log("Return key was pressed.");
+       
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
@@ -48,5 +49,6 @@ public class ChangeSpan : MonoBehaviour
 
         }
 
+        wasFocused = InputSpan.isFocused;
     }
 }

@@ -32,8 +32,8 @@ public class Table
     private int xmin_solution;
     private int xmax_solution;
     private float fc_solution;
-    private int amplitude;
-    private int amplitude_solution;
+    private float amplitude;
+    private float amplitude_solution;
 
     private int waitingForInputToStabilize = 0;
 
@@ -73,12 +73,12 @@ public class Table
         this.span = span;
     }
 
-    public void SetAmplitude(int amplitude)
+    public void SetAmplitude(float amplitude)
     {
         this.amplitude = amplitude;
     }
 
-    public void SetAmplitudeSolution(int amplitude_solution)
+    public void SetAmplitudeSolution(float amplitude_solution)
     {
         this.amplitude_solution = amplitude_solution;
     }
@@ -98,7 +98,7 @@ public class Table
         return n;
     }
 
-    public int GetAmplitude()
+    public float GetAmplitude()
     {
         return amplitude;
     }
@@ -123,7 +123,7 @@ public class Table
         return xmax_solution;
     }
 
-    public int GetAmplitude_solution()
+    public float GetAmplitude_solution()
     {
         return amplitude_solution;
     }
@@ -182,7 +182,7 @@ public class Table
         //Debug.Log("Valor final xmin:" + xmin_fc);
         //Debug.Log("Valor final xmax:" + xmax_fc);
         Setfc(fc);
-        ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
+        ChangeUrl(xmin_fc, xmax_fc, Getn(), (int) GetAmplitude());
      }
 
     public void ChangeSpan(float span)
@@ -192,7 +192,7 @@ public class Table
         int xmin_new = (int) (fc - half_span);
         int xmax_new = (int)(fc + half_span);
         SetSpan(span);
-        ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
+        ChangeUrl(xmin_new, xmax_new, Getn(), (int) GetAmplitude());
     }
 
     public void ChangeAmplitude(int amp_new)
@@ -206,6 +206,7 @@ public class Table
         Setxmin(xmin_new);
         Setxmax(xmax_new);
         Setn(n);
+
         url = GameManager.octaveServerEndpoint + url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
         //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
         Debug.Log("La nueva url es: "+url);

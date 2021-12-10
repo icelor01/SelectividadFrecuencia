@@ -41,12 +41,12 @@ public class ChangeAllValues : MonoBehaviour
             table.Changefc(fc_new);
          }
 
-        int amplitude = table.GetAmplitude();
-        int amplitude_new = int.Parse(InputAmplitude.text); ;
+        float amplitude = table.GetAmplitude();
+        float amplitude_new = int.Parse(InputAmplitude.text); ;
         //table.PlotGraphFromInterval(plot, xMin, xMax);
         if (amplitude_new != amplitude)
         {
-            table.ChangeAmplitude(amplitude_new);
+            table.ChangeAmplitude((int) amplitude_new);
         }
         table.RequestData(plot);
     }
