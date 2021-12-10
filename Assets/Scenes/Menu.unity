@@ -842,6 +842,7 @@ MonoBehaviour:
   exerciseMusic2: {fileID: 8300000, guid: 80d7470bc99989f48b84caf60c43d347, type: 3}
   exerciseMusic3: {fileID: 8300000, guid: 321e4b6b2cdcb424a8e0828ec8e59acc, type: 3}
   endGameMusic: {fileID: 8300000, guid: 791f97949e71aed40ba88e9910c4b7b8, type: 3}
+  playButton: {fileID: 2076053129}
   soundPosX: 0
   soundPosY: 0
 --- !u!4 &571376091

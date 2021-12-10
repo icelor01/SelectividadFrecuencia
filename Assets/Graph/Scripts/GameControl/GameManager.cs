@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour {
     
     public bool solutionIsCorrect = false;
     public bool tutorial_solutionIsCorrect = false;
-    public static GameManager manager; 
+    public static GameManager manager;
+      
     
     public string outputFile = null;
     public string outputFile_name = null;
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour {
     public AudioClip endGameMusic;
 
     private AudioSource audioSource;
+
+    public Button playButton;
 
     public int soundPosX;
     public int soundPosY;
@@ -98,6 +101,11 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GoToScene(string sceneName) {
+        if (completed_tutorial)
+        {
+            playButton.interactable = true;
+        }
+       
         var parameters = new LoadSceneParameters(LoadSceneMode.Single);
         SceneManager.LoadScene(sceneName, parameters);
     }
@@ -127,7 +135,7 @@ public class GameManager : MonoBehaviour {
         //Check if instance already exists
         if (manager != null) return;
         manager = this;
-      
+        
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
         audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
@@ -136,8 +144,10 @@ public class GameManager : MonoBehaviour {
         // ver https://raw.githubusercontent.com/e-ucm/unity-tracker/master/Tracker.cs
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         SceneManager.sceneLoaded += updateReferences;
+
+        playButton.interactable = false;
+        
     }
 
     void Start() {        
