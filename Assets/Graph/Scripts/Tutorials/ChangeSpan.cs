@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeAmplitude_whenEnter : MonoBehaviour
+public class ChangeSpan : MonoBehaviour
 {
-    public InputField InputAmplitude;
+    public InputField InputSpan;
     [SerializeField] public GameObject plotComponent;
     // Each slider must have a min, max and an initital value
     [SerializeField] protected int min_value;
@@ -16,33 +16,37 @@ public class ChangeAmplitude_whenEnter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || InputAmplitude.isFocused== false)
+
+        if (Input.GetKeyDown(KeyCode.Return) || InputSpan.isFocused == false)
         {
-            Debug.Log("Return key was pressed.");
+            //Debug.Log("Return key was pressed.");
             //Pedir a plot dibujar con estos valores
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
-            int amplitude = table.GetAmplitude();
-            int amplitude_new = int.Parse(InputAmplitude.text); 
-            
-            if (amplitude_new != amplitude)
+
+            float span = table.GetSpan();
+            float span_new = float.Parse(InputSpan.text);
+
+            if (span_new != span)
             {
                 // Adjust amplitude to fit into its min & max values
-                if (amplitude_new > max_value)
+                if (span_new > max_value)
                 {
-                    amplitude_new = max_value;
-                    InputAmplitude.text = amplitude_new.ToString();
+                    span_new = max_value;
+                    InputSpan.text = span_new.ToString();
                 }
-                else if (amplitude_new < min_value)
+                else if (span_new < min_value)
                 {
-                    amplitude_new = min_value;
-                    InputAmplitude.text = amplitude_new.ToString();
+                    span_new = min_value;
+                    InputSpan.text = span_new.ToString();
                 }
 
-                table.ChangeAmplitude(amplitude_new);
+                table.ChangeSpan(span_new);
                 table.RequestData(plot);
 
-            }
+            } 
+
         }
+
     }
 }

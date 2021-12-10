@@ -3471,8 +3471,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62.35, y: -195.47}
-  m_SizeDelta: {x: 396.5, y: 34.15}
+  m_AnchoredPosition: {x: 53.7, y: -196.6}
+  m_SizeDelta: {x: 413.8496, y: 36.404747}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705451210
 MonoBehaviour:
@@ -3506,7 +3506,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xBFExiste electividad en frecuencia?\r"
+  m_Text: "\xBFExiste selectividad en frecuencia?\r"
 --- !u!222 &705451211
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6679,7 +6679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1436254106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7510,13 +7510,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ddbe0304d186f46a849c7f1d1c5b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreT: {fileID: 0}
   solutionIsCorrect: 0
   tutorial_solutionIsCorrect: 0
+  outputFile: 
+  outputFile_name: 
   SoundOn: 1
+  canvas: {fileID: 0}
   permanente: {fileID: 0}
   completed_tutorial: 0
+  completed_game: 0
   CheckImage: {fileID: 0}
+  CheckImage2: {fileID: 0}
+  Creditos: {fileID: 0}
+  ScoreT: {fileID: 0}
   score: 0
   menuMusic: {fileID: 0}
   tutorialMusic1: {fileID: 0}

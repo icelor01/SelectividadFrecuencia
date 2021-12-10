@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ChangeFreq : MonoBehaviour
+public class ChangeFreq_whenButtonPressed : MonoBehaviour
 {
 
     public Button OKBtn;

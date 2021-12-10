@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeFreq_whenEnter : MonoBehaviour
+public class ChangeFreq : MonoBehaviour
 {
     public InputField InputFreq;
     [SerializeField] public GameObject plotComponent;
@@ -19,7 +19,7 @@ public class ChangeFreq_whenEnter : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || InputFreq.isFocused == false)
         {
             Debug.Log("Return key was pressed.");
 
@@ -27,12 +27,22 @@ public class ChangeFreq_whenEnter : MonoBehaviour
             Plot plot = plotComponent.GetComponent<Plot>();
             Table table = plot.getTable();
             float fc = table.Getfc();
-            // fc inicial=0 El dial fc suma el valor indicado de frecuencia
-
             float fc_new = float.Parse(InputFreq.text);
 
             if (fc_new != fc)
             {
+                    // Adjust amplitude to fit into its min & max values
+                    if (fc_new > max_value)
+                    {
+                        fc_new = max_value;
+                        InputFreq.text = fc_new.ToString();
+                    }
+                    else if (fc_new < min_value)
+                    {
+                        fc_new = min_value;
+                        InputFreq.text = fc_new.ToString();
+                    }
+
                 table.Changefc(fc_new);
                 table.RequestData(plot);
             }
