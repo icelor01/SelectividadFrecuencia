@@ -12,13 +12,13 @@ public class UI_InputOK_Tutorial : MonoBehaviour
     private Button_UI okBtn;
    [SerializeField] public GameObject plotComponent;
     private float fc;
-    private int xMin;
-    private int xMax;
+    private float xMin;
+    private float xMax;
     private float amplitude;
     //Valores solucion para cada Ejercicio
     public float fc_solution;
-    public int xMin_solution;
-    public int xMax_solution;
+    public float xMin_solution;
+    public float xMax_solution;
     public float amplitude_solution;
     public Text feedbackText;
 

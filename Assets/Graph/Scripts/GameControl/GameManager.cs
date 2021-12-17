@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour {
     public string outputFile = null;
     public string outputFile_name = null;
 
-    //public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
-    public const string octaveServerEndpoint = "http://localhost:5000/f/";
+    public const string octaveServerEndpoint = "http://gin.fdi.ucm.es:8080/f/";
+    //public const string octaveServerEndpoint = "http://localhost:5000/f/";
 
     public bool SoundOn = true; //true=SoundOn false=SoundOff
     public GameObject canvas;

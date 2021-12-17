@@ -163,8 +163,8 @@ public class Plot : MonoBehaviour
 
         //Label X
             
-        int xmin = table.Getxmin();
-        int xmax = table.Getxmax();
+        float xmin = table.Getxmin();
+        float xmax = table.Getxmax();
         
         int valores_ejeX_max = 7;
         int separatorCountX;

@@ -23,14 +23,14 @@ public class Table
     [SerializeField] public string url_inicial;
     private String url;
     private string url_function;
-    private int xmin;
-    private int xmax;
+    private float xmin;
+    private float xmax;
     private int n;
     private float fc;
     private float span;
     private GameObject Graphname;
-    private int xmin_solution;
-    private int xmax_solution;
+    private float xmin_solution;
+    private float xmax_solution;
     private float fc_solution;
     private float amplitude;
     private float amplitude_solution;
@@ -49,12 +49,12 @@ public class Table
 
     #region Properties
 
-    public void Setxmin(int xmin)
+    public void Setxmin(float xmin)
     {
         this.xmin = xmin;
     }
 
-    public void Setxmax(int xmax)
+    public void Setxmax(float xmax)
     {
         this.xmax = xmax;
     }
@@ -84,12 +84,12 @@ public class Table
         this.amplitude_solution = amplitude_solution;
     }
 
-    public int Getxmin()
+    public float Getxmin()
     {
         return xmin;
     }
 
-    public int Getxmax()
+    public float Getxmax()
     {
         return xmax;
     }
@@ -114,12 +114,12 @@ public class Table
         return span;
     }
 
-    public int Getxmin_solution()
+    public float Getxmin_solution()
     {
         return xmin_solution;
     }
 
-    public int Getxmax_solution()
+    public float Getxmax_solution()
     {
         return xmax_solution;
     }
@@ -133,16 +133,13 @@ public class Table
 
     public void Initialize() {
 
-        //Graphname = GameObject.Find("Window_graph_Channel");
-        // if (Graphname != null)
-
         char[] delimiterChars = { '?', '=', '&' };
         string[] url_args = url_inicial.Split(delimiterChars);
         string url_function_total = url_args[0];
         string[] url_function_args = url_args[0].Split('/');
         url_function= url_function_args[4];
 
-        if (url_function == "sincwave") 
+        if (url_function == "sincwave") // MUY FEO 
         {                    
             xmin_solution = 1;
             xmax_solution = 16;
@@ -152,64 +149,48 @@ public class Table
             span = xmax - xmin;
             n = 100;
             amplitude = 1;
-            url = GameManager.octaveServerEndpoint + url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
-            //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
-            Debug.Log("La función url es: " + url_function + "Estoy en el if");
-            Debug.Log("La url es: " + url);
         }
         else 
         { 
-        
-            xmin = int.Parse(url_args[2]);
-            xmax = int.Parse(url_args[4]);
+            xmin = float.Parse(url_args[2]);
+            xmax = float.Parse(url_args[4]);
             n = int.Parse(url_args[6]);
-            amplitude= int.Parse(url_args[8]);
-            
-            // garantiza que la url empieza por GameManager.octaveServerEndpoint
-            int ultimaBarra = url_inicial.LastIndexOf('/');
-            url = GameManager.octaveServerEndpoint + url_inicial.Substring(ultimaBarra+1);
-            Debug.Log("La función url es: " + url_function +"Estoy en el else");
-            Debug.Log("La url es: " + url);
+            amplitude= float.Parse(url_args[8]);
         }
-
+        ChangeUrl(Getxmax(), Getxmin(), Getn(), GetAmplitude());
     }
 
-    public void Changefc(float fc)  {
-        //Debug.Log("Valor inicial xmin:" + Getxmin());
-        //Debug.Log("Valor inicial xmin:" + Getxmax());
-        float valormediorango = ((xmax - xmin +1) / 2);
-        int xmin_fc = (int) (fc - valormediorango);
-        int xmax_fc = (int) (fc + valormediorango);
-        //Debug.Log("Valor final xmin:" + xmin_fc);
-        //Debug.Log("Valor final xmax:" + xmax_fc);
+    public void Changefc(float fc) {
+        float half_span = (xmax - xmin)/2;
+        int xmin_fc = (int) (fc - half_span);
+        int xmax_fc = (int) (fc + half_span);
         Setfc(fc);
-        ChangeUrl(xmin_fc, xmax_fc, Getn(), (int) GetAmplitude());
+        ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
      }
 
     public void ChangeSpan(float span)
     {
-
-        float half_span = (span+1)/ 2;
-        int xmin_new = (int) (fc - half_span);
-        int xmax_new = (int)(fc + half_span);
+        float half_span = span/2;
+        float xmin_new = fc - half_span;
+        float xmax_new = fc + half_span;
         SetSpan(span);
-        ChangeUrl(xmin_new, xmax_new, Getn(), (int) GetAmplitude());
+        ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
     }
 
     public void ChangeAmplitude(int amp_new)
     {
         SetAmplitude(amp_new);
-        url = GameManager.octaveServerEndpoint + url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&a=" + amplitude.ToString();
-        
+        ChangeUrl(Getxmax(), Getxmin(), Getn(), GetAmplitude());
     }
 
-    public void ChangeUrl (int xmin_new, int xmax_new, int n, int amp_new) {
+    public void ChangeUrl (float xmin_new, float xmax_new, int n, float amp_new) {
         Setxmin(xmin_new);
         Setxmax(xmax_new);
         Setn(n);
+        SetAmplitude(amp_new);
 
         url = GameManager.octaveServerEndpoint + url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
-        //url = url_function + "?xmin=" + xmin.ToString() + "&xmax=" + xmax.ToString() + "&n=" + n.ToString() + "&amplitude=" + amplitude.ToString();
+        url = url.Replace(",",".");
         Debug.Log("La nueva url es: "+url);
     }
 

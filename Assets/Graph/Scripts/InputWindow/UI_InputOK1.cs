@@ -13,16 +13,16 @@ public class UI_InputOK1 : MonoBehaviour {
     //private Button_UI cancelBtn;
     [SerializeField] public GameObject plotComponent;
     private float fc;
-    private int xMin;
-    private int xMax;
+    private float xMin;
+    private float xMax;
     private float amplitude;
     //private int n;
     //Valores solucion para cada Ejercicio
     public float fc_solution;
-    public int xMin_solution;
-    public int xMax_solution;
-    public int amplitude_solution;
-    public int toggle_solution=1; // No existe selectividad en frecuencia No=1
+    public float xMin_solution;
+    public float xMax_solution;
+    public float amplitude_solution;
+    public float toggle_solution=1; // No existe selectividad en frecuencia No=1
     public ToggleManager toggleManagerInstance;
     public Text feedbackText;
 
