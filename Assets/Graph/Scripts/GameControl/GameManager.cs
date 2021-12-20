@@ -8,10 +8,10 @@ using AssetPackage;
 
 //Clase estática para acceder desde cualquier escena
 
-public class GameManager : MonoBehaviour { 
-    
-    public bool solutionIsCorrect = false;
+public class GameManager : MonoBehaviour {
+
     public bool tutorial_solutionIsCorrect = false;
+    public bool solutionIsCorrect = false;
     public static GameManager manager;
       
     

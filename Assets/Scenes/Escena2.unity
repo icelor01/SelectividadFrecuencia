@@ -1011,9 +1011,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138.8936, y: 789.4467}
+  m_AnchoredPosition: {x: 1357.6699, y: 2420.1943}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.42765957, y: 1.2306238}
+  m_Pivot: {x: 1.2071197, y: 2.7385058}
 --- !u!114 &187753691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3493,7 +3493,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 50,0
+  m_Text: 100
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -7082,7 +7082,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50,0
+  m_Text: 100
 --- !u!222 &1230033146
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9045,7 +9045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url_inicial: http://localhost:5000/f/sincwave?xmin=-50&xmax=50&n=100&a=1
+    url_inicial: http://localhost:5000/f/sincwave?xmin=-50&xmax=50&n=100&a=1&b=1
   Canvas_VideoPlayer: {fileID: 546007981}
   circleSprite: {fileID: 21300000, guid: 1258275d44ed2914cbc16ef3a48db1cd, type: 3}
   yMin: 0

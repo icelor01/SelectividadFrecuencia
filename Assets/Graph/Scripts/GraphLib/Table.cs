@@ -34,6 +34,7 @@ public class Table
     private float fc_solution;
     private float amplitude;
     private float amplitude_solution;
+    private float b;
 
     private int waitingForInputToStabilize = 0;
     bool askDataForFirstTime = true;
@@ -84,6 +85,11 @@ public class Table
         this.amplitude_solution = amplitude_solution;
     }
 
+    public void SetB(float b_new)
+    {
+        this.b = b_new;
+    }
+
     public float Getxmin()
     {
         return xmin;
@@ -128,6 +134,12 @@ public class Table
     {
         return amplitude_solution;
     }
+
+    public float GetB()
+    {
+        return b;
+    }
+
     #endregion
     #region Methods
 
@@ -139,33 +151,24 @@ public class Table
         string[] url_function_args = url_args[0].Split('/');
         url_function= url_function_args[4];
 
-        if (url_function == "sincwave") // MUY FEO 
-        {                    
-            xmin_solution = 1;
-            xmax_solution = 16;
-            amplitude_solution = 2;
-            xmin = -50;
-            xmax = 50;
-            span = xmax - xmin;
-            n = 100;
-            amplitude = 1;
-        }
-        else 
-        { 
-            xmin = float.Parse(url_args[2]);
-            xmax = float.Parse(url_args[4]);
-            n = int.Parse(url_args[6]);
-            amplitude= float.Parse(url_args[8]);
-        }
-        ChangeUrl(Getxmax(), Getxmin(), Getn(), GetAmplitude());
+        xmin = float.Parse(url_args[2]);
+        xmax = float.Parse(url_args[4]);
+        n = int.Parse(url_args[6]);
+        amplitude = float.Parse(url_args[8]);
+        // Inicializar b= 1 si no se utiliza en la función
+        b = float.Parse(url_args[10]);
+
+
+        ChangeUrl(Getxmin(), Getxmax(), Getn(), GetAmplitude(), GetB());
     }
 
     public void Changefc(float fc) {
         float half_span = (xmax - xmin)/2;
-        int xmin_fc = (int) (fc - half_span);
-        int xmax_fc = (int) (fc + half_span);
+        float xmin_fc = fc - half_span;
+        float xmax_fc = fc + half_span;
         Setfc(fc);
-        ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude());
+        SetSpan(xmax - xmin);
+        ChangeUrl(xmin_fc, xmax_fc, Getn(), GetAmplitude(), GetB());
      }
 
     public void ChangeSpan(float span)
@@ -174,22 +177,23 @@ public class Table
         float xmin_new = fc - half_span;
         float xmax_new = fc + half_span;
         SetSpan(span);
-        ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude());
+        ChangeUrl(xmin_new, xmax_new, Getn(), GetAmplitude(), GetB());
     }
 
-    public void ChangeAmplitude(int amp_new)
+    public void ChangeAmplitude(float amp_new)
     {
         SetAmplitude(amp_new);
-        ChangeUrl(Getxmax(), Getxmin(), Getn(), GetAmplitude());
+        ChangeUrl(Getxmin(), Getxmax(), Getn(), GetAmplitude(), GetB());
     }
 
-    public void ChangeUrl (float xmin_new, float xmax_new, int n, float amp_new) {
+    public void ChangeUrl (float xmin_new, float xmax_new, int n, float amp_new, float b_new) {
         Setxmin(xmin_new);
         Setxmax(xmax_new);
         Setn(n);
         SetAmplitude(amp_new);
+        SetB(b_new);
 
-        url = GameManager.octaveServerEndpoint + url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString();
+        url = GameManager.octaveServerEndpoint + url_function + "?xmin="+xmin.ToString() + "&xmax=" + xmax.ToString() + "&n="+n.ToString() + "&a=" + amplitude.ToString() + "&b=" + b.ToString();
         url = url.Replace(",",".");
         Debug.Log("La nueva url es: "+url);
     }

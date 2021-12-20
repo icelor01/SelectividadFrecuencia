@@ -93,7 +93,7 @@ public class UI_InputSpan : MonoBehaviour {
             //int n = int.Parse(Input_n.text);
             //int amplitude = table.GetAmplitude();
             //table.PlotGraphFromInterval(plot, xMin, xMax);
-            table.ChangeUrl(xMin, xMax, table.Getn(), (int) table.GetAmplitude());
+            table.ChangeUrl(xMin, xMax, table.Getn(), (int) table.GetAmplitude(), table.GetB());
             table.RequestData(plot);
             onOk(InputXMin.text);
             Hide();

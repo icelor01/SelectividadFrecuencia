@@ -41,7 +41,7 @@ public class ChangeAmplitude : MonoBehaviour
                     InputAmplitude.text = amplitude_new.ToString();
                 }
 
-                table.ChangeAmplitude((int)(System.Math.Round(amplitude_new, 0)));
+                table.ChangeAmplitude(amplitude_new);
                 table.RequestData(plot);
 
             }

@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 1,0
+  m_Text: 4
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url_inicial: http://localhost:5000/f/square_signal?xmin=0&xmax=20&n=100&a=1&b=1
+    url_inicial: http://localhost:5000/f/square_signal?xmin=0&xmax=20&n=100&a=4&b=1
   Canvas_VideoPlayer: {fileID: 1088874663}
   circleSprite: {fileID: 21300000, guid: 1258275d44ed2914cbc16ef3a48db1cd, type: 3}
   yMin: 0
@@ -4205,8 +4205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ddbe0304d186f46a849c7f1d1c5b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  solutionIsCorrect: 0
   tutorial_solutionIsCorrect: 0
+  solutionIsCorrect: 0
   outputFile: 
   outputFile_name: 
   SoundOn: 1
@@ -6772,9 +6772,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -964.08496, y: 246.12762}
+  m_AnchoredPosition: {x: 1847.905, y: 3086.7983}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: -0.0021276595, y: 0.72778827}
+  m_Pivot: {x: 1.4624506, y: 3.3543859}
 --- !u!114 &1389038068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8147,11 +8147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url_inicial: http://localhost:5000/f/sincwave1?xmin=0&xmax=40&n=100&a=2
+    url_inicial: http://localhost:5000/f/sincwave1?xmin=0&xmax=40&n=100&a=4&b=1
   Canvas_VideoPlayer: {fileID: 1088874663}
   circleSprite: {fileID: 21300000, guid: 1258275d44ed2914cbc16ef3a48db1cd, type: 3}
   yMin: 0
-  yMax: 5
+  yMax: 4
 --- !u!1 &1714404712
 GameObject:
   m_ObjectHideFlags: 0
@@ -8905,7 +8905,7 @@ MonoBehaviour:
   Canvas_VideoPlayer: {fileID: 1088874663}
   circleSprite: {fileID: 21300000, guid: 1258275d44ed2914cbc16ef3a48db1cd, type: 3}
   yMin: 0
-  yMax: 5
+  yMax: 3
 --- !u!1 &1805795942
 GameObject:
   m_ObjectHideFlags: 0
@@ -10618,7 +10618,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1,0
+  m_Text: 4
 --- !u!222 &2145562479
 CanvasRenderer:
   m_ObjectHideFlags: 0

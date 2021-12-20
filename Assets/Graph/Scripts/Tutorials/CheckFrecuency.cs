@@ -8,6 +8,8 @@ public class CheckFrecuency : MonoBehaviour {
 
     public Plot myChannel;
     public Table myTable;
+    [SerializeField] private float delayBeforeLoading = 100f;
+    private float timeElapsed;
 
 
     // Use this for initialization
@@ -19,6 +21,8 @@ public class CheckFrecuency : MonoBehaviour {
 	void Update () {
         myTable = myChannel.getTable();
         if (System.Math.Round(myTable.Getfc(), 0) == 10) {
+            //StartCoroutine(Waiter());
+            Delay();
             GameManager.manager.GoToScene("Tutorial2");
         }
         else
@@ -26,5 +30,25 @@ public class CheckFrecuency : MonoBehaviour {
             // Debemos mantenernos en la misma escena
             //do nothing
         }
+    }
+
+    private void Delay()
+    {
+        timeElapsed = 0;
+        while (timeElapsed < delayBeforeLoading)
+        {
+            //Wait
+            timeElapsed += Time.deltaTime;
+        }
+
+    }
+
+
+    IEnumerator Waiter()
+    {
+        //Wait for 10 seconds
+        yield return new WaitForSeconds(10);
+
+
     }
 }

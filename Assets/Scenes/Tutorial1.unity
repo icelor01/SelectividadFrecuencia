@@ -1426,6 +1426,7 @@ MonoBehaviour:
   myChannel: {fileID: 0}
   myTable:
     url_inicial: 
+  delayBeforeLoading: 100
 --- !u!1 &326748884
 GameObject:
   m_ObjectHideFlags: 0
@@ -4696,9 +4697,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120.51062, y: 787.4042}
+  m_AnchoredPosition: {x: 984.6506, y: 2022.7106}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.43723404, y: 1.2287334}
+  m_Pivot: {x: 1.0128388, y: 2.3743656}
 --- !u!114 &1481820365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5773,7 +5774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
-    url_inicial: http://localhost:5000/f/sincwave?xmin=-50&xmax=50&n=100&a=1
+    url_inicial: http://localhost:5000/f/sincwave?xmin=-50&xmax=50&n=100&a=1&b=1
   Canvas_VideoPlayer: {fileID: 1193912883}
   circleSprite: {fileID: 21300000, guid: 1258275d44ed2914cbc16ef3a48db1cd, type: 3}
   yMin: 0
@@ -5793,6 +5794,7 @@ MonoBehaviour:
   myChannel: {fileID: 1677527899}
   myTable:
     url_inicial: 
+  delayBeforeLoading: 100
 --- !u!1 &1715748555
 GameObject:
   m_ObjectHideFlags: 0
