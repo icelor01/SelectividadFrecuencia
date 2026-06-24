@@ -33,6 +33,7 @@ Este proyecto fue desarrollado como parte de un trabajo de investigación acadé
 
 * Nombre de la autora: Iris Celorrio Aguilera.
 * Director de tesis: Manuel Freire Morán.
+* Codirectora de tesis: Alba García Barrera.
 
 ## Instalación
 
@@ -50,6 +51,12 @@ cd SelectividadFrecuencia
 
 Seguir las instrucciones específicas de compilación o ejecución según el entorno de desarrollo utilizado.
 
+## Reconocimientos
+
+Este juego serio es el resultado de un trabajo desarrollado conjuntamente en el contexto de una tesis universitaria.
+
+La autora agradece especialmente a Manuel Freire Morán, director de la investigación, por su colaboración, orientación y contribuciones al diseño conceptual y metodológico del proyecto, así como por su apoyo continuo durante el proceso de desarrollo y validación.
+
 ## Licencia
 
 Este proyecto se distribuye bajo la licencia GNU General Public License v3.0. Consulte el archivo `LICENSE` para obtener más información.
@@ -61,9 +68,3 @@ Si utiliza este proyecto en trabajos académicos, investigaciones o materiales d
 ## Contacto
 
 Para consultas relacionadas con el proyecto o la investigación asociada, puede contactar con los autores a través de GitHub.
-
-## Reconocimientos
-
-Este juego serio es el resultado de un trabajo desarrollado conjuntamente en el contexto de una tesis universitaria.
-
-La autora agradece especialmente a Manuel Freire Morán, director de la investigación, por su colaboración, orientación y contribuciones al diseño conceptual y metodológico del proyecto, así como por su apoyo continuo durante el proceso de desarrollo y validación.
